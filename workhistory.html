@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrea Trevisi - Portfolio</title>
+    <title>Andrea Trevisi - Work History</title>
     <style>
         /* Simple, clean styling */
         body {
@@ -32,6 +32,11 @@
             padding-bottom: 10px;
             margin-top: 40px;
         }
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
         .profile-image {
             width: 150px;
             height: 150px;
@@ -42,16 +47,30 @@
         .section {
             margin-bottom: 40px;
         }
-        .project {
+        .experience {
             margin-bottom: 30px;
             padding: 20px;
             background-color: white;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .project h3 {
+        .experience h3 {
             margin-top: 0;
             color: #2c3e50;
+        }
+        .experience-meta {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        .experience-description {
+            margin-top: 15px;
+        }
+        .experience ul {
+            padding-left: 20px;
+        }
+        .experience li {
+            margin-bottom: 8px;
         }
         .skills {
             display: flex;
@@ -174,18 +193,23 @@
                 width: 100%;
             }
         }
+
+        /* Current page indicator */
+        .active {
+            background-color: #3498db;
+        }
     </style>
 </head>
 <body>
     <!-- Navigation Bar with Dropdown -->
     <div class="navbar">
-        <a href="index.html" class="active">Home</a>
+        <a href="index.html">Home</a>
         <div class="dropdown">
-            <button class="dropbtn">Experience 
+            <button class="dropbtn active">Experience 
                 <i>▼</i>
             </button>
             <div class="dropdown-content">
-                <a href="workhistory.html">Work History</a>
+                <a href="workhistory.html" class="active">Work History</a>
                 <a href="projects.html">Key Projects</a>
                 <a href="achievements.html">Achievements</a>
             </div>
@@ -205,82 +229,85 @@
     </div>
     
     <header>
-        <!-- Add your profile photo here -->
         <img src="profile-photo.jpg" alt="Andrea Trevisi" class="profile-image">
         <h1>Andrea Trevisi</h1>
         <p>Area Sales Manager | Singapore</p>
     </header>
 
     <div class="section">
-        <h2>Welcome to My Portfolio</h2>
-        <p>Hello, I'm Andrea Trevisi, an experienced Area Sales Manager currently based in Singapore with a focus on the Asia-Pacific region. With over two decades in the industry, I've developed extensive expertise in sales, marketing, and relationship building across international markets.</p>
-        <p>My career has been defined by my ability to understand complex business environments, build strategic partnerships, and deliver results in competitive markets. Whether working with global teams or developing regional strategies, I bring a thoughtful, results-oriented approach to every challenge.</p>
-        <p>This portfolio showcases my professional journey, key projects, and the skills I've developed throughout my career. I'm passionate about connecting businesses with solutions that drive growth and creating value through meaningful business relationships.</p>
-        <p>I'm always open to discussing new opportunities, collaborations, or simply connecting with like-minded professionals. Please feel free to explore my work and reach out to start a conversation.</p>
-    </div>
-
-    <div class="section">
-        <h2>Skills</h2>
-        <div class="skills">
-            <span class="skill">International Business Development</span>
-            <span class="skill">Key Account Management</span>
-            <span class="skill">Cross-Cultural Communication</span>
-            <span class="skill">Strategic Sales Leadership</span>
-            <span class="skill">Market Analysis & Strategy</span>
-            <span class="skill">Technical Industry Knowledge</span>
-            <span class="skill">Contract Negotiation</span>
-            <span class="skill">Budget Management</span>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Projects</h2>
+        <h2>Professional Experience</h2>
         
-        <div class="project">
-            <h3>Project 1</h3>
-            <p><strong>Description:</strong> Brief description of what the project is about and what you accomplished.</p>
-            <p><strong>Technologies:</strong> List of technologies, tools, or methodologies used.</p>
-            <p><a href="#">View Project</a></p>
+        <div class="experience">
+            <h3>Area Sales Manager</h3>
+            <div class="experience-meta">Continental AG (ContiTech Surface Solutions) | Singapore | June 2023 - Present</div>
+            <div class="experience-description">
+                <ul>
+                    <li>Leading B2B sales and Key Account management across Southeast Asia (SEA)</li>
+                    <li>Drive sales growth through distributors and end-users, focusing on new business development</li>
+                    <li>Manage physical and financial claims, overseeing marketing and sales strategies for the region</li>
+                    <li>Product portfolio: Offset Printing Blankets (Brands: Vulcan, Rollin, and Printec)</li>
+                </ul>
+            </div>
         </div>
-
-        <div class="project">
-            <h3>Project 2</h3>
-            <p><strong>Description:</strong> Brief description of what the project is about and what you accomplished.</p>
-            <p><strong>Technologies:</strong> List of technologies, tools, or methodologies used.</p>
-            <p><a href="#">View Project</a></p>
+        
+        <div class="experience">
+            <h3>Area Sales Manager</h3>
+            <div class="experience-meta">Trelleborg Singapore Pte Ltd (Part of Trelleborg AB Group) | Singapore | January 2015 - May 2023</div>
+            <div class="experience-description">
+                <ul>
+                    <li>Led business development initiatives across 11 Southeast Asian countries</li>
+                    <li>Increased regional sales by 60% through strategic management of distributors and key accounts</li>
+                    <li>Handled customer claims and developed comprehensive marketing strategies</li>
+                    <li>Product focus: Offset Printing Blankets</li>
+                </ul>
+            </div>
         </div>
-    </div>
-
-    <div class="section">
-        <h2>Education</h2>
-        <p><strong>Degree Name</strong> - Institution Name, Year</p>
-        <p>Brief description or notable achievements during your education.</p>
         
-        <p><strong>Certification/Course</strong> - Provider, Year</p>
-        <p>Brief description of the certification or its relevance to your field.</p>
-    </div>
-
-    <div class="section">
-        <h2>Experience</h2>
-        <p><strong>Job Title</strong> - Company Name, Duration</p>
-        <p>Brief description of your role and key achievements.</p>
+        <div class="experience">
+            <h3>Export Manager EMEA</h3>
+            <div class="experience-meta">IPAGSA Technologies S.L.U (part Of Agfa-Gevaert N.V.) | Barcelona, Spain | July 2009 - December 2014</div>
+            <div class="experience-description">
+                <ul>
+                    <li>Drove business expansion across the African continent, focusing on B2B and key account sales</li>
+                    <li>Managed direct sales (B2C) for the UK & German markets</li>
+                    <li>Developed and implemented marketing and sales strategies for diverse markets</li>
+                    <li>Product specialization: Offset Printing Plates</li>
+                </ul>
+            </div>
+        </div>
         
-        <p><strong>Previous Job Title</strong> - Previous Company, Duration</p>
-        <p>Brief description of your role and key achievements.</p>
-    </div>
-
-    <div class="section">
-        <h2>Contact</h2>
-        <p>I'm open to new opportunities and collaborations. Feel free to reach out!</p>
-        <div class="contact-info">
-            <a href="mailto:your.email@example.com">Email</a>
-            <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
-            <a href="https://github.com/yourusername">GitHub</a>
+        <div class="experience">
+            <h3>Commercial Operations Coordinator</h3>
+            <div class="experience-meta">HEWLETT-PACKARD ESPAÑOLA S.L. (HP) | Barcelona, Spain | November 2006 - November 2008</div>
+            <div class="experience-description">
+                <ul>
+                    <li>Coordinated HP Commercial Operation department, ensuring full compliance with Service Level Agreements</li>
+                    <li>Optimized open order backlog and managed vendor debit reconciliation</li>
+                    <li>Oversaw purchasing, sales, marketing, and customer account operations</li>
+                    <li>Product range: Desktop PCs, Laptops, and related services</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="experience">
+            <h3>Commercial Operations Specialist</h3>
+            <div class="experience-meta">HEWLETT-PACKARD ESPAÑOLA S.L. (HP) | Barcelona | November 2004 - October 2006</div>
+            <div class="experience-description">
+                <ul>
+                    <li>Managed commercial activities for major Italian wholesalers, including pre-sales, order entry, and post-sales support</li>
+                    <li>Handled order backlog management, escalations, and claims resolution</li>
+                    <li>Product focus: Desktop PCs, Laptops, and related services</li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <p>&copy; 2025 Andrea Trevisi. All rights reserved.</p>
+        <div class="contact-info">
+            <a href="mailto:andrea.trevisi@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+        </div>
     </footer>
 </body>
 </html>
