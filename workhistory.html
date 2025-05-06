@@ -198,6 +198,34 @@
         .active {
             background-color: #3498db;
         }
+        
+        /* Download button styling */
+        .download-section {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+        
+        .download-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .download-button:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -229,7 +257,7 @@
     </div>
     
     <header>
-        <img src="Profile Picture.jpg" alt="Andrea Trevisi" class="profile-image">
+        <img src="profile-photo.jpg" alt="Andrea Trevisi" class="profile-image">
         <h1>Andrea Trevisi</h1>
         <p>Area Sales Manager | Singapore</p>
     </header>
@@ -300,6 +328,12 @@
                 </ul>
             </div>
         </div>
+    </div>
+
+    <div class="section download-section">
+        <h2>Download My CV</h2>
+        <p>For a complete overview of my professional experience, education, and skills, you can download my full CV by clicking the button below:</p>
+        <a href="Andrea_Trevisi_CV.pdf" download class="download-button">Download CV (PDF)</a>
     </div>
 
     <footer>
