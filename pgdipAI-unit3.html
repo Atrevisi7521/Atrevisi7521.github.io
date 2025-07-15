@@ -1,1 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Trevisi - AI Diploma: Unit 3</title>
+    <style>
+        /* Simple, clean styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        h4 {
+            color: #3498db;
+            margin-top: 25px;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        /* Navigation Menu Styling */
+        .navbar {
+            background-color: #2c3e50;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        
+        /* Dropdown container */
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        
+        /* Dropdown button */
+        .dropdown .dropbtn {
+            font-size: 17px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        /* Add a background color to navbar links on hover */
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #3498db;
+        }
+        
+        /* Dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            float: none;
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        
+        /* Add a background color to dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* Responsive navigation */
+        @media screen and (max-width: 600px) {
+            .navbar a, .dropdown .dropbtn {
+                display: block;
+                width: 100%;
+                text-align: left;
+            }
+            
+            .dropdown-content {
+                position: relative;
+                width: 100%;
+            }
+        }
 
+        /* Current page indicator */
+        .active {
+            background-color: #3498db;
+        }
+        
+        /* Unit Content Styling */
+        .unit-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .unit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .unit-number {
+            background-color: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .unit-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .completed-badge {
+            background-color: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-left: 15px;
+        }
+        
+        .section-title {
+            color: #3498db;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        
+        .key-concept {
+            background-color: #f1f9ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .learning-outcomes {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .learning-outcomes li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .learning-outcomes li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .resources-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .resources-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .resources-list li:before {
+            content: "📚";
+            position: absolute;
+            left: 0;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        
+        .reflection {
+            background-color: #fdf9e8;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 25px;
+            border-left: 4px solid #f1c40f;
+        }
+        
+        .reflection-title {
+            color: #f39c12;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        blockquote {
+            font-style: italic;
+            border-left: 3px solid #3498db;
+            padding-left: 15px;
+            margin-left: 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar with Dropdown -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn active">Experience 
+                <i>▼</i>
+            </button>
+            <div class="dropdown-content">
+                <a href="workhistory.html">Work History</a>
+                <a href="pgdipAI.html" class="active">PG Dip Artificial Intelligence</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Skills 
+                <i>▼</i>
+            </button>
+            <div class="dropdown-content">
+                <a href="technical-skills.html">Technical Skills</a>
+                <a href="languages.html">Languages</a>
+            </div>
+        </div>
+        <a href="education.html">Education</a>
+        <a href="afterwork.html">After Work</a>
+    </div>
+    
+    <header>
+        <img src="Profile Picture.jpg" alt="Andrea Trevisi" class="profile-image">
+        <h1>Andrea Trevisi</h1>
+        <p>PG Diploma in Artificial Intelligence</p>
+    </header>
+
+    <div class="section">
+        <div class="unit-content">
+            <div class="unit-header">
+                <div class="unit-number">3</div>
+                <h2 class="unit-title">Unit 3: Correlation and Regression</h2>
+                <span class="completed-badge">Completed</span>
+            </div>
+            
+            <p>Welcome to Week 3.
+
+            </p>Correlation and regression are statistical techniques to quantify and describe the relationship between variables. Correlation quantifies the strength and type of relationship whereas regression express the relationship in the form of equation that enable us to predict value and relationship of unseen variables.</p>     
+            <h3 class="section-title">This week we shall learn about:</h3>
+            <ul class="learning-outcomes">
+                <li>Core aspects of correlation and regression.</li>
+                <li>Techniques to measure them.</li>
+                <li>Techniques to measure them.</li>
+            </ul>
+            <h3 class="section-title">On completion of this week, you will be able to:</h3>
+             <ul class="learning-outcomes">
+                <li>Gain theoretical understanding of correlation and regression.</li>
+                <li>Understand how to compute correlation and regression.</li>
+                <li>Be able to apply these statistical techniques in real world scenario.</li>
+             </ul>
+            
+            <h3 class="section-title">Collaborative Discussion 1: The 4th Industrial Revolution</h3>
+            <p>This discussion will last for 3 weeks covering Units 1, 2 and 3. Ensure you include appropriate citations and references in all your posts (this is not included in the word count for each week's post/submission).</p>
+            <h3 class="selection-title">Discussion Topic</h3>
+            <p>Read the article by Metcalf (2024) and discuss the impact of industry 4.0 and/or Industry 5.0 on the sector in which you are involved or interested.</p>
+                            
+            <h3 class="selection-title">Summary post</h3>    
+            <p>Dear Colleagues,</p>
+            <p>During those weeks of debate and discussion we have deepened our understanding about the industry 4.0 and industry 5.0 with a particular focus on the impact of those two new versions of industry on our fields and our businesses.</p>
+            <p>In my first and initial post, I have highlighted the influence of the industry 4.0 on the automotive industry. I explained the improvements brought by the industry 4.0 on the supply chain, time to market, quality and its effectiveness on the profitability, reputation of the company and on the profitability of the output and the increase of the return on sales (ROS) and pocket margin (PM).</p>
+            <p>Nevertheless, I also highlighted the need of the infrastructures to be able to coexist with the automatization implemented on the cars (autonomous driving and sensors for avoiding collisions). Without implementing the infrastructures, the enhancements brought by the industry 4.0 are useless and even dangerous for the circulations.</p>
+            <p>I found very interesting the reply of Dalbir Singh which has also highlighted the need to implement the infrastructures and, also, with the new concepts brought by industry 5.0, to implement more human-centric and sustainable solutions to merge the new developments of the businesses with a brand-new infrastructure in order to work harmoniously and bring real improvements to the society.</p>         
+            <p>Another key point has been pointed out in the reply of Choyee Wolff when discussed about the industry 5.0 as an ideal connection between important innovations and an environment ready for those innovations and more human centred.</p>
+            <p>This Human-Machine collaboration framework is meant to reshape the automotive industry by establishing a unified system that effectively merges human expertise with machine capabilities to enhance manufacturing processes (Abouhawwash et al., 2024: 138-139).</p>
+            <p>This debate was a successful instrument to reflect and rethink about the implications of industry 4.0 and 5.0.</p>
+            
+            <p><b>References:</b></p>
+            <p><b>Abouhawwash, M., Rosak-Szyrocka, J. & Gupta, S.K.</b> (2024) Aspects of Quality Management in Value Creating in the Industry 5.0 Way. Boca Raton (USA): CRC Press. Available at: https://books.google.com.sg/books?hl=en&lr=&id=QBgXEQAAQBAJ&oi=fnd&pg=PA137&dq=industry+5.0+and+automotive+business&ots=QGgrH0FlCe&sig=gojwzs7OXVjdtoPbEcBk77hWW58&redir_esc=y#v=onepage&q=industry%205.0%20and%20automotive%20business&f=false [Accessed 25th May 2025].</p>
+                           
+            <h3 class="section-title">Key Readings and Resources</h3>
+            <ul class="resources-list">
+                <li>Bishop, C. and Bishop, H. (2024). <i>Deep Learning: Foundations and Concepts.</i> UK: Cambridge University Press. Chapters 4.</li>
+                <li>Chernozhukov, V., Hansen, C. and Spindler, M. (2024) <i>Applied Causal Inference Powered by ML and AI</i>. Oxford, UK: Oxford University Press. Chapter 5</li>
+                <li>Valaskova, K., T, Kliestik., L, Svabova. and P, Adamko. (2018)<i> 'Financial Risk Measurement and Prediction Modelling for Sustainable Development of Business Entities Using Regression Analysis', ISustainability, 10(7).</li>
+                <li>Leetaru, K. (2019)<i>A Reminder That Machine Learning Is About Correlations Not Causation.</i></li>
+                <li>Calvello (2020)<i>Correlation vs. Regression Made Easy.</i></li>
+                <li>Goyal, C. (2021)<i>ntuition Behind Correlation.</i></li>
+                <li>Chartterjee, S. (2017)<i>Good Data and Machine Learning.</i></li>
+                <li>odebasic. (2018)<i>Machine Learning Tutorial Python - 8: Logistic Regression (Binary Classification).7 September.</i></li> 
+            </ul>
+            
+            <div class="reflection">
+                <h4 class="reflection-title">Personal Reflection</h4>
+                <p>Exploratory Data Analysis (EDA) has been quite a challenging topic to handle. But I learned that is a fundamental tool to learn. EDA is a crucial preliminary step in any AI/machine learning pipeline that involves:</p>
+                <p>Understanding the structure and characteristics of your data before building AI models</p>
+                <p>Identifying patterns, trends, and relationships in the dataset</p>
+                <p>Detecting outliers, missing values, and data quality issues</p>
+                <p>Determining which features might be most relevant for your AI model</p>
+                <p>I am really looking forward to start working practically on some datasets and try the Exploratory Data Analysis myself.</p>
+                <blockquote>
+                    "EDA is like getting to know your data intimately before you ask it to power an AI system - it's the foundation that makes everything else more reliable and effective."
+                </blockquote>
+            </div>
+            
+            <div class="navigation-buttons">
+                <a href="pgdipAI.html" class="nav-button">Back to Course Overview</a>
+                <a href="pgdipAI-unit4.html" class="nav-button">Unit 4: Linear Regression with Scikit-Learn</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Andrea Trevisi. All rights reserved.</p>
+        <div class="contact-info">
+            <a href="mailto:andrea.trevisi@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>
