@@ -1,1 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Trevisi - AI Diploma: Unit 6</title>
+    <style>
+        /* Simple, clean styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        h4 {
+            color: #3498db;
+            margin-top: 25px;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        /* Navigation Menu Styling */
+        .navbar {
+            background-color: #2c3e50;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        
+        /* Dropdown container */
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        
+        /* Dropdown button */
+        .dropdown .dropbtn {
+            font-size: 17px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        /* Add a background color to navbar links on hover */
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #3498db;
+        }
+        
+        /* Dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            float: none;
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        
+        /* Add a background color to dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* Responsive navigation */
+        @media screen and (max-width: 600px) {
+            .navbar a, .dropdown .dropbtn {
+                display: block;
+                width: 100%;
+                text-align: left;
+            }
+            
+            .dropdown-content {
+                position: relative;
+                width: 100%;
+            }
+        }
 
+        /* Current page indicator */
+        .active {
+            background-color: #3498db;
+        }
+        
+        /* Unit Content Styling */
+        .unit-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .unit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .unit-number {
+            background-color: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .unit-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .completed-badge {
+            background-color: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-left: 15px;
+        }
+        
+        .section-title {
+            color: #3498db;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        
+        .key-concept {
+            background-color: #f1f9ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .learning-outcomes {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .learning-outcomes li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .learning-outcomes li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .resources-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .resources-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .resources-list li:before {
+            content: "📚";
+            position: absolute;
+            left: 0;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        
+        .reflection {
+            background-color: #fdf9e8;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 25px;
+            border-left: 4px solid #f1c40f;
+        }
+        
+        .reflection-title {
+            color: #f39c12;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        blockquote {
+            font-style: italic;
+            border-left: 3px solid #3498db;
+            padding-left: 15px;
+            margin-left: 0;
+            color: #555;
+        }
+
+        /* ENHANCED TEAM PROJECT STYLING */
+        .team-project-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-project-section::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
+            border-radius: 12px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .team-project-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .team-project-icon {
+            background-color: rgba(255,255,255,0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            margin-right: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .team-project-title {
+            font-size: 2.2em;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 600;
+        }
+
+        .team-project-subtitle {
+            font-size: 1.1em;
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .project-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .project-info-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .project-info-card h4 {
+            margin-top: 0;
+            color: #fff;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-info-card p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .project-topic {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #FFD700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .meeting-points {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meeting-points h4 {
+            color: #FFD700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meeting-points ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .meeting-points li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .meeting-points li:before {
+            content: "🎯";
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        .next-meeting-highlight {
+            background: rgba(255,215,0,0.2);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border-left: 4px solid #FFD700;
+        }
+
+        .next-meeting-highlight strong {
+            color: #FFD700;
+        }
+
+        /* Responsive design for team project */
+        @media screen and (max-width: 600px) {
+            .team-project-section {
+                padding: 20px;
+            }
+            
+            .team-project-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .team-project-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .team-project-title {
+                font-size: 1.8em;
+            }
+            
+            .project-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Pulse animation for important elements */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar with Dropdown -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn active">Experience 
+                <i>▼</i>
+            </button>
+            <div class="dropdown-content">
+                <a href="workhistory.html">Work History</a>
+                <a href="pgdipAI.html" class="active">PG Dip Artificial Intelligence</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Skills 
+                <i>▼</i>
+            </button>
+            <div class="dropdown-content">
+                <a href="technical-skills.html">Technical Skills</a>
+                <a href="languages.html">Languages</a>
+            </div>
+        </div>
+        <a href="education.html">Education</a>
+        <a href="afterwork.html">After Work</a>
+    </div>
+    
+    <header>
+        <img src="Profile Picture.jpg" alt="Andrea Trevisi" class="profile-image">
+        <h1>Andrea Trevisi</h1>
+        <p>PG Diploma in Artificial Intelligence</p>
+    </header>
+
+    <div class="section">
+        <div class="unit-content">
+            <div class="unit-header">
+                <div class="unit-number"></div>
+                <h2 class="unit-title">Unit 6: Clustering with Python</h2>
+                <span class="completed-badge">Completed</span>
+            </div>
+            
+            <p>Welcome to Week 6.</p>
+            <p>Last week we learned about clustering. This week, we will apply clustering (K-means only) on real life data using the Python libraries in scikit-learn.</p>     
+            
+          <h3 class="section-title">This week we shall learn about:</h3>
+            <ul class="learning-outcomes">
+                <li>The functionalities of Python libraries used in the K-Means clustering algorithm.</li>
+                <li>Role of clustering algorithms in answering some interesting questions based on a dataset.</li>
+            </ul>
+            
+            <h3 class="section-title">On completion of this week, you will be able to:</h3>
+            <ul class="learning-outcomes">
+                <li>Undertake clustering analysis on large datasets.</li>
+                <li>Use right Python libraries for clustering.</li>
+                <li>Evaluate and interpret the results.</li>
+            </ul>
+            
+            <!-- ENHANCED TEAM PROJECT SECTION -->
+            <div class="team-project-section">
+                <div class="team-project-header">
+                    <div class="team-project-icon">👥</div>
+                    <div>
+                        <h2 class="team-project-title">TEAM PROJECT</h2>
+                        <p class="team-project-subtitle">Submission of the Team Report (due at the end of this week)</p>
+                    </div>
+                </div>
+                
+                <div class="project-info-grid">
+                    <div class="project-info-card">
+                        <h4>🏷️ Team Name</h4>
+                        <p>Group 3</p>
+                    </div>
+                    <div class="project-info-card">
+                        <h4>📊 Project Topic</h4>
+                        <p class="project-topic">"Airbnb Business Analysis Using a Data Science Approach"</p>
+                    </div>
+                    <div class="project-info-card">
+                        <h4>📅 Due Date</h4>
+                        <p>End of Week 6</p>
+                    </div>
+                    <div class="project-info-card">
+                        <h4>📋 Deliverable</h4>
+                        <p>Project Report</p>
+                    </div>
+                </div>
+                
+                <div class="meeting-points">
+                    <h4>🎯 Work done by the Team in the last week:</h4>
+                    <ul>
+                        <li>Analysis and "Cleaning" of the DataSet.</li>
+                        <li>Coding of Machine Learning for Track 1 Classical Machine Learning Method</li>
+                        <li>Analysis of the Coding and definition of the findings</li>
+                        <li>Analytical assesment of the results and preparation of graphics and tables (Visualisation Phase)</li>
+                        <li>Preparation of report with included Phyton code + Visualisation + Academic References in Harvard Style Format.</li>
+                        <li>Discussion of the final report within the team and decision to submit it after overall agreement.</li>
+                    </ul>
+                    
+                    <div class="next-meeting-highlight pulse">
+                        <strong>🗓️ Submission Deadline:</strong> 23:55hrs (UK Time) of Monday 9th June 2025.
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="section-title">Key Readings and Resources</h3>
+            <ul class="resources-list">
+                <li>Bishop, C. and Bishop, H. (2024) <i>Deep Learning: Foundations and Concepts</i> UK: Cambridge University Press. Chapter 8: Introduction to Deep Neural Networks.</li>
+                <li>Goodfellow, I., Bengio, Y. and Courville, A. (2016) <i>Deep Learning.</i> Cambridge. Cambridge, MA: MIT Press. Chapter 6: Deep Feedforward Networks</li>
+            </ul>
+            
+            <div class="reflection">
+                <h4 class="reflection-title">Personal Reflection</h4>
+                <p>Clustering is a fundamental unsupervised learning technique that reveals hidden patterns and structures within unlabeled data, making it essential for exploratory data analysis and knowledge discovery.</p>
+                <p>Unlike supervised learning, clustering algorithms like K-means, hierarchical clustering, and DBSCAN identify natural groupings without predefined categories, enabling practitioners to understand data distributions and uncover meaningful segments.</p>
+                <p>This capability is crucial for numerous applications including customer segmentation, market research, image recognition, and anomaly detection.</p>
+                <p>Clustering serves as a preprocessing step for other machine learning tasks, helping to reduce dimensionality, improve model performance, and identify outliers that might skew results.</p>
+                <p>Understanding clustering algorithms develops critical analytical thinking about data relationships and similarity measures.</p>
+                <blockquote>
+                    <p>"Clustering teaches practitioners to evaluate cluster quality, determine optimal cluster numbers, and interpret results meaningfully.</p>
+                    <p>These skills are particularly valuable in business intelligence, where discovering customer behaviors or market segments can drive strategic decisions and competitive advantages in data-driven organizations."</p>
+                </blockquote>
+            </div>
+            
+            <div class="navigation-buttons">
+                <a href="pgdipAI.html" class="nav-button">Back to Course Overview</a>
+                <a href="pgdipAI-unit7.html" class="nav-button">Unit 7: Introduction to Artificial Neural Networks</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Andrea Trevisi. All rights reserved.</p>
+        <div class="contact-info">
+            <a href="mailto:andrea.trevisi@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>
