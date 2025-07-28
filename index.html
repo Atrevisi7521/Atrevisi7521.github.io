@@ -265,5 +265,478 @@
     <footer>
         <p>&copy; 2025 Andrea Trevisi. All rights reserved.</p>
     </footer>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Trevisi - Portfolio</title>
+    <style>
+        /* Simple, clean styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .project {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .project h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .skill {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        /* Navigation Menu Styling */
+        .navbar {
+            background-color: #2c3e50;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        
+        /* Dropdown container */
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        
+        /* Dropdown button */
+        .dropdown .dropbtn {
+            font-size: 17px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        /* Add a background color to navbar links on hover */
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #3498db;
+        }
+        
+        /* Dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            float: none;
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        
+        /* Add a background color to dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* Responsive navigation */
+        @media screen and (max-width: 600px) {
+            .navbar a, .dropdown .dropbtn {
+                display: block;
+                width: 100%;
+                text-align: left;
+            }
+            
+            .dropdown-content {
+                position: relative;
+                width: 100%;
+            }
+        }
+        
+        /* Current page indicator */
+        .active {
+            background-color: #3498db;
+        }
+
+        /* Book of the Month Styling */
+        .book-of-month {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-of-month::before {
+            content: '📚';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            opacity: 0.3;
+        }
+
+        .book-of-month h2 {
+            color: white;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            margin-top: 0;
+        }
+
+        .book-container {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .book-cover {
+            flex-shrink: 0;
+            width: 120px;
+            height: 180px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .book-details {
+            flex: 1;
+        }
+
+        .book-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .book-author {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .book-description {
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        .month-indicator {
+            display: inline-block;
+            background-color: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .book-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .book-cover {
+                align-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar with Dropdown -->
+    <div class="navbar">
+        <a href="index.html" class="active">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Experience 
+                <i>▼</i>
+            </button>
+            <div class="dropdown-content">
+                <a href="workhistory.html">Work History</a>
+                <a href="pgdipAI.html">PG Dip Artificial Intelligence</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Skills 
+                <i>▼</i>
+            </button>
+            <div class="dropdown-content">
+                <a href="technical-skills.html">Technical Skills</a>
+                <a href="languages.html">Languages</a>
+            </div>
+        </div>
+        <a href="education.html">Education</a>
+        <a href="afterwork.html">After Work</a>
+    </div>
+    
+    <header>
+        <!-- Add your profile photo here -->
+        <img src="Profile Picture.jpg" alt="Andrea Trevisi" class="profile-image">
+        <h1>Andrea Trevisi</h1>
+        <p>Area Sales Manager | Singapore</p>
+    </header>
+
+    <div class="section">
+        <h2>Welcome to My Portfolio</h2>
+        <p>Hello, I'm Andrea Trevisi, an experienced Area Sales Manager currently based in Singapore with a focus on the Asia-Pacific region. With over two decades in the industry, I've developed extensive expertise in sales, marketing, and relationship building across international markets.</p>
+        <p>My career has been defined by my ability to understand complex business environments, build strategic partnerships, and deliver results in competitive markets. Whether working with global teams or developing regional strategies, I bring a thoughtful, results-oriented approach to every challenge.</p>
+        <p>This portfolio showcases my professional journey, key projects, and the skills I've developed throughout my career. I'm passionate about connecting businesses with solutions that drive growth and creating value through meaningful business relationships.</p>
+        <p>I'm always open to discussing new opportunities, collaborations, or simply connecting with like-minded professionals. Please feel free to explore my work and reach out to start a conversation.</p>
+    </div>
+
+    <div class="section">
+        <h2>Skills</h2>
+        <div class="skills">
+            <span class="skill">International Business Development</span>
+            <span class="skill">Key Account Management</span>
+            <span class="skill">Cross-Cultural Communication</span>
+            <span class="skill">Strategic Sales Leadership</span>
+            <span class="skill">Market Analysis & Strategy</span>
+            <span class="skill">Technical Industry Knowledge</span>
+            <span class="skill">Contract Negotiation</span>
+            <span class="skill">Budget Management</span>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Education</h2>
+        <p><strong>Postgraduate Diploma Artificial Intelligence</strong> - University of Essex (UK), Started 2024 (Expected completion: May 2026)</p>
+        <p>Currently pursuing advanced studies in AI to complement my extensive business experience.</p>
+        
+        <p><strong>Bachelor of Arts - International Business Management & Marketing</strong> - University of Essex (UK)</p>
+        <p>Foundation of my business acumen and international perspective.</p>
+    </div>
+
+    <!-- Book of the Month Section -->
+    <div class="book-of-month">
+        <div class="month-indicator" id="currentMonth">July 2025</div>
+        <h2>📖 Book of the Month</h2>
+        <div class="book-container">
+            <div class="book-cover" id="bookEmoji">🤖</div>
+            <div class="book-details">
+                <div class="book-title" id="bookTitle">Artificial Intelligence: A Modern Approach</div>
+                <div class="book-author" id="bookAuthor">by Stuart Russell & Peter Norvig</div>
+                <div class="book-description" id="bookDescription">
+                    As I pursue my PG Diploma in AI, this comprehensive textbook has been invaluable. It brilliantly balances theoretical foundations with practical applications, making complex AI concepts accessible. A must-read for anyone serious about understanding the current and future landscape of artificial intelligence.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Experience</h2>
+        <p><strong>Area Sales Manager</strong> - Continental AG (ContiTech Surface Solutions), Singapore (June 2023 - Present)</p>
+        <p>Leading B2B sales and Key Account management across Southeast Asia (SEA).</p>
+        
+        <p><strong>Area Sales Manager</strong> - Trelleborg Singapore Pte Ltd, Singapore (January 2015 - May 2023)</p>
+        <p>Led business development initiatives across 11 Southeast Asian countries, increasing regional sales by 60%.</p>
+    </div>
+
+    <div class="section">
+        <h2>Contact</h2>
+        <p>I'm open to new opportunities and collaborations. Feel free to reach out!</p>
+        <div class="contact-info">
+            <a href="mailto:andrea.trevisi@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Andrea Trevisi. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Book of the Month Data
+        const books = {
+            0: { // January
+                title: "Good to Great",
+                author: "by Jim Collins",
+                emoji: "📈",
+                description: "A timeless classic on what separates good companies from truly great ones. Collins' research-backed insights on leadership and organizational excellence resonate deeply with my experience in building successful sales teams and driving business transformation."
+            },
+            1: { // February
+                title: "Never Eat Alone",
+                author: "by Keith Ferrazzi",
+                emoji: "🤝",
+                description: "Networking isn't just about collecting business cards—it's about building meaningful relationships that create mutual value. This book perfectly captures the philosophy I've applied throughout my international business career."
+            },
+            2: { // March
+                title: "The Challenger Sale",
+                author: "by Matthew Dixon & Brent Adamson",
+                emoji: "🎯",
+                description: "Revolutionary insights into modern B2B selling that challenge traditional relationship-building approaches. As someone managing key accounts across Southeast Asia, this book has transformed how I approach complex sales situations."
+            },
+            3: { // April
+                title: "Blue Ocean Strategy",
+                author: "by W. Chan Kim & Renée Mauborgne",
+                emoji: "🌊",
+                description: "Creating uncontested market space rather than competing in existing markets—this strategic thinking has been crucial in my approach to expanding business across 11 Southeast Asian countries."
+            },
+            4: { // May
+                title: "Crossing the Chasm",
+                author: "by Geoffrey A. Moore",
+                emoji: "🚀",
+                description: "Understanding technology adoption lifecycle is crucial in today's digital business environment. This book provides invaluable insights for anyone working with B2B technology solutions and market development."
+            },
+            5: { // June
+                title: "The Culture Code",
+                author: "by Daniel Coyle",
+                emoji: "🏛️",
+                description: "Working across diverse cultures in Asia-Pacific has taught me the importance of understanding cultural dynamics. This book offers fascinating insights into how successful groups create psychological safety and shared purpose."
+            },
+            6: { // July
+                title: "Artificial Intelligence: A Modern Approach",
+                author: "by Stuart Russell & Peter Norvig",
+                emoji: "🤖",
+                description: "As I pursue my PG Diploma in AI, this comprehensive textbook has been invaluable. It brilliantly balances theoretical foundations with practical applications, making complex AI concepts accessible. A must-read for anyone serious about understanding the current and future landscape of artificial intelligence."
+            },
+            7: { // August
+                title: "Sapiens",
+                author: "by Yuval Noah Harari",
+                emoji: "🧬",
+                description: "A fascinating exploration of human history and our species' remarkable journey. Harari's insights into how we've organized societies and created shared beliefs offer valuable perspectives for understanding modern business and cultural dynamics."
+            },
+            8: { // September
+                title: "The Lean Startup",
+                author: "by Eric Ries",
+                emoji: "⚡",
+                description: "Even in established companies, thinking like a startup can drive innovation and agility. This methodology of build-measure-learn has influenced how I approach new market opportunities and business development initiatives."
+            },
+            9: { // October
+                title: "Influence: The Psychology of Persuasion",
+                author: "by Robert B. Cialdini",
+                emoji: "🧠",
+                description: "Understanding the psychological principles behind decision-making has been invaluable in my sales and negotiation work. Cialdini's research-backed insights are essential for anyone in business development or leadership roles."
+            },
+            10: { // November
+                title: "The Innovator's Dilemma",
+                author: "by Clayton M. Christensen",
+                emoji: "⚙️",
+                description: "Christensen's insights into disruptive innovation help explain why established companies struggle with new technologies. Essential reading for understanding how industries evolve and how to position businesses for long-term success."
+            },
+            11: { // December
+                title: "Thinking, Fast and Slow",
+                author: "by Daniel Kahneman",
+                emoji: "🤔",
+                description: "Nobel laureate Kahneman's exploration of how we make decisions has profound implications for sales, negotiation, and leadership. Understanding cognitive biases has made me a more effective communicator and decision-maker."
+            }
+        };
+
+        // Function to update book display
+        function updateBookOfMonth() {
+            const currentDate = new Date();
+            const currentMonth = currentDate.getMonth();
+            const book = books[currentMonth];
+            
+            // Update month indicator
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            document.getElementById('currentMonth').textContent = `${monthNames[currentMonth]} ${currentDate.getFullYear()}`;
+            
+            // Update book details
+            document.getElementById('bookTitle').textContent = book.title;
+            document.getElementById('bookAuthor').textContent = book.author;
+            document.getElementById('bookEmoji').textContent = book.emoji;
+            document.getElementById('bookDescription').textContent = book.description;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', updateBookOfMonth);
+    </script>
+</body>
+</html>
 </body>
 </html>
