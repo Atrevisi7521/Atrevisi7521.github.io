@@ -236,6 +236,23 @@
             font-weight: bold;
         }
         
+        .resources-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .resources-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .resources-list li:before {
+            content: "📚";
+            position: absolute;
+            left: 0;
+        }
+        
         .navigation-buttons {
             display: flex;
             justify-content: space-between;
@@ -254,6 +271,28 @@
         .nav-button:hover {
             background-color: #2980b9;
             text-decoration: none;
+        }
+        
+        .reflection {
+            background-color: #fdf9e8;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 25px;
+            border-left: 4px solid #f1c40f;
+        }
+        
+        .reflection-title {
+            color: #f39c12;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        blockquote {
+            font-style: italic;
+            border-left: 3px solid #3498db;
+            padding-left: 15px;
+            margin-left: 0;
+            color: #555;
         }
 
         /* ENHANCED TEAM PROJECT STYLING */
@@ -944,26 +983,27 @@
             
             <h3 class="section-title">Key Readings, Resources and References.</h3>
             <ul class="resources-list">
-                <li>Finin, T.et al. (1994) <i>'KQML as an agent communication language'</i>, CIKM, 1, pp. 456-463.</li>
-
+                <li>Bishop, C. and Bishop, H. (2024) <i>Deep Learning: Foundations and Concepts</i> UK: Cambridge University Press. Chapter 8: Introduction to Deep Neural Networks.</li>
+                <li>Goodfellow, I., Bengio, Y. and Courville, A. (2016) <i>Deep Learning.</i> Cambridge. Cambridge, MA: MIT Press. Chapter 6: Deep Feedforward Networks</li>
+                <li>University Of Essex Online (2025)<i> Unit 6: Clustering with Python.</i> Available from: https://www.my-course.co.uk/course/view.php?id=13459&section=12 [Accessed June 2025].</li>
             </ul>
             
             <div class="reflection">
                 <h4 class="reflection-title">Personal Reflection</h4>
-                <p>Clustering is a fundamental unsupervised learning technique that reveals hidden patterns and structures within unlabeled data, making it essential for exploratory data analysis and knowledge discovery.</p>
-                <p>Unlike supervised learning, clustering algorithms like K-means, hierarchical clustering, and DBSCAN identify natural groupings without predefined categories, enabling practitioners to understand data distributions and uncover meaningful segments.</p>
-                <p>This capability is crucial for numerous applications including customer segmentation, market research, image recognition, and anomaly detection.</p>
-                <p>Clustering serves as a preprocessing step for other machine learning tasks, helping to reduce dimensionality, improve model performance, and identify outliers that might skew results.</p>
+                <p>Implementing clustering with Python represents a crucial transition from theoretical understanding to practical application in data science.</p>
+                <p>Python's scikit-learn library provides an accessible yet powerful framework for applying K-means clustering to real-world datasets, making complex unsupervised learning techniques readily available to practitioners.</p>
+                <p>This hands-on approach bridges the gap between academic concepts and industry implementation, where clustering algorithms are essential for customer segmentation, market analysis, and pattern recognition.</p>
+                <p>Scikit-learn's streamlined API allows data scientists to focus on interpreting results rather than wrestling with implementation details, while its comprehensive toolkit includes preprocessing functions, evaluation metrics, and visualization capabilities.</p>
                 <p>Understanding clustering algorithms develops critical analytical thinking about data relationships and similarity measures.</p>
                 <blockquote>
-                    <p>"Clustering teaches practitioners to evaluate cluster quality, determine optimal cluster numbers, and interpret results meaningfully.</p>
-                    <p>These skills are particularly valuable in business intelligence, where discovering customer behaviors or market segments can drive strategic decisions and competitive advantages in data-driven organizations."</p>
+                    <p>"Mastering K-means clustering in Python develops critical skills in data preprocessing, parameter tuning, and cluster validation that are fundamental to any machine learning workflow.</p>
+                    <p>The ability to rapidly prototype, test, and deploy clustering solutions using Python's ecosystem makes it an indispensable skill for modern data analysts seeking to extract actionable insights from unlabeled data."</p>
                 </blockquote>
             </div>
             
             <div class="navigation-buttons">
-                <a href="intelligent-agents.html" class="nav-button">Back to Course Overview</a>
-                <a href="intelligent-agents-Unit7.html" class="nav-button">Unit 7: Natural Language Processing (NLP)</a>
+                <a href="pgdipAI.html" class="nav-button">Back to Course Overview</a>
+                <a href="pgdipAI-unit7.html" class="nav-button">Unit 7: Introduction to Artificial Neural Networks</a>
             </div>
         </div>
     </div>
