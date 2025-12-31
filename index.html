@@ -337,15 +337,15 @@
 
     <!-- Book of the Month Section -->
     <div class="book-of-month">
-        <div class="month-indicator" id="currentMonth">July 2025</div>
-        <h2>📖 Book of the Month</h2>
+        <div class="month-indicator" id="currentMonth">January 2025</div>
+        <h2>📖 AI & Business Book of the Month</h2>
         <div class="book-container">
             <div class="book-cover" id="bookEmoji">🤖</div>
             <div class="book-details">
-                <div class="book-title" id="bookTitle">Artificial Intelligence: A Modern Approach</div>
-                <div class="book-author" id="bookAuthor">by Stuart Russell & Peter Norvig</div>
+                <div class="book-title" id="bookTitle">AI Superpowers</div>
+                <div class="book-author" id="bookAuthor">by Kai-Fu Lee</div>
                 <div class="book-description" id="bookDescription">
-                    As I pursue my PG Diploma in AI, this comprehensive textbook has been invaluable. It brilliantly balances theoretical foundations with practical applications, making complex AI concepts accessible. A must-read for anyone serious about understanding the current and future landscape of artificial intelligence.
+                    A compelling exploration of how AI is reshaping global business dynamics and the competitive landscape between the US and China. Essential reading for understanding AI's transformative impact on international business strategy.
                 </div>
             </div>
         </div>
@@ -374,79 +374,79 @@
     </footer>
 
     <script>
-        // Book of the Month Data
+        // AI & Business Book of the Month Data
         const books = {
             0: { // January
-                title: "Good to Great",
-                author: "by Jim Collins",
-                emoji: "📈",
-                description: "A timeless classic on what separates good companies from truly great ones. Collins' research-backed insights on leadership and organizational excellence resonate deeply with my experience in building successful sales teams and driving business transformation."
+                title: "AI Superpowers: China, Silicon Valley, and the New World Order",
+                author: "by Kai-Fu Lee",
+                emoji: "🌏",
+                description: "A compelling exploration of how AI is reshaping global business dynamics and the competitive landscape between the US and China. Kai-Fu Lee's insider perspective on both ecosystems offers invaluable insights for anyone navigating international business in the age of AI. Essential reading for understanding AI's transformative impact on global commerce."
             },
             1: { // February
-                title: "Never Eat Alone",
-                author: "by Keith Ferrazzi",
-                emoji: "🤝",
-                description: "Networking isn't just about collecting business cards—it's about building meaningful relationships that create mutual value. This book perfectly captures the philosophy I've applied throughout my international business career."
+                title: "Prediction Machines: The Simple Economics of Artificial Intelligence",
+                author: "by Ajay Agrawal, Joshua Gans & Avi Goldfarb",
+                emoji: "📊",
+                description: "This book brilliantly reframes AI as a tool that dramatically reduces the cost of prediction—and explains how this shifts business strategy. For sales and marketing professionals, understanding how AI changes decision-making economics is crucial for staying competitive. A must-read for anyone looking to leverage AI strategically."
             },
             2: { // March
-                title: "The Challenger Sale",
-                author: "by Matthew Dixon & Brent Adamson",
-                emoji: "🎯",
-                description: "Revolutionary insights into modern B2B selling that challenge traditional relationship-building approaches. As someone managing key accounts across Southeast Asia, this book has transformed how I approach complex sales situations."
+                title: "The AI-First Company: How to Compete and Win with Artificial Intelligence",
+                author: "by Ash Fontana",
+                emoji: "🏆",
+                description: "A practical guide to building competitive advantage through AI and data. Fontana draws on his experience as a venture capitalist to show how companies can systematically develop AI capabilities. Particularly relevant for understanding how AI transforms B2B relationships and sales strategies in competitive markets."
             },
             3: { // April
-                title: "Blue Ocean Strategy",
-                author: "by W. Chan Kim & Renée Mauborgne",
-                emoji: "🌊",
-                description: "Creating uncontested market space rather than competing in existing markets—this strategic thinking has been crucial in my approach to expanding business across 11 Southeast Asian countries."
+                title: "Human + Machine: Reimagining Work in the Age of AI",
+                author: "by Paul Daugherty & H. James Wilson",
+                emoji: "🤝",
+                description: "Accenture's research leaders reveal how leading companies are reimagining business processes through human-AI collaboration. This book is essential for sales leaders seeking to understand how AI augments rather than replaces human capabilities. The 'missing middle' concept has transformed how I think about AI in relationship-driven sales."
             },
             4: { // May
-                title: "Crossing the Chasm",
-                author: "by Geoffrey A. Moore",
-                emoji: "🚀",
-                description: "Understanding technology adoption lifecycle is crucial in today's digital business environment. This book provides invaluable insights for anyone working with B2B technology solutions and market development."
+                title: "Competing in the Age of AI: Strategy and Leadership When Algorithms and Networks Run the World",
+                author: "by Marco Iansiti & Karim Lakhani",
+                emoji: "⚡",
+                description: "Harvard professors Iansiti and Lakhani explain how AI is fundamentally changing the rules of business competition. Their framework for understanding AI-driven operating models is invaluable for sales strategists. A crucial read for anyone leading business development in industries being transformed by AI."
             },
             5: { // June
-                title: "The Culture Code",
-                author: "by Daniel Coyle",
-                emoji: "🏛️",
-                description: "Working across diverse cultures in Asia-Pacific has taught me the importance of understanding cultural dynamics. This book offers fascinating insights into how successful groups create psychological safety and shared purpose."
+                title: "The Algorithmic Leader: How to Be Smart When Machines Are Smarter Than You",
+                author: "by Mike Walsh",
+                emoji: "🧭",
+                description: "Mike Walsh offers practical wisdom on leadership and decision-making in an AI-driven world. This book addresses the human side of AI adoption—how leaders can maintain relevance and effectiveness. Essential reading for sales managers navigating AI transformation while leading diverse teams across cultures."
             },
             6: { // July
-                title: "The AI Selling Revolution: The Ultimate Guide to Unlocking AI-Powered Strategies for Winning Sales",
-                author: "by Lionel Sim (Author)",
-                emoji: "🤖",
-                description: "In an age where every sales professional is racing against the clock and fighting for attention in a crowded, competitive marketplace, there's a secret weapon that can transform the way you sell-and it's powered by Artificial Intelligence."
+                title: "AI for Sales: How Artificial Intelligence is Changing Sales",
+                author: "by Chad Burmeister",
+                emoji: "💼",
+                description: "A practical, hands-on guide specifically for sales professionals looking to leverage AI. Burmeister provides concrete examples of AI applications in prospecting, lead scoring, and customer engagement. This book bridges the gap between AI theory and daily sales practice—exactly what B2B sales managers need."
             },
             7: { // August
-                title: "An Introduction to MultiAgent Systems",
-                author: "by Michael Wooldridge (2009)",
-                emoji: "🧬",
-                description: "Multiagent systems are systems composed of multiple interacting computing elements, known as agents. Agents are computer systems with two important capabilities. First, they are at least to some extent capable of autonomous action – of deciding for themselves what they need to do in order to satisfy their design objectives. Second, they are capable of interacting with other agents – not simply by exchanging data, but by engaging in analogues of the kind of social activity that we all engage in every day of our lives: cooperation, coordination, negotiation, and the like. (Wooldridge, 2009)"
+                title: "Marketing Artificial Intelligence: AI, Marketing, and the Future of Business",
+                author: "by Paul Roetzer & Mike Kaput",
+                emoji: "📈",
+                description: "The definitive guide to AI applications in marketing from the Marketing AI Institute founders. This book provides a practical roadmap for integrating AI into marketing strategy, from content creation to customer analytics. Invaluable for understanding how AI transforms the sales-marketing alignment in modern B2B environments."
             },
             8: { // September
-                title: "The Lean Startup",
-                author: "by Eric Ries",
-                emoji: "⚡",
-                description: "Even in established companies, thinking like a startup can drive innovation and agility. This methodology of build-measure-learn has influenced how I approach new market opportunities and business development initiatives."
+                title: "The Big Nine: How the Tech Titans and Their Thinking Machines Could Warp Humanity",
+                author: "by Amy Webb",
+                emoji: "🔮",
+                description: "Futurist Amy Webb examines how nine major tech companies are shaping AI's future and its implications for business and society. Understanding these dynamics is crucial for business leaders making strategic decisions about AI partnerships and technology adoption. A thought-provoking read on AI's broader business implications."
             },
             9: { // October
-                title: "Influence: The Psychology of Persuasion",
-                author: "by Robert B. Cialdini",
-                emoji: "🧠",
-                description: "Understanding the psychological principles behind decision-making has been invaluable in my sales and negotiation work. Cialdini's research-backed insights are essential for anyone in business development or leadership roles."
+                title: "Applied Artificial Intelligence: A Handbook for Business Leaders",
+                author: "by Mariya Yao, Adelyn Zhou & Marlene Jia",
+                emoji: "📘",
+                description: "A practical executive guide to AI implementation that cuts through the hype. This handbook helps business leaders understand AI capabilities, evaluate vendors, and implement AI projects successfully. Particularly useful for sales leaders building business cases for AI adoption in their organizations."
             },
             10: { // November
-                title: "The Innovator's Dilemma",
-                author: "by Clayton M. Christensen",
-                emoji: "⚙️",
-                description: "Christensen's insights into disruptive innovation help explain why established companies struggle with new technologies. Essential reading for understanding how industries evolve and how to position businesses for long-term success."
+                title: "Artificial Intelligence in Practice: How 50 Successful Companies Used AI to Solve Problems",
+                author: "by Bernard Marr",
+                emoji: "🏢",
+                description: "Bernard Marr presents 50 real-world case studies of AI implementation across industries. From Netflix to BMW, these examples show how leading companies are using AI to transform operations, marketing, and customer engagement. An inspiring and practical resource for identifying AI opportunities in your own business context."
             },
             11: { // December
-                title: "Thinking, Fast and Slow",
-                author: "by Daniel Kahneman",
-                emoji: "🤔",
-                description: "Nobel laureate Kahneman's exploration of how we make decisions has profound implications for sales, negotiation, and leadership. Understanding cognitive biases has made me a more effective communicator and decision-maker."
+                title: "Co-Intelligence: Living and Working with AI",
+                author: "by Ethan Mollick",
+                emoji: "🧠",
+                description: "Wharton professor Ethan Mollick's essential guide to the new era of human-AI collaboration. Published in 2024, this is one of the most current and practical books on integrating AI into professional life. Mollick's research-backed insights on working alongside AI make this perfect year-end reading for anyone committed to thriving in the AI age."
             }
         };
 
