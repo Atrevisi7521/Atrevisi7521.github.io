@@ -1,1 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Trevisi - AI Diploma: Unit 9</title>
+    <style>
+        /* Simple, clean styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        h4 {
+            color: #3498db;
+            margin-top: 25px;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        /* Navigation Menu Styling */
+        .navbar {
+            background-color: #2c3e50;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        
+        /* Dropdown container */
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        
+        /* Dropdown button */
+        .dropdown .dropbtn {
+            font-size: 17px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        /* Add a background color to navbar links on hover */
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #3498db;
+        }
+        
+        /* Dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            float: none;
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        
+        /* Add a background color to dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* Responsive navigation */
+        @media screen and (max-width: 600px) {
+            .navbar a, .dropdown .dropbtn {
+                display: block;
+                width: 100%;
+                text-align: left;
+            }
+            
+            .dropdown-content {
+                position: relative;
+                width: 100%;
+            }
+        }
 
+        /* Current page indicator */
+        .active {
+            background-color: #3498db;
+        }
+        
+        /* Unit Content Styling */
+        .unit-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .unit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .unit-number {
+            background-color: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .unit-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .completed-badge {
+            background-color: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-left: 15px;
+        }
+        
+        .section-title {
+            color: #3498db;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        
+        .key-concept {
+            background-color: #f1f9ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .learning-outcomes {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .learning-outcomes li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .learning-outcomes li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .resources-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .resources-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .resources-list li:before {
+            content: "📚";
+            position: absolute;
+            left: 0;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        
+        .reflection {
+            background-color: #fdf9e8;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 25px;
+            border-left: 4px solid #f1c40f;
+        }
+        
+        .reflection-title {
+            color: #f39c12;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        blockquote {
+            font-style: italic;
+            border-left: 3px solid #3498db;
+            padding-left: 15px;
+            margin-left: 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar with Dropdown -->
+    <div class="navbar">
+        <a href="index.html" class="active">Home</a>
+        <div class="dropdown">
+    <button class="dropbtn">Experience 
+        <i>▼</i>
+    </button>
+    <div class="dropdown-content">
+        <a href="workhistory.html">Work History</a>
+        <a href="pgdipAI.html">Machine Learning</a>
+        <a href="intelligent-agents.html">Intelligent Agents</a>
+        <a href="knowledge-representation.html">Knowledge Representation and Reasoning</a>
+    </div>
+    </div>
+        <div class="dropdown">
+            <button class="dropbtn">Skills 
+                <i>▼</i>
+            </button>
+            <div class="dropdown-content">
+                <a href="technical-skills.html">Technical Skills</a>
+                <a href="languages.html">Languages</a>
+            </div>
+        </div>
+        <a href="education.html">Education</a>
+        <a href="afterwork.html">After Work</a>
+    </div>
+    
+    <header>
+        <img src="Profile Picture.jpg" alt="Andrea Trevisi" class="profile-image">
+        <h1>Andrea Trevisi</h1>
+        <p>PG Diploma in Artificial Intelligence</p>
+    </header>
+
+    <div class="section">
+        <div class="unit-content">
+            <div class="unit-header">
+                <div class="unit-number">9</div>
+                <h2 class="unit-title">Unit 9: Formalism Techniques and Applications</h2>
+                <span class="completed-badge">Completed</span>
+            </div>
+            
+            <p>Welcome to Week 9.
+
+            </p>This unit will continue with tutorials aimed at equipping you with the practical skills to be able to develop a knowledge-based system. It will explore inferencing and reasoning using the Protégé software. You will be taken through worked examples from a case study.</p>
+            <P>This week's seminar provides a further tutorial developing a knowledge-based system, using the Protégé software tool. This seminar serves as a foundation and prepares you to be able to implement a solution for the mid-module assignment.</P>
+          
+            <h3 class="section-title">This week we shall learn about:</h3>
+            <ul class="learning-outcomes">
+                <li>Learn to use protégé tools to develop reasoning and inferencing capabilities.</li>
+                <li>Apply the concept of reasoning to make inferences from an ontology data model.</li>
+             </ul>
+            <h3 class="section-title">On completion of this week, you will be able to:</h3>
+             <ul class="learning-outcomes">
+                <li>Develop the understanding of reasoning language such as read.</li>
+                <li>Develop the capacity to interpret reasoning language.</li>
+             </ul>
+
+            <p>University of Essex Online (2025)</p>
+                        
+            <h3 class="section-title">Collaborative Discussion 2</h3>
+            <p>This discussion will last for 3 weeks, starting in Unit 9 and ending in Unit 11. Ensure you include appropriate citations and references in all your posts.</p>
+            <h3 class="selection-title">Discussion Topic</h3>
+            <p>Kalibatiene & Vasilecas (2011) posit that “An ontology is a formal, explicit specification of a shared conceptualization”.</p>
+            <p>Based on this definition, which language do you believe is the most useful to express ontologies that can be utilised by software agents on the WWW: KIF, OWL2, RDF or OWL-lite?</p>
+          
+            <h3 class="selection-title">Initial Post</h3>    
+            <p>Dear Colleagues,</p> 
+            <p>Following the definition of ontology given by Kalibatiene & Vasilecas (2011) as a “formal, explicit specification of a shared conceptualization”, the topic of this second collaborative learning discussion is to identify which language is more useful to express ontologies to be used by agents.</p>
+            <p>In my personal opinion, the most useful language to express ontologies and to be used by agents in the WWW is the OWL 2 Web Ontology Language (shorten in OWL2 in this post). There are few reasons why I consider this language the most useful:</p>
+            <p>-       OWL2 has been purposely created for the semantic web architecture so, in this case, the agents can easily discover, retrieve and reason over ontologies using the standard web protocols (one of the aspects where KIF was never designed for).</p>
+            <p>As highlighted by Segaran et al. (2009) “OWL is the current W3C standard for defining semantic web schemas, and tools and API support for OWL are rapidly expanding”.</p>
+            <p>-       OWL2 is based on DL (Description Logics) and that is guarantying that the reasoning tasks will be terminated. Other languages based on FOL cannot guarantee the same.</p>
+            <p>-       OWL2 offers more flexibility to developers because it provides: Existential Language, Query Language and Rule Language which give developers wide choice for their applications.</p>
+            <p>I would like to hear your opinions about this topic.</p>
+            <p>Thanks,</p>
+            <p>Andrea</p>
+          
+            <p><b>References:</b></p>
+            <p><b>Kalibatiene, D., & Vasilecas, O. </b>(2011) Survey on Ontology Languages. In: Grabis, J., Kirikova, M. (eds) <i>Perspectives in Business Informatics Research.</i> BIR 2011. Lecture Notes in Business Information Processing, vol 90. Springer, Berlin, Heidelberg. Available from: https://link.springer.com/chapter/10.1007/978-3-642-24511-4_10 [Accessed 1st January 2026].</p>
+            <p><b>Segaran, T., Evan C. & Taylor, J. </b>(2009) <i>Programming the Semantic Web</i> 1st edition. O’Reilly Media, Inc. Available from: https://learning.oreilly.com/library/view/programming-the-semantic/9780596802141/ch06.html#I_sect13_d1e8027 [Accessed 1st of January 2026].</p>    
+                  
+            <h3 class="section-title">Key Readings, Resources and References.</h3>
+            <ul class="resources-list">
+                <li>Brachman, R. & Levesque, H. (2004)<i> Knowledge Representation and Reasoning</i> San Francisco, CA: Morgan Kaufmann. Chapter 3.</li>
+                <li>Harmelen, F V., Lifschitz, V. & Porter, B. (2008) <i>Handbook of Knowledge Representation</i>  Amsterdam: Elsevier. Chapter 3.</li>
+                <li>Debellis, M. (2021) <i>A Practical Guide to Building OWL Ontologies Using Protégé 5.5 and Plugins.</i></li>
+                <li>W3C Recommendation. (2012) OWL 2 Web Ontology Language Primer.</li>
+                <li>Baader, F., Horrocks, I. & Sattler, U (2007) Description Logics.</li>
+                <li>Kádár, B., Terkaj, W. & Sacco, M. (2013) Semantic Virtual Factory supporting interoperable modelling and evaluation of production systems. <i>CIRP Annals</i> 62(1): 443-446.</li>
+                <li>Brachman, R.J. & Schmolze, J.G. (1989) An overview of the KL-ONE knowledge representation system. <i>Readings in artificial intelligence and databases</i> 9(2): 207-230.</li>
+            </ul>
+            
+            <div class="reflection">
+                <h4 class="reflection-title">Personal Reflection</h4>
+                <p>To be added.</p>
+                <blockquote>To be added</blockquote>
+            </div>
+            
+            <div class="navigation-buttons">
+                <a href="knowledge-representation.html" class="nav-button">Back to Course Overview</a>
+                <a href="knowledge-representation-Unit10.html" class="nav-button">Next: Unit 10: Reasoning with Protégé.</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Andrea Trevisi. All rights reserved.</p>
+        <div class="contact-info">
+            <a href="mailto:andrea.trevisi@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>
