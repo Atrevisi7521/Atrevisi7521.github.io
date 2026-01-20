@@ -1,1 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Trevisi - AI Diploma: Unit 12</title>
+    <style>
+        /* Simple, clean styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        h4 {
+            color: #3498db;
+            margin-top: 25px;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        /* Navigation Menu Styling */
+        .navbar {
+            background-color: #2c3e50;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        
+        /* Dropdown container */
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        
+        /* Dropdown button */
+        .dropdown .dropbtn {
+            font-size: 17px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        /* Add a background color to navbar links on hover */
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #3498db;
+        }
+        
+        /* Dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            float: none;
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        
+        /* Add a background color to dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* Responsive navigation */
+        @media screen and (max-width: 600px) {
+            .navbar a, .dropdown .dropbtn {
+                display: block;
+                width: 100%;
+                text-align: left;
+            }
+            
+            .dropdown-content {
+                position: relative;
+                width: 100%;
+            }
+        }
 
+        /* Current page indicator */
+        .active {
+            background-color: #3498db;
+        }
+        
+        /* Unit Content Styling */
+        .unit-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .unit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .unit-number {
+            background-color: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .unit-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .completed-badge {
+            background-color: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-left: 15px;
+        }
+        
+        .section-title {
+            color: #3498db;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        
+        .learning-outcomes {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .learning-outcomes li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .learning-outcomes li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .resources-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .resources-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .resources-list li:before {
+            content: "📚";
+            position: absolute;
+            left: 0;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        
+        .reflection {
+            background-color: #fdf9e8;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 25px;
+            border-left: 4px solid #f1c40f;
+        }
+        
+        .reflection-title {
+            color: #f39c12;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        blockquote {
+            font-style: italic;
+            border-left: 3px solid #3498db;
+            padding-left: 15px;
+            margin-left: 0;
+            color: #555;
+        }
+
+        /* ENHANCED TEAM PROJECT STYLING */
+        .team-project-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-project-section::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
+            border-radius: 12px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .team-project-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .team-project-icon {
+            background-color: rgba(255,255,255,0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            margin-right: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .team-project-title {
+            font-size: 2.2em;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 600;
+        }
+
+        .team-project-subtitle {
+            font-size: 1.1em;
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .project-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .project-info-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .project-info-card h4 {
+            margin-top: 0;
+            color: #fff;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-info-card p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .project-topic {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #FFD700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .meeting-points {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .meeting-points h4 {
+            color: #FFD700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meeting-points ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .meeting-points li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .meeting-points li:before {
+            content: "🎯";
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        .next-meeting-highlight {
+            background: rgba(255,215,0,0.2);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border-left: 4px solid #FFD700;
+        }
+
+        .next-meeting-highlight strong {
+            color: #FFD700;
+        }
+
+        /* NEW ASSIGNMENT SECTION STYLING */
+        .assignment-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 50%, #ff9068 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+            box-shadow: 0 8px 25px rgba(255,107,107,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .assignment-section::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52, #ff9068, #ff6b6b);
+            border-radius: 12px;
+            z-index: -1;
+            animation: assignmentGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes assignmentGlow {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .assignment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .assignment-icon {
+            background-color: rgba(255,255,255,0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            margin-right: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .assignment-title {
+            font-size: 2.2em;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 600;
+        }
+
+        .assignment-subtitle {
+            font-size: 1.1em;
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .assignment-overview {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .assignment-overview h4 {
+            color: #FFE4B5;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .assignment-overview p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .track-card {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .track-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .track-card h5 {
+            margin-top: 0;
+            color: #FFE4B5;
+            font-size: 1.1em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .track-card p {
+            margin: 8px 0 0 0;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .track-highlight {
+            background: rgba(255,228,181,0.2);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border-left: 4px solid #FFE4B5;
+        }
+
+        .track-highlight strong {
+            color: #FFE4B5;
+        }
+
+        .tasks-section {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .tasks-section h4 {
+            color: #FFE4B5;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #FFE4B5;
+        }
+
+        .task-item h5 {
+            margin-top: 0;
+            color: #FFE4B5;
+            font-size: 1.1em;
+        }
+
+        .task-item p {
+            margin: 8px 0 0 0;
+            line-height: 1.5;
+        }
+
+        .grading-breakdown {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .grading-breakdown h4 {
+            color: #FFE4B5;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grading-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 5px;
+            border-left: 3px solid #FFE4B5;
+        }
+
+        .grading-item span:first-child {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .grading-item span:last-child {
+            font-weight: 600;
+            color: #FFE4B5;
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .submission-area {
+            background: rgba(255,228,181,0.2);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            border: 2px dashed rgba(255,228,181,0.5);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .submission-area:hover {
+            background: rgba(255,228,181,0.3);
+            border-color: #FFE4B5;
+        }
+
+        .submission-area h4 {
+            color: #FFE4B5;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .upload-button {
+            background: linear-gradient(45deg, #FFE4B5, #FFF8DC);
+            color: #ff6b6b;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .upload-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,228,181,0.4);
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        /* Responsive design for assignment section */
+        @media screen and (max-width: 600px) {
+            .assignment-section {
+                padding: 20px;
+            }
+            
+            .assignment-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .assignment-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .assignment-title {
+                font-size: 1.8em;
+            }
+            
+            .tracks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Responsive design for team project */
+        @media screen and (max-width: 600px) {
+            .team-project-section {
+                padding: 20px;
+            }
+            
+            .team-project-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .team-project-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .team-project-title {
+                font-size: 1.8em;
+            }
+            
+            .project-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Pulse animation for important elements */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Bounce animation for submission area */
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar with Dropdown -->
+    <div class="navbar">
+        <a href="index.html" class="active">Home</a>
+        <div class="dropdown">
+    <button class="dropbtn">Experience 
+        <i>▼</i>
+    </button>
+    <div class="dropdown-content">
+        <a href="workhistory.html">Work History</a>
+        <a href="pgdipAI.html">Machine Learning</a>
+        <a href="intelligent-agents.html">Intelligent Agents</a>
+        <a href="knowledge-representation.html">Knowledge Representation and Reasoning</a>
+    </div>
+    </div>
+        <div class="dropdown">
+            <button class="dropbtn">Skills 
+                <i>▼</i>
+            </button>
+            <div class="dropdown-content">
+                <a href="technical-skills.html">Technical Skills</a>
+                <a href="languages.html">Languages</a>
+            </div>
+        </div>
+        <a href="education.html">Education</a>
+        <a href="afterwork.html">After Work</a>
+    </div>
+    
+    <header>
+        <img src="Profile Picture.jpg" alt="Andrea Trevisi" class="profile-image">
+        <h1>Andrea Trevisi</h1>
+        <p>PG Diploma in Artificial Intelligence</p>
+    </header>
+
+    <div class="section">
+        <div class="unit-content">
+            <div class="unit-header">
+                <div class="unit-number">12</div>
+                <h2 class="unit-title">Unit 12: Ontology Evaluation – Case Study</h2>
+                <span class="completed-badge">Completed</span>
+            </div>
+            
+            <p>Welcome to Week 12.</p>
+            <p>This unit focuses on the end-to-end development of knowledge-based systems using ontology. It discusses the approach to ontology development as well as the methodology. It also discusses the approaches to evaluation based on a case study.</p>
+            <p>This week’s seminar builds on the Unit 11 lecturecast by reviewing a case study as a window to look into the future of knowledge-based systems and applications.</p>
+            
+            <h3 class="section-title">This week we shall learn about:</h3>
+            <ul class="learning-outcomes">
+                <li>Explore the development choices and decisions that need to be made when developing an ontology.</li>
+                <li>Cover some of the emerging methodologies and how they are applied.</li>
+                <li>Discuss the various evaluation approaches to ensuring a fit for purpose knowledge-based system.</li>
+            </ul>
+            
+            <h3 class="section-title">On completion of this week, you will be able to:</h3>
+            <ul class="learning-outcomes">
+                <li>Critically evaluate methods and approaches to knowledge-based systems.</li>
+                <li>Develop the ability to evaluate ontologies for knowledge-based system applications.</li>
+            </ul>
+
+            <p>University of Essex Online (2026)</p>         
+            
+           
+            <!-- ENHANCED TEAM PROJECT SECTION -->
+            <div class="team-project-section">
+                <div class="team-project-header">
+                    <div class="team-project-icon">👥</div>
+                    <div>
+                        <h2 class="team-project-title">Individual e-Portfolio Submission</h2>
+                        <p class="team-project-subtitle">individual e-portfolio that collates all the evidence of your work in this module.</p>
+                    </div>
+                </div>
+                
+                <div class="project-info-grid">
+                    <div class="project-info-card">
+                        <h4>🏷️ e-Portfolio Submission</h4>
+                    </div>
+                    <div class="project-info-card">
+                        <h4>📊 Project Topic</h4>
+                        <p class="project-topic">This assessment focuses on your reflections on your individual contributions throughout this module.</p>
+                    </div>
+                    <div class="project-info-card">
+                        <h4>📅 Due Date</h4>
+                        <p>End of Week 12</p>
+                    </div>
+                    <div class="project-info-card">
+                        <h4>📋 Deliverable</h4>
+                        <p>Presentation of the Individual E-Portfolio.</p>
+                    </div>
+                </div>
+                
+                <div class="meeting-points">
+                    <h4>Individual work done in the last weeks:</h4>
+                    <ul>
+                        <li>Constant update of the E-Portfolio on GitHub with weekly updates.</li>
+                        <li>Evidence of participation to the 2 discussion Forums.</li>
+                        <li>focuse on my reflections on my individual contributions throughout this module.</li>
+                        <li>Preparation of the 1.000 words report based on my online E-Portfolio.</li>
+                        <li>Review on the entire work in order to assess if matches the requests of the assignment.</li>
+                    </ul>
+                    
+                    <div class="next-meeting-highlight pulse">
+                        <strong>🗓️ Submission Deadline:</strong> 23:55hrs (UK Time) Monday 26th January 2026.
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW ASSIGNMENT SECTION -->
+            <div class="assignment-section">
+                <div class="assignment-header">
+                    <div class="assignment-icon">📋</div>
+                    <div>
+                        <h2 class="assignment-title">ASSIGNMENT BRIEF</h2>
+                        <p class="assignment-subtitle">Individual e-Portfolio Submission.</p>
+                    </div>
+                </div>
+                
+                <div class="assignment-overview">
+                    <h4>📊 Assignment Overview</h4>
+                    <p>The final assessment in this module is an individual e-portfolio that collates all the evidence of your work in this module</p>
+                    
+                    <div class="track-highlight">
+                        <strong>🎯 Assignment:</strong> Individual E-Portfolio of the Module "Knowledge Representation and Reasoning" October 2025.
+                    </div>
+                </div>
+
+                <div class="tracks-grid">
+                    <div class="track-card">
+                        <h5>🔍 Extensive review of my online E-Portfolio with a reflective section</h5>
+                        <p><strong>Focus:</strong> Reflections on Knowledge Representation and Reasoning based on your learnings in this module, focusing on the skills and knowledge you have gained during the preparation of the ontology for the local library.</p>
+                        <p><strong>Methods:</strong> Written Report with words count of max. 1.000 words</p>
+                    </div>
+                </div>
+
+                <div class="tasks-section">
+                    <h4>📝 Assignment Tasks</h4>
+                    
+                    <div class="task-item">
+                        <h5>Summary of learning outcomes.</h5>
+                        <p>Your answers to and outputs from exercises carried out during the module, including the ontology created on Protégé software.</p>
+                    </div>
+                    
+                    <div class="task-item">
+                        <h5>Feedback from peers and tutors.</h5>
+                        <p>feedback from tutor, your contributions to the online forums and peer's replies.</p>
+                    </div>
+                    
+                    <div class="task-item">
+                        <h5>Professional Skills matrix and action plan (PDP).</h5>
+                        <p>Reflections on what this module has brought to my working approach.</p>
+                    </div>
+                </div>
+
+                <div class="grading-breakdown">
+                    <h4>📊 Grading Breakdown</h4>
+                    <div class="grading-item">
+                        <span>Have you clearly described the topic of your assignment and the various aspects of the learning outcomes which are key to your reflection?</span>
+                        <span>Knowledge 20%</span>
+                    </div>
+                    <div class="grading-item">
+                        <span>Emotional Response and Analysis. Critically analyse yourself and your own behaviour during the application of the module learning outcomes</span>
+                        <span>Knowledge, 10% and Criticality, 10%</span>
+                    </div>
+                    <div class="grading-item">
+                        <span>Learning and Changed Actions</span>
+                        <span>Knowledge, 10% and Criticality, 10%</span>
+                    </div>
+                    <div class="grading-item">
+                        <span>Do you have evidence of skills and knowledge developed through this module?</span>
+                        <span>Knowledge, 5% and Criticality, 5%</span>
+                    </div>
+                    <div class="grading-item">
+                        <span>You will need to evidence and evaluate your individual contribution, completing tasks to the required standard</span>
+                        <span>25%</span>
+                    </div>
+                    <div class="grading-item">
+                        <span>Is there an accurate use of citations and references throughout this piece of work?</span>
+                        <span>10%</span>
+                    </div>
+                    <div class="grading-item">
+                        <span>Structure and Presentation</span>
+                        <span>5%</span>
+                    </div>
+                </div>
+
+                <div class="submission-area bounce">
+                    <h4>📁 Assignment Download</h4>
+                    <p>Download completed assignment report</p>
+                    <a href="End of Module Assignment - e-Portfolio Submission (Intelligent Agents).docx" class="upload-button" download>📄 Download Final Report</a>
+                    <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
+                        <strong>Submitted:</strong> 23:55hrs (UK Time) - Monday 26th January 2026
+                    </p>
+                </div>
+            </div>
+            
+            <h3 class="section-title">Key Readings, Resources and References.</h3>
+            <ul class="resources-list">
+                <li>Bright, T.J., Furuya, E.Y., Kuperman, G.J., Cimino, J.J. & Bakken, S. (2012) Development and evaluation of an ontology for guiding appropriate antibiotic prescribing. <i>Journal of Biomedical Informatics</i> 45(1): 120-128.</li>
+                <li>Harmelen, F V., Lifschitz, V. & Porter, B. (2008)<i> Handbook of Knowledge Representation.</i>  Amsterdam: Elsevier. Chapter 25.</li>
+                <li>Tarasov, V., Seigerroth, U. & Sandkuhl, K. (2019) 'Ontology Development Strategies in Industrial Contexts', in: Abramowicz, W., Paschke, A. (eds) Business Information Systems Workshops. BIS 2018. Lecture Notes in Business Information Processing.</li>
+                <li>University of Essex Online<i> Unit 12: Ontology Evaluation – Case Study </i>Available from: https://www.my-course.co.uk/course/view.php?id=14305&section=18 [Accessed January 2026].</li>
+
+            </ul>
+            
+            <div class="reflection">
+                <h4 class="reflection-title">Personal Reflection</h4>
+                <p>to be added</p>
+                <blockquote>
+                    <p>"to be added."</p>
+                </blockquote>
+            </div>
+            
+            <div class="navigation-buttons">
+                <a href="knowledge-representation.html" class="nav-button">Back to Course Overview</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Andrea Trevisi. All rights reserved.</p>
+        <div class="contact-info">
+            <a href="mailto:andrea.trevisi@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>
