@@ -1,471 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrea Trevisi - Portfolio</title>
-    <style>
-        /* Simple, clean styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        header {
-            text-align: center;
-            padding: 30px 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 40px;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-        h2 {
-            color: #3498db;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 40px;
-        }
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        .project {
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .project h3 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .skill {
-            background-color: #3498db;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            border-top: 1px solid #eee;
-            color: #7f8c8d;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        /* Navigation Menu Styling */
-        .navbar {
-            background-color: #2c3e50;
-            overflow: hidden;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        .navbar a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-        
-        /* Dropdown container */
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-        
-        /* Dropdown button */
-        .dropdown .dropbtn {
-            font-size: 17px;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-            cursor: pointer;
-        }
-        
-        /* Add a background color to navbar links on hover */
-        .navbar a:hover, .dropdown:hover .dropbtn {
-            background-color: #3498db;
-        }
-        
-        /* Dropdown content (hidden by default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 0 0 5px 5px;
-        }
-        
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            float: none;
-            color: #333;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        
-        /* Add a background color to dropdown links on hover */
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-        
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        /* Responsive navigation */
-        @media screen and (max-width: 600px) {
-            .navbar a, .dropdown .dropbtn {
-                display: block;
-                width: 100%;
-                text-align: left;
-            }
-            
-            .dropdown-content {
-                position: relative;
-                width: 100%;
-            }
-        }
-        
-        /* Current page indicator */
-        .active {
-            background-color: #3498db;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Trevisi — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #040a0f;
+  --bg2: #080f17;
+  --surface: #0d1825;
+  --border: #1a2f45;
+  --accent: #00d4ff;
+  --accent2: #7b4fff;
+  --accent3: #00ff9d;
+  --text: #e8f4f8;
+  --muted: #6a8a9e;
+  --mono: 'Space Mono', monospace;
+  --sans: 'Syne', sans-serif;
+}
 
-        /* Book of the Month Styling */
-        .book-of-month {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            margin: 40px 0;
-            position: relative;
-            overflow: hidden;
-        }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; cursor: none; }
 
-        .book-of-month::before {
-            content: '📚';
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2em;
-            opacity: 0.3;
-        }
+.cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+.cursor-ring { width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease; opacity: 0.5; mix-blend-mode: screen; }
 
-        .book-of-month h2 {
-            color: white;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-            margin-top: 0;
-        }
+#canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; }
 
-        .book-container {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-            margin-top: 20px;
-        }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(0,212,255,0.08);
+  background: rgba(4,10,15,0.85);
+  backdrop-filter: blur(20px);
+}
+.nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
 
-        .book-cover {
-            flex-shrink: 0;
-            width: 120px;
-            height: 180px;
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3em;
-            border: 2px solid rgba(255,255,255,0.2);
-        }
+main { position: relative; z-index: 2; }
 
-        .book-details {
-            flex: 1;
-        }
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 48px 80px; position: relative; overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
 
-        .book-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
+.hero-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+.hero-label::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
 
-        .book-author {
-            font-size: 1.1em;
-            opacity: 0.9;
-            margin-bottom: 15px;
-        }
+/* Hero photo */
+.hero-photo-wrap { position: relative; width: 110px; height: 110px; margin-bottom: 28px; }
+.hero-photo { width: 110px; height: 110px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent); display: block; position: relative; z-index: 1; }
+.hero-photo-placeholder { width: 110px; height: 110px; border-radius: 50%; border: 2px dashed var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; text-align: center; position: absolute; top: 0; left: 0; z-index: 0; }
+.hero-photo-placeholder span { font-family: var(--mono); font-size: 9px; color: var(--muted); line-height: 1.6; padding: 0 12px; }
+.hero-photo-placeholder code { color: var(--accent); font-size: 9px; }
 
-        .book-description {
-            line-height: 1.5;
-            opacity: 0.95;
-        }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(64px, 8vw, 110px); font-weight: 300; line-height: 1.0; letter-spacing: 0.02em; margin-bottom: 8px; }
+.hero h1 span { display: block; background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-role { font-family: var(--mono); font-size: 14px; color: var(--muted); margin-bottom: 32px; letter-spacing: 0.05em; }
+.hero-desc { font-size: 17px; line-height: 1.7; color: rgba(232,244,248,0.7); max-width: 540px; margin-bottom: 48px; }
 
-        .month-indicator {
-            display: inline-block;
-            background-color: rgba(255,255,255,0.2);
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-        }
+.hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--accent); color: var(--bg); font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+.btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+.btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border: 1px solid var(--border); color: var(--text); font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; transition: all 0.2s; }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-        @media screen and (max-width: 600px) {
-            .book-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .book-cover {
-                align-self: center;
-            }
-        }
-    </style>
+.hero-card { background: var(--surface); border: 1px solid var(--border); padding: 36px; position: relative; overflow: hidden; }
+.hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3)); }
+.hero-card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+.avatar-ring { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--accent); overflow: hidden; position: relative; flex-shrink: 0; }
+.avatar-ring img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, var(--accent2), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; color: white; }
+.hero-card-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.hero-card-title { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; }
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.stat { background: rgba(0,212,255,0.04); border: 1px solid rgba(0,212,255,0.12); padding: 14px; }
+.stat-value { font-size: 26px; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+.stat-label { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+.ai-badge { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: rgba(123,79,255,0.1); border: 1px solid rgba(123,79,255,0.3); font-family: var(--mono); font-size: 11px; color: var(--accent2); letter-spacing: 0.08em; }
+.ai-badge-dot { width: 8px; height: 8px; background: var(--accent3); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+section { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
+.section-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+.section-title { font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 56px; line-height: 1.1; }
+
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--accent), var(--accent2), transparent); }
+.timeline-item { position: relative; margin-bottom: 52px; opacity: 0; transform: translateX(-20px); transition: all 0.6s ease; }
+.timeline-item.visible { opacity: 1; transform: translateX(0); }
+.timeline-item::before { content: ''; position: absolute; left: -36px; top: 6px; width: 10px; height: 10px; border: 2px solid var(--accent); background: var(--bg); border-radius: 50%; }
+.timeline-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+.timeline-role { font-size: 20px; font-weight: 700; }
+.timeline-period { font-family: var(--mono); font-size: 11px; color: var(--accent); padding: 4px 12px; border: 1px solid rgba(0,212,255,0.2); background: rgba(0,212,255,0.04); white-space: nowrap; }
+.timeline-company { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-bottom: 12px; letter-spacing: 0.05em; }
+.timeline-desc { font-size: 15px; line-height: 1.7; color: rgba(232,244,248,0.65); }
+.timeline-achievement { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 14px; background: rgba(0,255,157,0.06); border: 1px solid rgba(0,255,157,0.2); font-family: var(--mono); font-size: 12px; color: var(--accent3); }
+
+.ai-section { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 52px; position: relative; overflow: hidden; }
+.ai-section::after { content: 'AI'; position: absolute; right: -20px; top: -20px; font-size: 160px; font-weight: 800; color: rgba(123,79,255,0.04); pointer-events: none; letter-spacing: -0.05em; }
+.ai-modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 32px; }
+.ai-module { padding: 20px; border: 1px solid var(--border); background: rgba(0,0,0,0.3); transition: all 0.3s; position: relative; overflow: hidden; }
+.ai-module::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(123,79,255,0.08), transparent); opacity: 0; transition: opacity 0.3s; }
+.ai-module:hover { border-color: var(--accent2); transform: translateY(-4px); }
+.ai-module:hover::before { opacity: 1; }
+.ai-module-icon { font-size: 22px; margin-bottom: 10px; }
+.ai-module-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.ai-module-uni { font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: 0.08em; }
+
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.skill-item { display: flex; flex-direction: column; gap: 8px; }
+.skill-header { display: flex; justify-content: space-between; align-items: center; }
+.skill-name { font-size: 14px; font-weight: 600; }
+.skill-level { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+.skill-bar { height: 3px; background: var(--border); position: relative; overflow: hidden; }
+.skill-fill { position: absolute; top: 0; left: 0; bottom: 0; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+
+.book-card { display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start; background: var(--surface); border: 1px solid var(--border); padding: 36px; position: relative; overflow: hidden; }
+.book-spine { width: 72px; height: 100px; background: linear-gradient(135deg, var(--accent2), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; box-shadow: 8px 8px 0 rgba(0,212,255,0.1); }
+.book-label { font-family: var(--mono); font-size: 10px; color: var(--accent3); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+.book-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.book-author { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+.book-desc { font-size: 14px; line-height: 1.7; color: rgba(232,244,248,0.65); }
+
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.edu-card { background: var(--surface); border: 1px solid var(--border); padding: 28px; position: relative; overflow: hidden; transition: border-color 0.3s; }
+.edu-card:hover { border-color: var(--accent); }
+.edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
+.edu-degree { font-size: 16px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+.edu-school { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 8px; letter-spacing: 0.05em; }
+.edu-meta { font-size: 13px; color: rgba(232,244,248,0.5); line-height: 1.5; }
+.edu-tag { display: inline-block; margin-top: 12px; padding: 4px 10px; background: rgba(0,255,157,0.08); border: 1px solid rgba(0,255,157,0.2); font-family: var(--mono); font-size: 10px; color: var(--accent3); letter-spacing: 0.1em; text-transform: uppercase; }
+
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.contact-desc { font-size: 17px; line-height: 1.7; color: rgba(232,244,248,0.65); margin-bottom: 32px; }
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-link { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border: 1px solid var(--border); text-decoration: none; color: var(--text); transition: all 0.2s; font-size: 14px; }
+.contact-link:hover { border-color: var(--accent); background: rgba(0,212,255,0.04); transform: translateX(6px); }
+.contact-link-icon { font-size: 18px; width: 24px; text-align: center; }
+
+.terminal { background: #020810; border: 1px solid var(--border); overflow: hidden; }
+.terminal-bar { padding: 10px 16px; background: #0a1520; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: center; }
+.terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+.terminal-body { padding: 24px; font-family: var(--mono); font-size: 13px; line-height: 2; }
+.t-prompt { color: var(--accent3); }
+.t-cmd { color: var(--text); }
+.t-output { color: var(--muted); }
+.t-highlight { color: var(--accent); }
+.t-accent2 { color: var(--accent2); }
+.t-green { color: var(--accent3); }
+.blink { display: inline-block; width: 8px; height: 14px; background: var(--accent); animation: blink 1s infinite; vertical-align: text-bottom; }
+@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+
+footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+.footer-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; color: var(--accent3); }
+.status-dot { width: 6px; height: 6px; background: var(--accent3); border-radius: 50%; animation: pulse 2s infinite; }
+
+.fade-up { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 0 48px; max-width: calc(1200px - 96px); }
+
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .hero { padding: 100px 24px 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  section { padding: 72px 24px; }
+  .edu-grid { grid-template-columns: 1fr; }
+  .contact-wrap { grid-template-columns: 1fr; }
+  .ai-section { padding: 36px 24px; }
+  footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
 </head>
 <body>
-    <!-- Navigation Bar with Dropdown -->
-    <div class="navbar">
-        <a href="index.html" class="active">Home</a>
-        <div class="dropdown">
-            <button class="dropbtn">Experience ▼</button>
-            <div class="dropdown-content">
-                <a href="workhistory.html">Work History</a>
-                <a href="pgdipAI.html">Machine Learning</a>
-                <a href="intelligent-agents.html">Intelligent Agents</a>
-                <a href="knowledge-representation.html">Knowledge Representation and Reasoning</a>
-            </div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<canvas id="canvas-bg"></canvas>
+
+<nav>
+  <div class="nav-logo">AT // 2026</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#ai">AI Studies</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-label">Singapore · Asia-Pacific</div>
+
+        <div class="hero-photo-wrap">
+          <img src="profile.jpg" alt="Andrea Trevisi" class="hero-photo" onerror="this.parentElement.style.display='none';">
+          <div class="hero-photo-placeholder">
+            <span>Upload photo as<br><code>profile.jpg</code><br>to your GitHub repo</span>
+          </div>
         </div>
-        <div class="dropdown">
-            <button class="dropbtn">Skills ▼</button>
-            <div class="dropdown-content">
-                <a href="technical-skills.html">Technical Skills</a>
-                <a href="languages.html">Languages</a>
-            </div>
+
+        <h1>Andrea<br><span>Trevisi</span></h1>
+        <div class="hero-role">// Area Sales Manager · AI Graduate · Singapore</div>
+        <p class="hero-desc">Two decades of driving growth across Asia-Pacific markets, now at the frontier of AI adoption in enterprise sales. Bridging deep industry relationships with the intelligence of tomorrow.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn-primary">→ Get in touch</a>
+          <a href="#experience" class="btn-secondary">View experience</a>
         </div>
-        <a href="education.html">Education</a>
-        <a href="afterwork.html">After Work</a>
-    </div>
-    
-    <header>
-        <!-- Add your profile photo here -->
-        <img src="Profile Picture.jpg" alt="Andrea Trevisi" class="profile-image">
-        <h1>Andrea Trevisi</h1>
-        <p>Area Sales Manager | Singapore</p>
-    </header>
+      </div>
 
-    <div class="section">
-        <h2>Welcome to My Portfolio</h2>
-        <p>Hello, I'm Andrea Trevisi, an experienced Area Sales Manager currently based in Singapore with a focus on the Asia-Pacific region. With over two decades in the industry, I've developed extensive expertise in sales, marketing, and relationship building across international markets.</p>
-        <p>My career has been defined by my ability to understand complex business environments, build strategic partnerships, and deliver results in competitive markets. Whether working with global teams or developing regional strategies, I bring a thoughtful, results-oriented approach to every challenge.</p>
-        <p>This portfolio showcases my professional journey, key projects, and the skills I've developed throughout my career. I'm passionate about connecting businesses with solutions that drive growth and creating value through meaningful business relationships.</p>
-        <p>I'm always open to discussing new opportunities, collaborations, or simply connecting with like-minded professionals. Please feel free to explore my work and reach out to start a conversation.</p>
-    </div>
-
-    <div class="section">
-        <h2>Skills</h2>
-        <div class="skills">
-            <span class="skill">International Business Development</span>
-            <span class="skill">Key Account Management</span>
-            <span class="skill">Cross-Cultural Communication</span>
-            <span class="skill">Strategic Sales Leadership</span>
-            <span class="skill">Market Analysis & Strategy</span>
-            <span class="skill">Technical Industry Knowledge</span>
-            <span class="skill">Contract Negotiation</span>
-            <span class="skill">Budget Management</span>
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="avatar-ring">
+            <img src="profile.jpg" alt="Andrea Trevisi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="avatar-placeholder" style="display:none;">AT</div>
+          </div>
+          <div>
+            <div class="hero-card-name">Andrea Trevisi</div>
+            <div class="hero-card-title">SINGAPORE · APAC</div>
+          </div>
         </div>
-    </div>
-    
-    <div class="section">
-        <h2>Education</h2>
-        <p><strong>Postgraduate Diploma Artificial Intelligence</strong> - University of Essex (UK), Started 2024 (Expected completion: May 2026)</p>
-        <p>Currently pursuing advanced studies in AI to complement my extensive business experience.</p>
-        
-        <p><strong>Bachelor of Arts - International Business Management & Marketing</strong> - University of Essex (UK)</p>
-        <p>Foundation of my business acumen and international perspective.</p>
-    </div>
-
-    <!-- Book of the Month Section -->
-    <div class="book-of-month">
-        <div class="month-indicator" id="currentMonth">January 2025</div>
-        <h2>📖 AI & Business Book of the Month</h2>
-        <div class="book-container">
-            <div class="book-cover" id="bookEmoji">🤖</div>
-            <div class="book-details">
-                <div class="book-title" id="bookTitle">AI Superpowers</div>
-                <div class="book-author" id="bookAuthor">by Kai-Fu Lee</div>
-                <div class="book-description" id="bookDescription">
-                    A compelling exploration of how AI is reshaping global business dynamics and the competitive landscape between the US and China. Essential reading for understanding AI's transformative impact on international business strategy.
-                </div>
-            </div>
+        <div class="stat-grid">
+          <div class="stat"><div class="stat-value">20+</div><div class="stat-label">Years experience</div></div>
+          <div class="stat"><div class="stat-value">11</div><div class="stat-label">SEA markets</div></div>
+          <div class="stat"><div class="stat-value">4</div><div class="stat-label">Languages spoken</div></div>
+          <div class="stat"><div class="stat-value">2026</div><div class="stat-label">AI Diploma · Essex</div></div>
         </div>
-    </div>
-
-    <div class="section">
-        <h2>Experience</h2>
-        <p><strong>Area Sales Manager</strong> - Continental AG (ContiTech Surface Solutions), Singapore (June 2023 - Present)</p>
-        <p>Leading B2B sales and Key Account management across Southeast Asia (SEA).</p>
-        
-        <p><strong>Area Sales Manager</strong> - Trelleborg Singapore Pte Ltd, Singapore (January 2015 - May 2023)</p>
-        <p>Led business development initiatives across 11 Southeast Asian countries, increasing regional sales by 60%.</p>
-    </div>
-
-    <div class="section">
-        <h2>Contact</h2>
-        <p>I'm open to new opportunities and collaborations. Feel free to reach out!</p>
-        <div class="contact-info">
-            <a href="mailto:andrea.trevisi@gmail.com">Email</a>
-            <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+        <div class="ai-badge">
+          <div class="ai-badge-dot"></div>
+          PgDip Artificial Intelligence — Completed May 2026
         </div>
+      </div>
     </div>
+  </div>
 
-    <footer>
-        <p>&copy; 2026 Andrea Trevisi. All rights reserved.</p>
-    </footer>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Professional journey</div>
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item fade-up">
+        <div class="timeline-header">
+          <div class="timeline-role">Area Sales Manager</div>
+          <div class="timeline-period">June 2023 — Present</div>
+        </div>
+        <div class="timeline-company">Continental AG (ContiTech Surface Solutions) · Singapore</div>
+        <p class="timeline-desc">Leading B2B sales and Key Account management across Southeast Asia. Developing strategic partnerships and driving commercial growth in the industrial solutions sector across the APAC region.</p>
+      </div>
+      <div class="timeline-item fade-up">
+        <div class="timeline-header">
+          <div class="timeline-role">Area Sales Manager</div>
+          <div class="timeline-period">January 2015 — May 2023</div>
+        </div>
+        <div class="timeline-company">Trelleborg Singapore Pte Ltd · Singapore</div>
+        <p class="timeline-desc">Led business development initiatives across 11 Southeast Asian countries. Built and managed a high-performing regional team, established key distributor networks, and executed market entry strategies across emerging APAC markets.</p>
+        <div class="timeline-achievement">→ Responsible for new business development in the SEA region</div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // AI & Business Book of the Month Data
-        const books = {
-            0: { // January
-                title: "AI Superpowers: China, Silicon Valley, and the New World Order",
-                author: "by Kai-Fu Lee",
-                emoji: "📖",
-                description: "A compelling exploration of how AI is reshaping global business dynamics and the competitive landscape between the US and China. Kai-Fu Lee's insider perspective on both ecosystems offers invaluable insights for anyone navigating international business in the age of AI. Essential reading for understanding AI's transformative impact on global commerce."
-            },
-            1: { // February
-                title: "Prediction Machines: The Simple Economics of Artificial Intelligence",
-                author: "by Ajay Agrawal, Joshua Gans & Avi Goldfarb",
-                emoji: "📊",
-                description: "This book brilliantly reframes AI as a tool that dramatically reduces the cost of prediction — and explains how this shifts business strategy. For sales and marketing professionals, understanding how AI changes decision-making economics is crucial for staying competitive. A must-read for anyone looking to leverage AI strategically."
-            },
-            2: { // March
-                title: "The AI-First Company: How to Compete and Win with Artificial Intelligence",
-                author: "by Ash Fontana",
-                emoji: "📈",
-                description: "A practical guide to building competitive advantage through AI and data. Fontana draws on his experience as a venture capitalist to show how companies can systematically develop AI capabilities. Particularly relevant for understanding how AI transforms B2B relationships and sales strategies in competitive markets."
-            },
-            3: { // April
-                title: "Co-Intelligence: Living and Working with AI",
-                author: "by Ethan Mollick",
-                emoji: "🧠",
-                description: "Wharton professor Ethan Mollick's essential guide to the new era of human-AI collaboration. Published in 2024, this is one of the most current and practical books on integrating AI into professional life. Mollick's research-backed insights on working alongside AI make this perfect reading for anyone committed to thriving in the AI age."
-            },
-            4: { // May
-                title: "Competing in the Age of AI: Strategy and Leadership When Algorithms and Networks Run the World",
-                author: "by Marco Iansiti & Karim Lakhani",
-                emoji: "⚡",
-                description: "Harvard professors Iansiti and Lakhani explain how AI is fundamentally changing the rules of business competition. Their framework for understanding AI-driven operating models is invaluable for sales strategists. A crucial read for anyone leading business development in industries being transformed by AI."
-            },
-            5: { // June
-                title: "The Algorithmic Leader: How to Be Smart When Machines Are Smarter Than You",
-                author: "by Mike Walsh",
-                emoji: "🧭",
-                description: "Mike Walsh offers practical wisdom on leadership and decision-making in an AI-driven world. This book addresses the human side of AI adoption — how leaders can maintain relevance and effectiveness. Essential reading for sales managers navigating AI transformation while leading diverse teams across cultures."
-            },
-            6: { // July
-                title: "AI for Sales: How Artificial Intelligence is Changing Sales",
-                author: "by Chad Burmeister",
-                emoji: "💼",
-                description: "A practical, hands-on guide specifically for sales professionals looking to leverage AI. Burmeister provides concrete examples of AI applications in prospecting, lead scoring, and customer engagement. This book bridges the gap between AI theory and daily sales practice — exactly what B2B sales managers need."
-            },
-            7: { // August
-                title: "Marketing Artificial Intelligence: AI, Marketing, and the Future of Business",
-                author: "by Paul Roetzer & Mike Kaput",
-                emoji: "📣",
-                description: "The definitive guide to AI applications in marketing from the Marketing AI Institute founders. This book provides a practical roadmap for integrating AI into marketing strategy, from content creation to customer analytics. Invaluable for understanding how AI transforms the sales-marketing alignment in modern B2B environments."
-            },
-            8: { // September
-                title: "The Big Nine: How the Tech Titans and Their Thinking Machines Could Warp Humanity",
-                author: "by Amy Webb",
-                emoji: "🔮",
-                description: "Futurist Amy Webb examines how nine major tech companies are shaping AI's future and its implications for business and society. Understanding these dynamics is crucial for business leaders making strategic decisions about AI partnerships and technology adoption. A thought-provoking read on AI's broader business implications."
-            },
-            9: { // October
-                title: "Applied Artificial Intelligence: A Handbook for Business Leaders",
-                author: "by Mariya Yao, Adelyn Zhou & Marlene Jia",
-                emoji: "📋",
-                description: "A practical executive guide to AI implementation that cuts through the hype. This handbook helps business leaders understand AI capabilities, evaluate vendors, and implement AI projects successfully. Particularly useful for sales leaders building business cases for AI adoption in their organizations."
-            },
-            10: { // November
-                title: "Artificial Intelligence in Practice: How 50 Successful Companies Used AI to Solve Problems",
-                author: "by Bernard Marr",
-                emoji: "🏢",
-                description: "Bernard Marr presents 50 real-world case studies of AI implementation across industries. From Netflix to BMW, these examples show how leading companies are using AI to transform operations, marketing, and customer engagement. An inspiring and practical resource for identifying AI opportunities in your own business context."
-            },
-            11: { // December
-                title: "Human + Machine: Reimagining Work in the Age of AI",
-                author: "by Paul Daugherty & H. James Wilson",
-                emoji: "🤝",
-                description: "Accenture's research leaders reveal how leading companies are reimagining business processes through human-AI collaboration. This book is essential for sales leaders seeking to understand how AI augments rather than replaces human capabilities. The 'missing middle' concept has transformed how I think about AI in relationship-driven sales."
-            }
-        };
+  <div class="divider"></div>
 
-        // Function to update book display
-        function updateBookOfMonth() {
-            const currentDate = new Date();
-            const currentMonth = currentDate.getMonth();
-            const book = books[currentMonth];
-            
-            // Update month indicator
-            const monthNames = ["January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"];
-            document.getElementById('currentMonth').textContent = `${monthNames[currentMonth]} ${currentDate.getFullYear()}`;
-            
-            // Update book details
-            document.getElementById('bookTitle').textContent = book.title;
-            document.getElementById('bookAuthor').textContent = book.author;
-            document.getElementById('bookEmoji').textContent = book.emoji;
-            document.getElementById('bookDescription').textContent = book.description;
-        }
+  <!-- AI STUDIES -->
+  <section id="ai" style="padding-bottom: 0;">
+    <div class="section-label">Frontier education</div>
+    <h2 class="section-title">AI Studies</h2>
+  </section>
+  <div style="padding: 0 48px 100px; max-width: 1200px; margin: 0 auto;">
+    <div class="ai-section fade-up">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+        <div>
+          <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 6px;">Postgraduate Diploma — Artificial Intelligence</h3>
+          <div style="font-family: var(--mono); font-size: 12px; color: var(--accent2); letter-spacing: 0.08em;">University of Essex, UK · 2024–2026</div>
+        </div>
+        <div class="edu-tag" style="align-self: flex-start;">Completed May 2026</div>
+      </div>
+      <p style="font-size: 15px; line-height: 1.7; color: rgba(232,244,248,0.65); max-width: 700px;">Advancing at the intersection of enterprise sales expertise and artificial intelligence. This programme equips me to lead AI-driven business transformation across APAC markets — from intelligent automation to data-driven strategy.</p>
+      <div class="ai-modules">
+        <div class="ai-module"><div class="ai-module-icon">🧠</div><div class="ai-module-name">Machine Learning</div><div class="ai-module-uni">Algorithms · Neural Networks</div></div>
+        <div class="ai-module"><div class="ai-module-icon">🤖</div><div class="ai-module-name">Intelligent Agents</div><div class="ai-module-uni">Autonomous systems · Decision-making</div></div>
+        <div class="ai-module"><div class="ai-module-icon">🔮</div><div class="ai-module-name">Knowledge Representation</div><div class="ai-module-uni">Reasoning · Logic · Ontologies</div></div>
+        <div class="ai-module"><div class="ai-module-icon">📊</div><div class="ai-module-name">Data & Strategy</div><div class="ai-module-uni">Business AI · Analytics</div></div>
+      </div>
+    </div>
+  </div>
 
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', updateBookOfMonth);
-    </script>
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Capabilities</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-item fade-up"><div class="skill-header"><span class="skill-name">International Business Development</span><span class="skill-level">Expert</span></div><div class="skill-bar"><div class="skill-fill" data-width="95"></div></div></div>
+      <div class="skill-item fade-up"><div class="skill-header"><span class="skill-name">Key Account Management</span><span class="skill-level">Expert</span></div><div class="skill-bar"><div class="skill-fill" data-width="95"></div></div></div>
+      <div class="skill-item fade-up"><div class="skill-header"><span class="skill-name">Strategic Sales Leadership</span><span class="skill-level">Expert</span></div><div class="skill-bar"><div class="skill-fill" data-width="92"></div></div></div>
+      <div class="skill-item fade-up"><div class="skill-header"><span class="skill-name">Cross-Cultural Communication</span><span class="skill-level">Expert</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
+      <div class="skill-item fade-up"><div class="skill-header"><span class="skill-name">Machine Learning</span><span class="skill-level">Advanced</span></div><div class="skill-bar"><div class="skill-fill" data-width="72"></div></div></div>
+      <div class="skill-item fade-up"><div class="skill-header"><span class="skill-name">AI Strategy & Business Applications</span><span class="skill-level">Advanced</span></div><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div></div>
+      <div class="skill-item fade-up"><div class="skill-header"><span class="skill-name">Market Analysis & Strategy</span><span class="skill-level">Expert</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
+      <div class="skill-item fade-up"><div class="skill-header"><span class="skill-name">Contract Negotiation</span><span class="skill-level">Expert</span></div><div class="skill-bar"><div class="skill-fill" data-width="88"></div></div></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Academic background</div>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card fade-up">
+        <div class="edu-degree">Postgraduate Diploma — Artificial Intelligence</div>
+        <div class="edu-school">University of Essex · United Kingdom</div>
+        <div class="edu-meta">Completed May 2026<br>Machine Learning · Intelligent Agents · Knowledge Representation</div>
+        <div class="edu-tag" style="border-color: rgba(0,212,255,0.2); color: var(--accent); background: rgba(0,212,255,0.06);">Completed</div>
+      </div>
+      <div class="edu-card fade-up">
+        <div class="edu-degree">Bachelor of Arts — International Business Management & Marketing</div>
+        <div class="edu-school">University of Essex · United Kingdom</div>
+        <div class="edu-meta">Foundation of international business acumen and cross-cultural strategic perspective across global markets.</div>
+        <div class="edu-tag" style="border-color: rgba(0,212,255,0.2); color: var(--accent); background: rgba(0,212,255,0.06);">Completed</div>
+      </div>
+    </div>
+    <div style="margin-top: 32px;">
+      <div class="book-card fade-up">
+        <div class="book-spine" id="bookSpine">📖</div>
+        <div>
+          <div class="book-label" id="bookMonth">// AI & Business — Book of the Month</div>
+          <div class="book-title" id="bookTitle">AI Superpowers</div>
+          <div class="book-author" id="bookAuthor">by Kai-Fu Lee</div>
+          <p class="book-desc" id="bookDesc">A compelling exploration of how AI is reshaping global business dynamics and the competitive landscape between the US and China. Essential reading for understanding AI's transformative impact on international business strategy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Let's connect</div>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-wrap">
+      <div>
+        <p class="contact-desc">Open to strategic collaborations and conversations at the intersection of AI and enterprise business. Based in Singapore, operating across APAC.</p>
+        <div class="contact-links">
+          <a href="mailto:andrea.trevisi@gmail.com" class="contact-link"><span class="contact-link-icon">✉</span>andrea.trevisi@gmail.com</a>
+          <a href="https://www.linkedin.com/in/andrea-trevisi-/" target="_blank" class="contact-link"><span class="contact-link-icon">in</span>linkedin.com/in/andrea-trevisi</a>
+        </div>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot" style="background:#ff5f57"></div>
+          <div class="terminal-dot" style="background:#febc2e"></div>
+          <div class="terminal-dot" style="background:#28c840"></div>
+          <span style="font-family: var(--mono); font-size: 11px; color: var(--muted); margin-left: 8px;">andrea@portfolio ~ </span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="t-prompt">▶</span> <span class="t-cmd">whoami</span></div>
+          <div class="t-output">Andrea Trevisi — Sales Leader × AI Graduate</div>
+          <br>
+          <div><span class="t-prompt">▶</span> <span class="t-cmd">location</span></div>
+          <div class="t-output">📍 <span class="t-highlight">Singapore</span> · APAC Region</div>
+          <br>
+          <div><span class="t-prompt">▶</span> <span class="t-cmd">status</span></div>
+          <div><span class="t-green">● ai_studies: completed</span></div>
+          <div><span class="t-accent2">● diploma: May_2026 ✓</span></div>
+          <div class="t-output">● languages: IT · EN · ES · CA</div>
+          <br>
+          <div><span class="t-prompt">▶</span> <span class="t-cmd">_</span><span class="blink"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-copy">© 2026 Andrea Trevisi — All rights reserved</div>
+  <div class="footer-status"><div class="status-dot"></div>Portfolio online · Singapore</div>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 4 + 'px';
+  cursor.style.top = my - 4 + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx - 16 + 'px'; ring.style.top = ry - 16 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+// Neural network canvas
+const canvas = document.getElementById('canvas-bg');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', () => { resize(); initNodes(); });
+function initNodes() {
+  nodes = [];
+  const count = Math.floor((W * H) / 18000);
+  for (let i = 0; i < count; i++) nodes.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, r: Math.random()*2+1 });
+}
+initNodes();
+function drawCanvas() {
+  ctx.clearRect(0,0,W,H);
+  nodes.forEach(n => { n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>W) n.vx*=-1; if(n.y<0||n.y>H) n.vy*=-1; });
+  for (let i=0; i<nodes.length; i++) {
+    for (let j=i+1; j<nodes.length; j++) {
+      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<130) { ctx.beginPath(); ctx.strokeStyle=`rgba(0,212,255,${(1-dist/130)*.18})`; ctx.lineWidth=.5; ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke(); }
+    }
+  }
+  nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fillStyle='rgba(0,212,255,0.5)'; ctx.fill(); });
+  requestAnimationFrame(drawCanvas);
+}
+drawCanvas();
+
+// Scroll animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      entry.target.querySelectorAll('.skill-fill[data-width]').forEach(bar => {
+        setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
+      });
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up, .timeline-item').forEach(el => observer.observe(el));
+document.querySelectorAll('.skill-item').forEach(el => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { const bar=e.target.querySelector('.skill-fill'); if(bar) setTimeout(()=>{ bar.style.width=bar.dataset.width+'%'; },300); } });
+  }, { threshold: 0.5 });
+  obs.observe(el);
+});
+
+// Book of the month
+const books = {
+  0:  { title:"AI Superpowers: China, Silicon Valley, and the New World Order", author:"by Kai-Fu Lee", emoji:"📖", desc:"A compelling exploration of how AI is reshaping global business dynamics and the competitive landscape between the US and China. Essential reading for understanding AI's transformative impact on global commerce." },
+  1:  { title:"Prediction Machines: The Simple Economics of Artificial Intelligence", author:"by Ajay Agrawal, Joshua Gans & Avi Goldfarb", emoji:"📊", desc:"Reframes AI as a tool that dramatically reduces the cost of prediction — and explains how this shifts business strategy. A must-read for anyone looking to leverage AI strategically." },
+  2:  { title:"The AI-First Company", author:"by Ash Fontana", emoji:"📈", desc:"A practical guide to building competitive advantage through AI and data. Particularly relevant for understanding how AI transforms B2B relationships and sales strategies." },
+  3:  { title:"Co-Intelligence: Living and Working with AI", author:"by Ethan Mollick", emoji:"🧠", desc:"Wharton professor Ethan Mollick's essential guide to the new era of human-AI collaboration. Research-backed insights on working alongside AI." },
+  4:  { title:"Competing in the Age of AI", author:"by Marco Iansiti & Karim Lakhani", emoji:"⚡", desc:"Harvard professors explain how AI is fundamentally changing the rules of business competition. Crucial for anyone leading business development in AI-transformed industries." },
+  5:  { title:"The Algorithmic Leader", author:"by Mike Walsh", emoji:"🧭", desc:"Practical wisdom on leadership and decision-making in an AI-driven world. Essential for sales managers navigating AI transformation across diverse cultural teams." },
+  6:  { title:"AI for Sales", author:"by Chad Burmeister", emoji:"💼", desc:"A hands-on guide for sales professionals looking to leverage AI in prospecting, lead scoring, and customer engagement. Bridges AI theory and daily sales practice." },
+  7:  { title:"Marketing Artificial Intelligence", author:"by Paul Roetzer & Mike Kaput", emoji:"📣", desc:"The definitive guide to AI applications in marketing. Invaluable for understanding how AI transforms sales-marketing alignment in modern B2B environments." },
+  8:  { title:"The Big Nine", author:"by Amy Webb", emoji:"🔮", desc:"Futurist Amy Webb examines how nine major tech companies are shaping AI's future and its implications for business and society." },
+  9:  { title:"Applied Artificial Intelligence: A Handbook for Business Leaders", author:"by Mariya Yao, Adelyn Zhou & Marlene Jia", emoji:"📋", desc:"A practical executive guide to AI implementation. Helps business leaders understand AI capabilities, evaluate vendors, and implement AI projects successfully." },
+  10: { title:"Artificial Intelligence in Practice", author:"by Bernard Marr", emoji:"🏢", desc:"50 real-world case studies of AI implementation across industries. An inspiring resource for identifying AI opportunities in your own business context." },
+  11: { title:"Human + Machine: Reimagining Work in the Age of AI", author:"by Paul Daugherty & H. James Wilson", emoji:"🤝", desc:"Accenture's research leaders reveal how leading companies are reimagining business processes through human-AI collaboration. The 'missing middle' concept is transformative." }
+};
+function updateBook() {
+  const m = new Date().getMonth();
+  const b = books[m];
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  document.getElementById('bookMonth').textContent = `// AI & Business — ${months[m]} ${new Date().getFullYear()}`;
+  document.getElementById('bookTitle').textContent = b.title;
+  document.getElementById('bookAuthor').textContent = b.author;
+  document.getElementById('bookSpine').textContent = b.emoji;
+  document.getElementById('bookDesc').textContent = b.desc;
+}
+updateBook();
+</script>
 </body>
 </html>
