@@ -460,11 +460,6 @@ function drawCanvas() {
 }
 drawCanvas();
 
-  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
-  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
-  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
-});
-
 // Scroll animations
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
