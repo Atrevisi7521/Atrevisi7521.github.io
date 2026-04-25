@@ -405,18 +405,24 @@ function drawCanvas() {
 }
 drawCanvas();
 
-  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
-  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
-  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
-});
-
 // Scroll animations
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.unit-card').forEach((el, i) => {
-  el.style.transitionDelay = (i % 3) * 0.1 + 's';
-  observer.observe(el);
+}, { threshold: 0.15 });
+document.querySelectorAll('.timeline-item, .skill-card, .unit-card').forEach(el => observer.observe(el));
+
+// Skill bar fills
+document.querySelectorAll('.skill-card, .lang-card').forEach(el => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.panel-fill[data-width]').forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 300);
+        });
+      }
+    });
+  }, { threshold: 0.15 });
+  obs.observe(el);
 });
 
 // Robust dropdown fix
