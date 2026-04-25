@@ -406,6 +406,7 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
 </footer>
 
 <script>
+// Cursor
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -420,6 +421,7 @@ function animRing() {
 }
 animRing();
 
+// Neural network canvas
 const canvas = document.getElementById('canvas-bg');
 const ctx = canvas.getContext('2d');
 let W, H, nodes = [];
@@ -446,23 +448,25 @@ function drawCanvas() {
 }
 drawCanvas();
 
-  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
-  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
-  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
-});
-
-// Scroll animations + skill bar fills
+// Scroll animations
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      entry.target.querySelectorAll('.panel-fill[data-width]').forEach(bar => {
-        setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 300);
-      });
-    }
-  });
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.15 });
-document.querySelectorAll('.skill-card').forEach(el => observer.observe(el));
+document.querySelectorAll('.timeline-item, .skill-card, .unit-card').forEach(el => observer.observe(el));
+
+// Skill bar fills
+document.querySelectorAll('.skill-card, .lang-card').forEach(el => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.panel-fill[data-width]').forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 300);
+        });
+      }
+    });
+  }, { threshold: 0.15 });
+  obs.observe(el);
+});
 
 // Robust dropdown fix
 document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
