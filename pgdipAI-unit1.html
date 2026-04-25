@@ -108,9 +108,10 @@ main { position: relative; z-index: 2; }
 .discussion-text:last-of-type { margin-bottom: 0; }
 
 /* References */
-.ref-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.ref-list li { font-size: 13px; line-height: 1.6; color: rgba(232,244,248,0.6); display: flex; gap: 10px; }
-.ref-list li::before { content: '📚'; flex-shrink: 0; }
+.ref-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.ref-list li { font-size: 13px; line-height: 1.7; color: rgba(232,244,248,0.65); display: flex; gap: 12px; align-items: flex-start; }
+.ref-list li::before { content: '📚'; flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+.ref-list li span { flex: 1; word-break: break-word; }
 
 /* Reflection */
 .reflection-block { background: var(--surface); border: 1px solid rgba(255,215,0,0.2); border-left: 3px solid var(--accent4); padding: 36px; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
@@ -320,8 +321,8 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
         <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);">
           <div class="discussion-label">// References</div>
           <ul class="ref-list" style="margin-top: 12px;">
-            <li>Barabás, I., Todoruţ, A., Cordoş, N. & Molea, A. (2017) Current challenges in autonomous driving. IOP Conference Series. Materials Science and Engineering, 252(1). DOI: 10.1088/1757-899X/252/1/012096</li>
-            <li>Zirpoli, F. & Cabigiosu, A. (2018) Industry 4.0 in the Italian automotive industry. Symphonya, (2): 158–169. DOI: 10.4468/2018.02.12</li>
+            <li><span>Barabás, I., Todoruţ, A., Cordoş, N. & Molea, A. (2017) Current challenges in autonomous driving. IOP Conference Series. Materials Science and Engineering, 252(1). DOI: 10.1088/1757-899X/252/1/012096</span></li>
+            <li><span>Zirpoli, F. & Cabigiosu, A. (2018) Industry 4.0 in the Italian automotive industry. Symphonya, (2): 158–169. DOI: 10.4468/2018.02.12</span></li>
           </ul>
         </div>
       </div>
@@ -330,12 +331,12 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
       <div class="content-block">
         <div class="block-title"><span class="block-title-icon">📚</span> Key Readings & References</div>
         <ul class="ref-list">
-          <li>Bishop, C. and Bishop, H. (2024). <em>Deep Learning: Foundations and Concepts.</em> Cambridge University Press. Chapters 1–2.</li>
-          <li>Bishop, C. (2006). <em>Pattern Recognition and Machine Learning.</em> Springer. Chapter 1.</li>
-          <li>Metcalf, G.S. (2024). <em>An Introduction to Industry 5.0: History, Foundations, and Futures.</em> In: Nousala, S., Metcalf, G., Ing, D. (eds) Industry 4.0 to Industry 5.0. Translational Systems Sciences.</li>
-          <li>Crawford, S. L. (2006). Correlation and Regression. <em>Circulation,</em> 114(9), pp. 2083–2088.</li>
-          <li>Pant, A. (2019). <em>Introduction to Machine Learning for Beginners.</em></li>
-          <li>University of Essex Online (2025). <em>Unit 1: Introduction to Machine Learning.</em> Available from: https://www.my-course.co.uk [Accessed April 2025].</li>
+          <li><span>Bishop, C. and Bishop, H. (2024). <em>Deep Learning: Foundations and Concepts.</em> Cambridge University Press. Chapters 1–2.</span></li>
+          <li><span>Bishop, C. (2006). <em>Pattern Recognition and Machine Learning.</em> Springer. Chapter 1.</span></li>
+          <li><span>Metcalf, G.S. (2024). <em>An Introduction to Industry 5.0: History, Foundations, and Futures.</em> In: Nousala, S., Metcalf, G., Ing, D. (eds) Industry 4.0 to Industry 5.0. Translational Systems Sciences.</span></li>
+          <li><span>Crawford, S. L. (2006). Correlation and Regression. <em>Circulation,</em> 114(9), pp. 2083–2088.</span></li>
+          <li><span>Pant, A. (2019). <em>Introduction to Machine Learning for Beginners.</em></span></li>
+          <li><span>University of Essex Online (2025). <em>Unit 1: Introduction to Machine Learning.</em> Available from: https://www.my-course.co.uk [Accessed April 2025].</span></li>
         </ul>
       </div>
 
