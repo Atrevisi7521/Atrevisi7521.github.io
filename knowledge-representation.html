@@ -396,6 +396,16 @@ document.querySelectorAll('.unit-card').forEach((el, i) => {
   el.style.transitionDelay = (i % 3) * 0.1 + 's';
   observer.observe(el);
 });
+
+// Robust dropdown fix
+document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
+  let timer;
+  const menu = dropdown.querySelector(".nav-dropdown-menu");
+  dropdown.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+});
 </script>
 </body>
 </html>
