@@ -460,11 +460,6 @@ function drawCanvas() {
 }
 drawCanvas();
 
-// Robust dropdown fix
-document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
-  let timer;
-  const menu = dropdown.querySelector(".nav-dropdown-menu");
-  dropdown.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
   dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
   menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
   menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
@@ -515,6 +510,16 @@ function updateBook() {
   document.getElementById('bookDesc').textContent = b.desc;
 }
 updateBook();
+
+// Robust dropdown fix
+document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
+  let timer;
+  const menu = dropdown.querySelector(".nav-dropdown-menu");
+  dropdown.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+});
 </script>
 </body>
 </html>
