@@ -53,11 +53,64 @@ main { position: relative; z-index: 2; }
 .page-title span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .page-subtitle { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 0; }
 
-.activity-card.force-odd { grid-template-columns: 380px 1fr !important; }
-.activity-card.force-odd .activity-img-wrap { order: 1 !important; }
-.activity-card.force-odd .activity-content { order: 2 !important; }
-.activity-card.force-odd .activity-img-wrap::after { background: linear-gradient(90deg, transparent 60%, var(--surface) 100%) !important; }
-.activity-card.force-odd .activity-content::before { left: 0 !important; right: auto !important; }
+/* Featured card for Music & Books */
+.activity-card-featured {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: all 0.7s ease;
+}
+.activity-card-featured.visible { opacity: 1; transform: translateY(0); }
+.activity-card-featured:hover { border-color: rgba(0,212,255,0.2); }
+
+.featured-img-wrap {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+.featured-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  transition: transform 0.6s ease;
+  filter: brightness(0.6) saturate(0.9);
+}
+.activity-card-featured:hover .featured-img-wrap img { transform: scale(1.04); }
+.featured-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, var(--surface) 100%);
+}
+.featured-number {
+  position: absolute;
+  top: 20px; left: 28px;
+  font-family: var(--mono); font-size: 10px;
+  color: rgba(232,244,248,0.6); letter-spacing: 0.2em;
+}
+.featured-title-overlay {
+  position: absolute;
+  bottom: 24px; left: 28px;
+  font-size: 32px; font-weight: 700;
+  color: var(--text);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+}
+
+.featured-content { padding: 32px 36px 36px; }
+.featured-cols { display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start; }
+.featured-col-main {}
+.featured-col-aside { display: flex; flex-direction: column; gap: 14px; }
+
+.featured-highlight { padding: 16px 18px; border-left: 3px solid; }
+.featured-highlight.purple { background: rgba(123,79,255,0.06); border-color: var(--accent2); }
+.featured-highlight.cyan { background: rgba(0,212,255,0.04); border-color: var(--accent); }
+.featured-highlight-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; }
+.featured-highlight.purple .featured-highlight-label { color: var(--accent2); }
+.featured-highlight.cyan .featured-highlight-label { color: var(--accent); }
+.featured-highlight-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; line-height: 1.4; }
+.featured-highlight-sub { font-family: var(--mono); font-size: 11px; color: rgba(232,244,248,0.75); }
 
 /* Activity cards */
 .activities-wrap { padding: 0 48px 100px; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
@@ -292,33 +345,37 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
 </main>
 
     <!-- Music & Books -->
-    <div class="activity-card force-odd">
-      <div class="activity-img-wrap">
+    <div class="activity-card-featured">
+      <div class="featured-img-wrap">
         <img src="Deftones.jpg" alt="Deftones Concert">
+        <div class="featured-img-overlay"></div>
+        <div class="featured-number">// 06</div>
+        <div class="featured-title-overlay">Music & Books</div>
       </div>
-      <div class="activity-content">
-        <div class="activity-number">// 06</div>
-        <div class="activity-title">Music & Books</div>
-        <p class="activity-desc">A lifelong passion for rock and metal music — from the energy of live concerts to the deeper connection that comes from music that pushes boundaries. Few things match the experience of a great live show with a crowd that lives and breathes the same sound.</p>
-        <p class="activity-desc">On the reading side, my focus is firmly on the intersection of AI, business and sales strategy — understanding how artificial intelligence is reshaping the way companies grow, compete and connect with customers.</p>
-
-        <div style="margin-top: 20px; padding: 14px 18px; background: rgba(123,79,255,0.06); border: 1px solid rgba(123,79,255,0.25); border-left: 3px solid var(--accent2);">
-          <div style="font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px;">🎸 Next Concert</div>
-          <div style="font-size: 15px; font-weight: 700; margin-bottom: 3px;">Deftones</div>
-          <div style="font-family: var(--mono); font-size: 11px; color: rgba(232,244,248,0.75);">19 May 2026 · Osaka, Japan</div>
-        </div>
-
-        <div style="margin-top: 12px; padding: 14px 18px; background: rgba(0,212,255,0.04); border: 1px solid rgba(0,212,255,0.2); border-left: 3px solid var(--accent);">
-          <div style="font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px;">📖 Currently Reading</div>
-          <div style="font-size: 14px; font-weight: 700; margin-bottom: 3px; line-height: 1.4;">AI First: How to Unlock AI to Transform Your Business</div>
-          <div style="font-family: var(--mono); font-size: 11px; color: rgba(232,244,248,0.75);">by Adam Brotman & Andy Sack</div>
-        </div>
-
-        <div class="skills-wrap">
-          <span class="skill-tag">Rock & Metal</span>
-          <span class="skill-tag">Live Concerts</span>
-          <span class="skill-tag">AI & Business</span>
-          <span class="skill-tag">Continuous Learning</span>
+      <div class="featured-content">
+        <div class="featured-cols">
+          <div class="featured-col-main">
+            <p class="activity-desc">A lifelong passion for rock and metal music — from the energy of live concerts to the deeper connection that comes from music that pushes boundaries. Few things match the experience of a great live show with a crowd that lives and breathes the same sound.</p>
+            <p class="activity-desc" style="margin-top: 12px;">On the reading side, my focus is firmly on the intersection of AI, business and sales strategy — understanding how artificial intelligence is reshaping the way companies grow, compete and connect with customers.</p>
+            <div class="skills-wrap" style="margin-top: 20px;">
+              <span class="skill-tag">Rock & Metal</span>
+              <span class="skill-tag">Live Concerts</span>
+              <span class="skill-tag">AI & Business</span>
+              <span class="skill-tag">Continuous Learning</span>
+            </div>
+          </div>
+          <div class="featured-col-aside">
+            <div class="featured-highlight purple">
+              <div class="featured-highlight-label">🎸 Next Concert</div>
+              <div class="featured-highlight-title">Deftones</div>
+              <div class="featured-highlight-sub">19 May 2026 · Osaka, Japan</div>
+            </div>
+            <div class="featured-highlight cyan">
+              <div class="featured-highlight-label">📖 Currently Reading</div>
+              <div class="featured-highlight-title">AI First: How to Unlock AI to Transform Your Business</div>
+              <div class="featured-highlight-sub">by Adam Brotman & Andy Sack</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -378,7 +435,7 @@ drawCanvas();
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1 });
-document.querySelectorAll('.activity-card').forEach(el => observer.observe(el));
+document.querySelectorAll('.activity-card, .activity-card-featured').forEach(el => observer.observe(el));
 
 // Robust dropdown fix
 document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
