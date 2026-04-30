@@ -53,6 +53,12 @@ main { position: relative; z-index: 2; }
 .page-title span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .page-subtitle { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 0; }
 
+.activity-card.force-odd { grid-template-columns: 380px 1fr !important; }
+.activity-card.force-odd .activity-img-wrap { order: 1 !important; }
+.activity-card.force-odd .activity-content { order: 2 !important; }
+.activity-card.force-odd .activity-img-wrap::after { background: linear-gradient(90deg, transparent 60%, var(--surface) 100%) !important; }
+.activity-card.force-odd .activity-content::before { left: 0 !important; right: auto !important; }
+
 /* Activity cards */
 .activities-wrap { padding: 0 48px 100px; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
 
@@ -286,7 +292,7 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
 </main>
 
     <!-- Music & Books -->
-    <div class="activity-card">
+    <div class="activity-card force-odd">
       <div class="activity-img-wrap">
         <img src="Deftones.jpg" alt="Deftones Concert">
       </div>
