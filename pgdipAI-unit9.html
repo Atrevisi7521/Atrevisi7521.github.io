@@ -1,433 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrea Trevisi - AI Diploma: Unit 9</title>
-    <style>
-        /* Simple, clean styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        header {
-            text-align: center;
-            padding: 30px 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 40px;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-        h2 {
-            color: #3498db;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 40px;
-        }
-        h3 {
-            color: #2c3e50;
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
-        h4 {
-            color: #3498db;
-            margin-top: 25px;
-        }
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            border-top: 1px solid #eee;
-            color: #7f8c8d;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        /* Navigation Menu Styling */
-        .navbar {
-            background-color: #2c3e50;
-            overflow: hidden;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        .navbar a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-        
-        /* Dropdown container */
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-        
-        /* Dropdown button */
-        .dropdown .dropbtn {
-            font-size: 17px;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-            cursor: pointer;
-        }
-        
-        /* Add a background color to navbar links on hover */
-        .navbar a:hover, .dropdown:hover .dropbtn {
-            background-color: #3498db;
-        }
-        
-        /* Dropdown content (hidden by default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 0 0 5px 5px;
-        }
-        
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            float: none;
-            color: #333;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        
-        /* Add a background color to dropdown links on hover */
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-        
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        /* Responsive navigation */
-        @media screen and (max-width: 600px) {
-            .navbar a, .dropdown .dropbtn {
-                display: block;
-                width: 100%;
-                text-align: left;
-            }
-            
-            .dropdown-content {
-                position: relative;
-                width: 100%;
-            }
-        }
-
-        /* Current page indicator */
-        .active {
-            background-color: #3498db;
-        }
-        
-        /* Unit Content Styling */
-        .unit-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        
-        .unit-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        
-        .unit-number {
-            background-color: #3498db;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-        
-        .unit-title {
-            font-size: 1.8em;
-            color: #2c3e50;
-            margin: 0;
-        }
-        
-        .completed-badge {
-            background-color: #27ae60;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            margin-left: 15px;
-        }
-        
-        .section-title {
-            color: #3498db;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-        }
-        
-        .key-concept {
-            background-color: #f1f9ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .learning-outcomes {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .learning-outcomes li {
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .learning-outcomes li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-            font-weight: bold;
-        }
-        
-        .resources-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .resources-list li {
-            margin-bottom: 12px;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .resources-list li:before {
-            content: "📚";
-            position: absolute;
-            left: 0;
-        }
-        
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-        
-        .nav-button {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        
-        .nav-button:hover {
-            background-color: #2980b9;
-            text-decoration: none;
-        }
-        
-        .reflection {
-            background-color: #fdf9e8;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 25px;
-            border-left: 4px solid #f1c40f;
-        }
-        
-        .reflection-title {
-            color: #f39c12;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        
-        blockquote {
-            font-style: italic;
-            border-left: 3px solid #3498db;
-            padding-left: 15px;
-            margin-left: 0;
-            color: #555;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Trevisi — ML Unit 9: Introduction to Convolutional Neural Networks</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #040a0f; --surface: #0d1825; --border: #1a2f45;
+  --accent: #00d4ff; --accent2: #7b4fff; --accent3: #00ff9d; --accent4: #ffd700;
+  --text: #e8f4f8; --muted: #6a8a9e;
+  --mono: 'Space Mono', monospace; --sans: 'Syne', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; cursor: none; }
+.cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+.cursor-ring { width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease; opacity: 0.5; mix-blend-mode: screen; }
+#canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,212,255,0.08); background: rgba(4,10,15,0.85); backdrop-filter: blur(20px); }
+.nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-dropdown { position: relative; }
+.nav-dropdown-btn { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; background: none; border: none; cursor: none; padding: 0; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+.nav-dropdown-btn:hover { color: var(--accent); }
+.nav-dropdown-menu { display: none; position: absolute; top: 20px; left: 0; background: var(--surface); border: 1px solid var(--border); min-width: 240px; z-index: 200; padding-top: 8px; }
+.nav-dropdown-menu a { display: block; padding: 10px 16px; font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; border-bottom: 1px solid var(--border); }
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover, .nav-dropdown-menu a.active { color: var(--accent); background: rgba(0,212,255,0.04); padding-left: 20px; }
+main { position: relative; z-index: 2; }
+.page-header { padding: 140px 48px 60px; max-width: 1200px; margin: 0 auto; }
+.breadcrumb { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb span { color: var(--accent); }
+.page-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.page-label::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+.page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 70px); font-weight: 300; letter-spacing: 0.02em; line-height: 1.15; margin-bottom: 20px; padding-bottom: 8px; }
+.page-title span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+.meta-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(0,212,255,0.2); background: rgba(0,212,255,0.04); font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.08em; }
+.meta-badge-green { border-color: rgba(0,255,157,0.2); background: rgba(0,255,157,0.04); color: var(--accent3); }
+.content-wrap { padding: 0 48px 100px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 280px; gap: 40px; align-items: start; }
+.content-main { display: flex; flex-direction: column; gap: 32px; }
+.content-block { background: var(--surface); border: 1px solid var(--border); padding: 36px; position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+.content-block.visible { opacity: 1; transform: translateY(0); }
+.content-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
+.block-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.block-subtitle { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; }
+.intro-text { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.90); }
+.intro-text + .intro-text { margin-top: 12px; }
+.arch-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.arch-list li { display: flex; gap: 12px; font-size: 14px; line-height: 1.6; color: rgba(232,244,248,0.88); }
+.arch-list li::before { content: '→'; font-family: var(--mono); font-size: 11px; color: var(--accent2); flex-shrink: 0; margin-top: 2px; }
+.outcomes-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.outcomes-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; line-height: 1.6; color: rgba(232,244,248,0.90); }
+.outcomes-list li::before { content: '✓'; font-family: var(--mono); font-size: 12px; color: var(--accent3); flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+.discussion-block { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 36px; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+.discussion-block.visible { opacity: 1; transform: translateY(0); }
+.discussion-label { font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+.discussion-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+.discussion-text { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.90); margin-bottom: 14px; }
+.ref-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.ref-list li { font-size: 13px; line-height: 1.7; color: rgba(232,244,248,0.85); display: flex; gap: 12px; align-items: flex-start; }
+.ref-list li::before { content: '📚'; flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+.ref-list li span { flex: 1; word-break: break-word; }
+.reflection-block { background: var(--surface); border: 1px solid rgba(255,215,0,0.2); border-left: 3px solid var(--accent4); padding: 36px; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+.reflection-block.visible { opacity: 1; transform: translateY(0); }
+.reflection-label { font-family: var(--mono); font-size: 10px; color: var(--accent4); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+.reflection-text { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.90); margin-bottom: 10px; }
+.reflection-quote { border-left: 2px solid var(--accent4); padding: 16px 20px; margin-top: 20px; font-style: italic; font-size: 14px; line-height: 1.7; color: rgba(232,244,248,0.80); background: rgba(255,215,0,0.03); }
+.content-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; }
+.sidebar-card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
+.sidebar-title { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
+.sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.sidebar-list li { font-size: 12px; color: rgba(232,244,248,0.75); display: flex; gap: 8px; line-height: 1.4; }
+.sidebar-list li::before { content: '·'; color: var(--accent); flex-shrink: 0; }
+.unit-nav { display: flex; flex-direction: column; gap: 8px; }
+.unit-nav-link { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; transition: all 0.2s; letter-spacing: 0.05em; }
+.unit-nav-link:hover { border-color: var(--accent); color: var(--accent); padding-left: 18px; }
+.unit-nav-link.next { background: rgba(0,212,255,0.04); border-color: rgba(0,212,255,0.2); color: var(--accent); justify-content: space-between; }
+.unit-nav-link.next:hover { background: rgba(0,212,255,0.1); }
+.bottom-nav { padding: 0 48px 80px; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.bottom-nav-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border: 1px solid var(--border); font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; }
+.bottom-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+.bottom-nav-btn.next { background: rgba(0,212,255,0.04); border-color: rgba(0,212,255,0.2); color: var(--accent); }
+.bottom-nav-btn.next:hover { background: rgba(0,212,255,0.1); }
+footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .page-header { padding: 100px 24px 48px; }
+  .content-wrap { grid-template-columns: 1fr; padding: 0 24px 80px; }
+  .content-sidebar { position: static; }
+  .bottom-nav { padding: 0 24px 60px; }
+  footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
 </head>
 <body>
-    <!-- Navigation Bar with Dropdown -->
-    <div class="navbar">
-        <a href="index.html" class="active">Home</a>
-        <div class="dropdown">
-    <button class="dropbtn">Experience 
-        <i>▼</i>
-    </button>
-    <div class="dropdown-content">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<canvas id="canvas-bg"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">AT // 2026</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Experience ▾</button>
+      <div class="nav-dropdown-menu">
         <a href="workhistory.html">Work History</a>
-        <a href="pgdipAI.html">Machine Learning</a>
+        <a href="pgdipAI.html" class="active">Machine Learning</a>
         <a href="intelligent-agents.html">Intelligent Agents</a>
-        <a href="knowledge-representation.html">Knowledge Representation and Reasoning</a>
+        <a href="knowledge-representation.html">Knowledge Representation</a>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Skills ▾</button>
+      <div class="nav-dropdown-menu">
+        <a href="technical-skills.html">Technical Skills</a>
+        <a href="languages.html">Languages</a>
+      </div>
+    </li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="afterwork.html">After Work</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> ›
+      <a href="pgdipAI.html">Machine Learning</a> ›
+      <span>Unit 9</span>
     </div>
+    <div class="page-label">Machine Learning · University of Essex · April 2025</div>
+    <h1 class="page-title">Unit 9: <span>Convolutional Neural Networks</span></h1>
+    <div class="page-meta">
+      <div class="meta-badge">📅 Week 9</div>
+      <div class="meta-badge">🎓 PgDip AI · Essex</div>
+      <div class="meta-badge meta-badge-green">✓ Completed</div>
     </div>
-        <div class="dropdown">
-            <button class="dropbtn">Skills 
-                <i>▼</i>
-            </button>
-            <div class="dropdown-content">
-                <a href="technical-skills.html">Technical Skills</a>
-                <a href="languages.html">Languages</a>
-            </div>
+  </div>
+
+  <div class="content-wrap">
+    <div class="content-main">
+
+      <!-- Introduction -->
+      <div class="content-block">
+        <div class="block-title"><span>👁️</span> Introduction</div>
+        <p class="intro-text">Deep learning has revolutionised artificial intelligence by enabling highly complex pattern recognition across different domains — from image processing to natural language understanding. This week we build upon traditional Convolutional Neural Networks (CNNs) and explore more advanced architectures:</p>
+        <ul class="arch-list">
+          <li><strong>Dueling Neural Networks</strong> — used in Reinforcement Learning & GANs</li>
+          <li><strong>Generative Adversarial Networks (GANs)</strong> — powering image synthesis, deepfake technology, and AI-driven creativity</li>
+          <li><strong>Transformer models (BERT, GPT, T5)</strong> — redefining NLP by replacing recurrent networks (RNNs & LSTMs)</li>
+        </ul>
+      </div>
+
+      <!-- Learning Outcomes -->
+      <div class="content-block">
+        <div class="block-title"><span>🎯</span> This Week We Shall Learn About</div>
+        <ul class="outcomes-list">
+          <li>The algorithm underpinning CNN in detail</li>
+          <li>CNN-specific Python libraries and examples</li>
+          <li>Applications of CNN in real life</li>
+        </ul>
+        <div class="block-subtitle" style="margin-top: 28px; margin-bottom: 14px;">On Completion of This Week, You Will Be Able To</div>
+        <ul class="outcomes-list">
+          <li>Understand the application and importance of computer vision</li>
+          <li>Undertake basic computer vision related tasks</li>
+        </ul>
+      </div>
+
+      <!-- Discussion: Reply to Dalbir Singh -->
+      <div class="discussion-block">
+        <div class="discussion-label">// Collaborative Discussion 2 · Units 8–10 · Reply</div>
+        <div class="discussion-title">Reply to Dalbir Singh's Initial Post</div>
+        <p class="discussion-text">Hi Dalbir, thanks for your initial post which I found remarkably interesting. I agree with your conclusions about AI writers — I am also concerned about the usage of those tools for creative tasks (i.e. poems) and for the risks of bias or disinformation.</p>
+        <p class="discussion-text">I was reading some books and publications about AI writing generating tools and found that many people, especially students, are concerned about the creative usage of those tools for academic purposes.</p>
+        <p class="discussion-text">An interesting and widely shared concern comes from professional writers and is about ethical issues that could arise from the usage of AI tools. As reported by Higgs and Stornaiuolo (2024: 642): "quite a bit of conversation revolved around the threats of AI to creative enterprise more broadly, whether that involved professional writers or artists, concerns over 'deepfakes', or worries about how ChatGPT dataset was trained on people's texts without consent."</p>
+        <p class="discussion-text">I think I can agree with you that for admin or mechanical tasks, AI writing generating tools are helpful — but when it comes to creativity and truth, those tools still need human interaction and control to avoid the issues mentioned above.</p>
+        <p class="discussion-text" style="color: var(--accent); font-family: var(--mono); font-size: 12px;">— Andrea</p>
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+          <div class="discussion-label">// Reference</div>
+          <ul class="ref-list" style="margin-top: 10px;">
+            <li><span>Higgs, J. M. & Stornaiuolo, A. (2024). Being Human in the Age of Generative AI: Young People's Ethical Concerns about Writing and Living with Machines. <em>Reading Research Quarterly,</em> 59(4), 632–650. DOI: 10.1002/rrq.552 [Accessed 1st July 2025].</span></li>
+          </ul>
         </div>
-        <a href="education.html">Education</a>
-        <a href="afterwork.html">After Work</a>
-    </div>
-    
-    <header>
-        <img src="Profile Picture.jpg" alt="Andrea Trevisi" class="profile-image">
-        <h1>Andrea Trevisi</h1>
-        <p>PG Diploma in Artificial Intelligence</p>
-    </header>
+      </div>
 
-    <div class="section">
-        <div class="unit-content">
-            <div class="unit-header">
-                <div class="unit-number">9</div>
-                <h2 class="unit-title">Unit 9: Introduction to Convolutional Neural Networks</h2>
-                <span class="completed-badge">Completed</span>
-            </div>
-            
-            <p>Welcome to Week 9.
-
-            </p>Deep learning has revolutionised artificial intelligence by enabling highly complex pattern recognition across different domains, from image processing to natural language understanding. This week, we will build upon traditional Convolutional Neural Networks (CNNs) and explore more advanced architectures such as:</p>
-            <li>Dueling Neural Networks (used in Reinforcement Learning & GANs).</li>
-            <li>Generative Adversarial Networks (GANs), which power image synthesis, deepfake technology, and AI-driven creativity.</li>
-            <li>Transformer models (BERT, GPT, T5), which have redefined NLP by replacing recurrent networks (RNNs & LSTMs).</li>
-            <h3 class="section-title">This week we shall learn about:</h3>
-            <ul class="learning-outcomes">
-                <li>TThe algorithm underpinning CNN in detail.</li>
-                <li>CNN specific python libraries and examples.</li>
-                <li>Applications of CNN in real life.</li>
-            </ul>
-            <h3 class="section-title">On completion of this week, you will be able to:</h3>
-             <ul class="learning-outcomes">
-                <li>Understand the application and importance of computer vision.</li>
-                <li>Undertake basic computer vision related tasks.</li>
-             </ul>
-
-            <p>University of Essex Online (2025)</p>
-            
-            <h3 class="section-title">Collaborative Discussion 2: Legal and Ethical Views on ANN Applications</h3>
-            <p>This discussion will last for 3 weeks covering units 8, 9 and 10. Ensure you include appropriate citations and references in all your posts (this is not included in the word count for each week's post/submission).</p>
-            <h3 class="selection-title">Discussion Topic</h3>
-            <p>Read/listen to the article by Hutson (2021) in Nature on Robo-writers. This week, post your thoughts on the risks and benefits of the use AI writers at different levels, from administrative work to creative writing.</p>
-            <p>RYou should demonstrate that you understand the topic covered and ensure you use references to academic literature (journals, books, reports, etc.).</p>
-                            
-            <h3 class="selection-title">Reply to Dalbir Singh's initial post</h3>    
-            <p>Hi Dalbir,</p>
-            <p>Thanks for your initial post which I found remarkably interesting. I have to say that I agree with your conclusions about the AI writers, I am also concerned about the usage of those tools for creative tasks (i.e. poems) and for the risks of bias or disinformation.</p>
-            <p>I was indeed reading some books and publications about AI writing generating tools and I found that many people, especially students, are also concerned about the creative usage of those tools for academic purposes.</p>
-            <p>But an interesting and widely shared concern comes from professional writers and is about ethical issues that could arise from the usage of AI tools. As reported by Higgs and Stornaiuolo (2024: 642) “quite a bit of conversation revolved around the threats of AI to creative enterprise more broadly, whether that involved professional writers or artists, concerns over ‘deepfakes’, or worries about how ChatGPT dataset was trained on people’s texts without consent.”</p>
-            <p>I think I can say that I agree with you when you affirm that for admin or mechanical task, AI writing generating tools are helpful but when it comes to creativity and truth, those tools still need human interaction and control to avoid issues like the ones mentioned above.</p>         
-            <p>Thanks,</p>
-            <p>Andrea.</p>
-            <p><b>References:</b></p>
-            <p><b>Higgs, J. M. & Stornaiuolo, A.</b> (2024) Being Human in the Age of Generative AI: Young People’s Ethical Concerns about Writing and Living with Machines. Reading research quarterly. 59 (4), 632–650. DOI: 10.1002/rrq.552 [Accessed 1st July 2025].</p>
-            
-            <h3 class="selection-title">Reply to Choyee Wolff's initial post</h3>    
-            <p>Hi Choyee,</p>
-            <p>Thanks for your initial post which I enjoyed reading.</p>
-            <p>I found interesting your focus on the educational and professional setting of the usage of the AI generative writing tools. I think that, for the professional side, the usage of those tools could be useful to save some time in performing mechanical and automated tasks or for some basic mail replies.</p>
-            <p>But the educational and academic usage of AI writing tools deserves a bit more of attention from an ethical perspective. A particularly crucial point is not to let the students alone in this new AI environment. Here is important the figure of the teachers or professors and their stands on the AI writing tools.</p>
-            <p>As wisely reported, talking about ChatGPT usage, by Črček and Patekar (2023: 135) “while the tool is still relatively new, and a hotly debated topic, instructors’ opinions are key to setting the foundations for AI usage in classrooms. If there are no guidelines on what for and how to use ChatGPT, it cannot be expected of students to figure out the ethical usage and to solve the issue of academic honesty by themselves.”</p>
-            <p>Can we agree on the fact that the usage of AI writing tools for academic or creative writing should be regulated or, at least, supervised by humans ?</p>         
-            <p>Thanks,</p>
-            <p>Andrea.</p>
-            <p><b>References:</b></p>
-            <p><b>Črček, N. & Patekar, J. </b> (2023) Writing with AI: University Students’ Use of ChatGPT. Journal of language and education.9(4): 128–138. DOI:10.17323/jle.2023.1737 [Accessed 1st July 2025].</p>
-                        
-            <h3 class="section-title">KKey Readings, Resources and References.</h3>
-            <ul class="resources-list">
-                <li>Bishop, C. and Bishop, H. (2024). <i>Deep Learning: Foundations and Concepts.</i> UK: Cambridge University Press. Chapters 5 and 10.</li>
-                <li>Parisi, L.et al. (2022) <i>Quantum ReLU activation for Convolutional Neural Networks to improve diagnosis of Parkinson’s disease and COVID-19.</i>Elsevier Ltd, 187, pp. 115892.</li>
-                <li>Wall, M. (2019)<i> Biased and wrong? Facial recognition tech in the dock.</i>
-                <li>University Of Essex Online (2025)<i> Unit 9: Introduction to Convolutional Neural Networks.</i> Available from: https://www.my-course.co.uk/course/view.php?id=13459&section=15 [Accessed June/July 2025].</li>
-            </ul>
-            
-            <div class="reflection">
-                <h4 class="reflection-title">Personal Reflection</h4>
-                <p>Convolutional Neural Networks represent a revolutionary advancement in deep learning, specifically designed to excel at spatial pattern recognition and hierarchical feature extraction.</p>
-                <p>CNNs have transformed computer vision by automatically learning features from raw pixel data, eliminating the need for manual feature engineering and achieving unprecedented accuracy in image classification, object detection, and medical imaging applications.</p>
-                <p>The exploration of advanced CNN architectures—including Dueling Neural Networks, Generative Adversarial Networks, and Transformer models—demonstrates the versatility and power of deep learning beyond traditional image processing.</p>
-                <p>These architectures have redefined multiple AI domains, from reinforcement learning and creative content generation to natural language processing, showcasing how CNN principles have evolved to solve diverse computational challenges.</p>
-                <blockquote>
-                    <p>"Understanding these sophisticated neural network architectures is crucial for developing cutting-edge AI solutions that power modern applications like autonomous vehicles, medical diagnostics, language translation, and creative AI tools.</p>
-                    <p>Mastery of CNNs and their variants provides the technical foundation necessary for innovation in machine learning research and industrial AI deployment, making it an essential skill for advancing in the rapidly evolving field of artificial intelligence."</p>
-                </blockquote>
-            </div>
-            
-            <div class="navigation-buttons">
-                <a href="pgdipAI.html" class="nav-button">Back to Course Overview</a>
-                <a href="pgdipAI-unit10.html" class="nav-button">Unit 10: Natural Language Processing</a>
-            </div>
+      <!-- Discussion: Reply to Choyee Wolff -->
+      <div class="discussion-block">
+        <div class="discussion-label">// Collaborative Discussion 2 · Units 8–10 · Reply</div>
+        <div class="discussion-title">Reply to Choyee Wolff's Initial Post</div>
+        <p class="discussion-text">Hi Choyee, thanks for your initial post which I enjoyed reading. I found your focus on the educational and professional setting of AI generative writing tools particularly interesting.</p>
+        <p class="discussion-text">For the professional side, the usage of those tools could be useful to save time in performing mechanical and automated tasks or for some basic email replies. But the educational and academic usage of AI writing tools deserves more attention from an ethical perspective.</p>
+        <p class="discussion-text">A particularly crucial point is not to leave students alone in this new AI environment. Here the figure of teachers or professors and their stance on AI writing tools is important. As wisely reported by Črček and Patekar (2023: 135): "while the tool is still relatively new, and a hotly debated topic, instructors' opinions are key to setting the foundations for AI usage in classrooms. If there are no guidelines on what for and how to use ChatGPT, it cannot be expected of students to figure out the ethical usage and to solve the issue of academic honesty by themselves."</p>
+        <p class="discussion-text">Can we agree that the usage of AI writing tools for academic or creative writing should be regulated or, at least, supervised by humans?</p>
+        <p class="discussion-text" style="color: var(--accent); font-family: var(--mono); font-size: 12px;">— Andrea</p>
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+          <div class="discussion-label">// Reference</div>
+          <ul class="ref-list" style="margin-top: 10px;">
+            <li><span>Črček, N. & Patekar, J. (2023). Writing with AI: University Students' Use of ChatGPT. <em>Journal of Language and Education,</em> 9(4), 128–138. DOI: 10.17323/jle.2023.1737 [Accessed 1st July 2025].</span></li>
+          </ul>
         </div>
+      </div>
+
+      <!-- References -->
+      <div class="content-block">
+        <div class="block-title"><span>📚</span> Key Readings & References</div>
+        <ul class="ref-list">
+          <li><span>Bishop, C. and Bishop, H. (2024). <em>Deep Learning: Foundations and Concepts.</em> Cambridge University Press. Chapters 5 and 10.</span></li>
+          <li><span>Parisi, L. et al. (2022). Quantum ReLU activation for Convolutional Neural Networks to improve diagnosis of Parkinson's disease and COVID-19. <em>Elsevier Ltd,</em> 187, pp. 115892.</span></li>
+          <li><span>Wall, M. (2019). <em>Biased and wrong? Facial recognition tech in the dock.</em></span></li>
+          <li><span>University of Essex Online (2025). <em>Unit 9: Introduction to Convolutional Neural Networks.</em> Available from: https://www.my-course.co.uk [Accessed June/July 2025].</span></li>
+        </ul>
+      </div>
+
+      <!-- Personal Reflection -->
+      <div class="reflection-block">
+        <div class="reflection-label">// Personal Reflection</div>
+        <p class="reflection-text">Convolutional Neural Networks represent a revolutionary advancement in deep learning, specifically designed to excel at spatial pattern recognition and hierarchical feature extraction. CNNs have transformed computer vision by automatically learning features from raw pixel data — eliminating the need for manual feature engineering and achieving unprecedented accuracy in image classification, object detection, and medical imaging.</p>
+        <p class="reflection-text">The exploration of advanced CNN architectures — including Dueling Neural Networks, Generative Adversarial Networks, and Transformer models — demonstrates the versatility and power of deep learning beyond traditional image processing. These architectures have redefined multiple AI domains, from reinforcement learning and creative content generation to natural language processing.</p>
+        <div class="reflection-quote">"Understanding these sophisticated neural network architectures is crucial for developing cutting-edge AI solutions that power modern applications like autonomous vehicles, medical diagnostics, language translation, and creative AI tools. Mastery of CNNs and their variants provides the technical foundation necessary for innovation in machine learning research and industrial AI deployment."</div>
+      </div>
+
     </div>
 
-    <footer>
-        <p>&copy; 2026 Andrea Trevisi. All rights reserved.</p>
-        <div class="contact-info">
-            <a href="mailto:andrea.trevisi@gmail.com">Email</a>
-            <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+    <!-- Sidebar -->
+    <div class="content-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-title">// Unit Navigation</div>
+        <div class="unit-nav">
+          <a href="pgdipAI-unit8.html" class="unit-nav-link">← Unit 8 · Training ANN</a>
+          <a href="pgdipAI.html" class="unit-nav-link">↑ Course Overview</a>
+          <a href="pgdipAI-unit10.html" class="unit-nav-link next">Unit 10 → <span style="font-size:10px;">NLP</span></a>
         </div>
-    </footer>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">// This Unit Covers</div>
+        <ul class="sidebar-list">
+          <li>CNN algorithm in depth</li>
+          <li>GANs & Deepfakes</li>
+          <li>Transformer models</li>
+          <li>Computer vision tasks</li>
+          <li>AI writing ethics debate</li>
+          <li>Academic honesty & AI</li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">// Module Info</div>
+        <ul class="sidebar-list">
+          <li>Machine Learning · April 2025</li>
+          <li>University of Essex, UK</li>
+          <li>PgDip Artificial Intelligence</li>
+          <li>Unit 9 of 12</li>
+          <li>Status: Completed ✓</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="pgdipAI-unit8.html" class="bottom-nav-btn">← Unit 8: Training an ANN</a>
+    <a href="pgdipAI-unit10.html" class="bottom-nav-btn next">Next: Unit 10 — Natural Language Processing →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">© 2026 Andrea Trevisi — All rights reserved</div>
+  <div class="footer-links">
+    <a href="mailto:andrea.trevisi@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 4 + 'px'; cursor.style.top = my - 4 + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx - 16 + 'px'; ring.style.top = ry - 16 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+const canvas = document.getElementById('canvas-bg');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', () => { resize(); initNodes(); });
+function initNodes() {
+  nodes = [];
+  const count = Math.floor((W * H) / 18000);
+  for (let i = 0; i < count; i++) nodes.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, r: Math.random()*2+1 });
+}
+initNodes();
+function drawCanvas() {
+  ctx.clearRect(0,0,W,H);
+  nodes.forEach(n => { n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>W) n.vx*=-1; if(n.y<0||n.y>H) n.vy*=-1; });
+  for (let i=0; i<nodes.length; i++) {
+    for (let j=i+1; j<nodes.length; j++) {
+      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<130) { ctx.beginPath(); ctx.strokeStyle=`rgba(0,212,255,${(1-dist/130)*.18})`; ctx.lineWidth=.5; ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke(); }
+    }
+  }
+  nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fillStyle='rgba(0,212,255,0.5)'; ctx.fill(); });
+  requestAnimationFrame(drawCanvas);
+}
+drawCanvas();
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.content-block, .discussion-block, .reflection-block').forEach(el => observer.observe(el));
+document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
+  let timer;
+  const menu = dropdown.querySelector(".nav-dropdown-menu");
+  dropdown.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+});
+</script>
 </body>
 </html>
