@@ -1,905 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrea Trevisi - AI Diploma: Unit 7</title>
-    <style>
-        /* Simple, clean styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        header {
-            text-align: center;
-            padding: 30px 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 40px;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-        h2 {
-            color: #3498db;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 40px;
-        }
-        h3 {
-            color: #2c3e50;
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
-        h4 {
-            color: #3498db;
-            margin-top: 25px;
-        }
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            border-top: 1px solid #eee;
-            color: #7f8c8d;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        /* Navigation Menu Styling */
-        .navbar {
-            background-color: #2c3e50;
-            overflow: hidden;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        .navbar a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-        
-        /* Dropdown container */
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-        
-        /* Dropdown button */
-        .dropdown .dropbtn {
-            font-size: 17px;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-            cursor: pointer;
-        }
-        
-        /* Add a background color to navbar links on hover */
-        .navbar a:hover, .dropdown:hover .dropbtn {
-            background-color: #3498db;
-        }
-        
-        /* Dropdown content (hidden by default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 0 0 5px 5px;
-        }
-        
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            float: none;
-            color: #333;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        
-        /* Add a background color to dropdown links on hover */
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-        
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        /* Responsive navigation */
-        @media screen and (max-width: 600px) {
-            .navbar a, .dropdown .dropbtn {
-                display: block;
-                width: 100%;
-                text-align: left;
-            }
-            
-            .dropdown-content {
-                position: relative;
-                width: 100%;
-            }
-        }
-
-        /* Current page indicator */
-        .active {
-            background-color: #3498db;
-        }
-        
-        /* Unit Content Styling */
-        .unit-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        
-        .unit-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        
-        .unit-number {
-            background-color: #3498db;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-        
-        .unit-title {
-            font-size: 1.8em;
-            color: #2c3e50;
-            margin: 0;
-        }
-        
-        .completed-badge {
-            background-color: #27ae60;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            margin-left: 15px;
-        }
-        
-        .section-title {
-            color: #3498db;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-        }
-        
-        .key-concept {
-            background-color: #f1f9ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .learning-outcomes {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .learning-outcomes li {
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .learning-outcomes li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-            font-weight: bold;
-        }
-        
-        .resources-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .resources-list li {
-            margin-bottom: 12px;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .resources-list li:before {
-            content: "📚";
-            position: absolute;
-            left: 0;
-        }
-        
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-        
-        .nav-button {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        
-        .nav-button:hover {
-            background-color: #2980b9;
-            text-decoration: none;
-        }
-        
-        .reflection {
-            background-color: #fdf9e8;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 25px;
-            border-left: 4px solid #f1c40f;
-        }
-        
-        .reflection-title {
-            color: #f39c12;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        
-        blockquote {
-            font-style: italic;
-            border-left: 3px solid #3498db;
-            padding-left: 15px;
-            margin-left: 0;
-            color: #555;
-        }
-
-        /* ENHANCED TEAM PROJECT STYLING */
-        .team-project-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin: 40px 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .team-project-section::before {
-            content: "";
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
-            border-radius: 12px;
-            z-index: -1;
-            animation: borderGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes borderGlow {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .team-project-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .team-project-icon {
-            background-color: rgba(255,255,255,0.2);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2em;
-            margin-right: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .team-project-title {
-            font-size: 2.2em;
-            margin: 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            font-weight: 600;
-        }
-
-        .team-project-subtitle {
-            font-size: 1.1em;
-            margin: 5px 0 0 0;
-            opacity: 0.9;
-        }
-
-        .project-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .project-info-card {
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .project-info-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .project-info-card h4 {
-            margin-top: 0;
-            color: #fff;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .project-info-card p {
-            margin: 10px 0 0 0;
-            font-size: 1.1em;
-            font-weight: 500;
-        }
-
-        .project-topic {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #FFD700;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .meeting-points {
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 8px;
-            margin-top: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .meeting-points h4 {
-            color: #FFD700;
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .meeting-points ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .meeting-points li {
-            margin-bottom: 15px;
-            padding-left: 35px;
-            position: relative;
-            line-height: 1.5;
-        }
-
-        .meeting-points li:before {
-            content: "🎯";
-            position: absolute;
-            left: 0;
-            font-size: 1.2em;
-        }
-
-        .next-meeting-highlight {
-            background: rgba(255,215,0,0.2);
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 15px;
-            border-left: 4px solid #FFD700;
-        }
-
-        .next-meeting-highlight strong {
-            color: #FFD700;
-        }
-
-        /* NEW ASSIGNMENT SECTION STYLING */
-        .assignment-section {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 50%, #ff9068 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin: 40px 0;
-            box-shadow: 0 8px 25px rgba(255,107,107,0.25);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .assignment-section::before {
-            content: "";
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff6b6b, #ee5a52, #ff9068, #ff6b6b);
-            border-radius: 12px;
-            z-index: -1;
-            animation: assignmentGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes assignmentGlow {
-            0% { opacity: 0.6; }
-            100% { opacity: 1; }
-        }
-
-        .assignment-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .assignment-icon {
-            background-color: rgba(255,255,255,0.2);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2em;
-            margin-right: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .assignment-title {
-            font-size: 2.2em;
-            margin: 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            font-weight: 600;
-        }
-
-        .assignment-subtitle {
-            font-size: 1.1em;
-            margin: 5px 0 0 0;
-            opacity: 0.9;
-        }
-
-        .assignment-overview {
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .assignment-overview h4 {
-            color: #FFE4B5;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .assignment-overview p {
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .tracks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-
-        .track-card {
-            background: rgba(255,255,255,0.15);
-            padding: 20px;
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .track-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-        }
-
-        .track-card h5 {
-            margin-top: 0;
-            color: #FFE4B5;
-            font-size: 1.1em;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .track-card p {
-            margin: 8px 0 0 0;
-            font-size: 0.95em;
-            line-height: 1.4;
-        }
-
-        .track-highlight {
-            background: rgba(255,228,181,0.2);
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 15px;
-            border-left: 4px solid #FFE4B5;
-        }
-
-        .track-highlight strong {
-            color: #FFE4B5;
-        }
-
-        .tasks-section {
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 8px;
-            margin: 25px 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .tasks-section h4 {
-            color: #FFE4B5;
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .task-item {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            border-left: 3px solid #FFE4B5;
-        }
-
-        .task-item h5 {
-            margin-top: 0;
-            color: #FFE4B5;
-            font-size: 1.1em;
-        }
-
-        .task-item p {
-            margin: 8px 0 0 0;
-            line-height: 1.5;
-        }
-
-        .grading-breakdown {
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 8px;
-            margin-top: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .grading-breakdown h4 {
-            color: #FFE4B5;
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .grading-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 15px;
-            margin-bottom: 8px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 5px;
-            border-left: 3px solid #FFE4B5;
-        }
-
-        .grading-item span:first-child {
-            flex: 1;
-            font-weight: 500;
-        }
-
-        .grading-item span:last-child {
-            font-weight: 600;
-            color: #FFE4B5;
-            min-width: 50px;
-            text-align: right;
-        }
-
-        .submission-area {
-            background: rgba(255,228,181,0.2);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 25px;
-            border: 2px dashed rgba(255,228,181,0.5);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .submission-area:hover {
-            background: rgba(255,228,181,0.3);
-            border-color: #FFE4B5;
-        }
-
-        .submission-area h4 {
-            color: #FFE4B5;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .upload-button {
-            background: linear-gradient(45deg, #FFE4B5, #FFF8DC);
-            color: #ff6b6b;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-        }
-
-        .upload-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255,228,181,0.4);
-            color: #ff6b6b;
-            text-decoration: none;
-        }
-
-        /* Responsive design for assignment section */
-        @media screen and (max-width: 600px) {
-            .assignment-section {
-                padding: 20px;
-            }
-            
-            .assignment-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .assignment-icon {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-            
-            .assignment-title {
-                font-size: 1.8em;
-            }
-            
-            .tracks-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Responsive design for team project */
-        @media screen and (max-width: 600px) {
-            .team-project-section {
-                padding: 20px;
-            }
-            
-            .team-project-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .team-project-icon {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-            
-            .team-project-title {
-                font-size: 1.8em;
-            }
-            
-            .project-info-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Pulse animation for important elements */
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Bounce animation for submission area */
-        .bounce {
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Trevisi — ML Unit 7: Introduction to Artificial Neural Networks</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #040a0f; --surface: #0d1825; --border: #1a2f45;
+  --accent: #00d4ff; --accent2: #7b4fff; --accent3: #00ff9d; --accent4: #ffd700;
+  --text: #e8f4f8; --muted: #6a8a9e;
+  --mono: 'Space Mono', monospace; --sans: 'Syne', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; cursor: none; }
+.cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+.cursor-ring { width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease; opacity: 0.5; mix-blend-mode: screen; }
+#canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,212,255,0.08); background: rgba(4,10,15,0.85); backdrop-filter: blur(20px); }
+.nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-dropdown { position: relative; }
+.nav-dropdown-btn { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; background: none; border: none; cursor: none; padding: 0; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+.nav-dropdown-btn:hover { color: var(--accent); }
+.nav-dropdown-menu { display: none; position: absolute; top: 20px; left: 0; background: var(--surface); border: 1px solid var(--border); min-width: 240px; z-index: 200; padding-top: 8px; }
+.nav-dropdown-menu a { display: block; padding: 10px 16px; font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; border-bottom: 1px solid var(--border); }
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover, .nav-dropdown-menu a.active { color: var(--accent); background: rgba(0,212,255,0.04); padding-left: 20px; }
+main { position: relative; z-index: 2; }
+.page-header { padding: 140px 48px 60px; max-width: 1200px; margin: 0 auto; }
+.breadcrumb { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb span { color: var(--accent); }
+.page-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.page-label::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+.page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 70px); font-weight: 300; letter-spacing: 0.02em; line-height: 1.15; margin-bottom: 20px; padding-bottom: 8px; }
+.page-title span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+.meta-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(0,212,255,0.2); background: rgba(0,212,255,0.04); font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.08em; }
+.meta-badge-green { border-color: rgba(0,255,157,0.2); background: rgba(0,255,157,0.04); color: var(--accent3); }
+.content-wrap { padding: 0 48px 100px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 280px; gap: 40px; align-items: start; }
+.content-main { display: flex; flex-direction: column; gap: 32px; }
+.content-block { background: var(--surface); border: 1px solid var(--border); padding: 36px; position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+.content-block.visible { opacity: 1; transform: translateY(0); }
+.content-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
+.block-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.block-subtitle { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; }
+.intro-text { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.90); }
+.intro-text + .intro-text { margin-top: 12px; }
+.outcomes-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.outcomes-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; line-height: 1.6; color: rgba(232,244,248,0.90); }
+.outcomes-list li::before { content: '✓'; font-family: var(--mono); font-size: 12px; color: var(--accent3); flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+.ref-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.ref-list li { font-size: 13px; line-height: 1.7; color: rgba(232,244,248,0.85); display: flex; gap: 12px; align-items: flex-start; }
+.ref-list li::before { content: '📚'; flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+.ref-list li span { flex: 1; word-break: break-word; }
+.reflection-block { background: var(--surface); border: 1px solid rgba(255,215,0,0.2); border-left: 3px solid var(--accent4); padding: 36px; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+.reflection-block.visible { opacity: 1; transform: translateY(0); }
+.reflection-label { font-family: var(--mono); font-size: 10px; color: var(--accent4); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+.reflection-text { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.90); margin-bottom: 10px; }
+.reflection-quote { border-left: 2px solid var(--accent4); padding: 16px 20px; margin-top: 20px; font-style: italic; font-size: 14px; line-height: 1.7; color: rgba(232,244,248,0.80); background: rgba(255,215,0,0.03); }
+.content-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; }
+.sidebar-card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
+.sidebar-title { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
+.sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.sidebar-list li { font-size: 12px; color: rgba(232,244,248,0.75); display: flex; gap: 8px; line-height: 1.4; }
+.sidebar-list li::before { content: '·'; color: var(--accent); flex-shrink: 0; }
+.unit-nav { display: flex; flex-direction: column; gap: 8px; }
+.unit-nav-link { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; transition: all 0.2s; letter-spacing: 0.05em; }
+.unit-nav-link:hover { border-color: var(--accent); color: var(--accent); padding-left: 18px; }
+.unit-nav-link.next { background: rgba(0,212,255,0.04); border-color: rgba(0,212,255,0.2); color: var(--accent); justify-content: space-between; }
+.unit-nav-link.next:hover { background: rgba(0,212,255,0.1); }
+.bottom-nav { padding: 0 48px 80px; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.bottom-nav-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border: 1px solid var(--border); font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; }
+.bottom-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+.bottom-nav-btn.next { background: rgba(0,212,255,0.04); border-color: rgba(0,212,255,0.2); color: var(--accent); }
+.bottom-nav-btn.next:hover { background: rgba(0,212,255,0.1); }
+footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .page-header { padding: 100px 24px 48px; }
+  .content-wrap { grid-template-columns: 1fr; padding: 0 24px 80px; }
+  .content-sidebar { position: static; }
+  .bottom-nav { padding: 0 24px 60px; }
+  footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
 </head>
 <body>
-    <!-- Navigation Bar with Dropdown -->
-    <div class="navbar">
-        <a href="index.html" class="active">Home</a>
-        <div class="dropdown">
-    <button class="dropbtn">Experience 
-        <i>▼</i>
-    </button>
-    <div class="dropdown-content">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<canvas id="canvas-bg"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">AT // 2026</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Experience ▾</button>
+      <div class="nav-dropdown-menu">
         <a href="workhistory.html">Work History</a>
-        <a href="pgdipAI.html">Machine Learning</a>
+        <a href="pgdipAI.html" class="active">Machine Learning</a>
         <a href="intelligent-agents.html">Intelligent Agents</a>
-        <a href="knowledge-representation.html">Knowledge Representation and Reasoning</a>
-    </div>
-    </div>
-        <div class="dropdown">
-            <button class="dropbtn">Skills 
-                <i>▼</i>
-            </button>
-            <div class="dropdown-content">
-                <a href="technical-skills.html">Technical Skills</a>
-                <a href="languages.html">Languages</a>
-            </div>
-        </div>
-        <a href="education.html">Education</a>
-        <a href="afterwork.html">After Work</a>
-    </div>
-    
-    <header>
-        <img src="Profile Picture.jpg" alt="Andrea Trevisi" class="profile-image">
-        <h1>Andrea Trevisi</h1>
-        <p>PG Diploma in Artificial Intelligence</p>
-    </header>
+        <a href="knowledge-representation.html">Knowledge Representation</a>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Skills ▾</button>
+      <div class="nav-dropdown-menu">
+        <a href="technical-skills.html">Technical Skills</a>
+        <a href="languages.html">Languages</a>
+      </div>
+    </li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="afterwork.html">After Work</a></li>
+  </ul>
+</nav>
 
-    <div class="section">
-        <div class="unit-content">
-            <div class="unit-header">
-                <div class="unit-number">7</div>
-                <h2 class="unit-title">Unit 7: Introduction to Artificial Neural Networks</h2>
-                <span class="completed-badge">Completed</span>
-            </div>
-            
-            <p>Welcome to Week 7.</p>
-            <p>Artificial Neural Network (ANN) is a biology inspired algorithm that, like animal brain, can learn from the environment and adapt itself to make more correct decisions.</p>     
-            <p>At present, ANN and its variant algorithm is used widely in different areas of our lives, from marketing to automation. ANN is a key driver for the industry 4.0 revolution, where machines are making decisions with minimal or no human interactions.</p>
-            
-            <h3 class="section-title">This week we shall learn about:</h3>
-            <ul class="learning-outcomes">
-                <li>The analogy between biological neuron and artificial neuron network.</li>
-                <li>A detailed understanding of the algorithm underpinning artificial neural networks (ANN).</li>
-                <li>Different functions used in ANN.</li>
-            </ul>
-            
-            <h3 class="section-title">On completion of this week, you will be able to:</h3>
-            <ul class="learning-outcomes">
-                <li>Gain a critical and detailed understanding of the ANN.</li>
-                <li>Design and develop simple ANN artefacts.</li>
-                <li>Critique and contextualise emerging research in ANN.</li>
-            </ul>
+<main>
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> ›
+      <a href="pgdipAI.html">Machine Learning</a> ›
+      <span>Unit 7</span>
+    </div>
+    <div class="page-label">Machine Learning · University of Essex · April 2025</div>
+    <h1 class="page-title">Unit 7: <span>Introduction to Artificial Neural Networks</span></h1>
+    <div class="page-meta">
+      <div class="meta-badge">📅 Week 7</div>
+      <div class="meta-badge">🎓 PgDip AI · Essex</div>
+      <div class="meta-badge meta-badge-green">✓ Completed</div>
+    </div>
+  </div>
 
-            <p>University of Essex Online (2025)</p>
-            
-            <h3 class="section-title">Key Readings, Resources and References.</h3>
-            <ul class="resources-list">
-                <li>Bishop, C. and Bishop, H. (2024) <i>Deep Learning: Foundations and Concepts.</i> UK: Cambridge University Press. Chapter 15: Training Deep Networks.</li>
-                <li>Chernozhukov, V., Hansen, C. and Spindler, M. (2024) <i>Applied Causal Inference Powered by ML and AI.</i> Oxford, UK: Oxford University Presss. Chapter 7: Applications in Economics and Social Sciences.</li>
-                <li>Goodfellow, I., Bengio, Y. and Courville, A. (2016) <i>Deep Learning.</i> Cambridge, MA: MIT Press. Chapter 8: Optimization for Training Deep Models.</li>
-                <li>Vaio, A.D. et al. (2020) 'Artificial intelligence and business models in the sustainable development goals perspective: A systematic literature review', <i>Journal of Business Research</i> 121, pp. 283-314.</li>
-                <li>Sharma, A. (2017) <i>Deep Learning.</i> Understanding Activation Functions in Neural Networks.</li>
-                <li>University Of Essex Online (2025)<i> Unit 7: Introduction to Artificial Neural Networks.</i> Available from: https://www.my-course.co.uk/course/view.php?id=13459&section=13 [Accessed June 2025].</li>
-            </ul>
-            
-            <div class="reflection">
-                <h4 class="reflection-title">Personal Reflection</h4>
-                <p>Artificial Neural Networks represent a transformative leap in machine learning, mimicking the human brain's interconnected neuron structure to solve complex problems that traditional algorithms struggle with.</p>
-                <p>ANNs excel at recognizing patterns, processing non-linear relationships, and adapting through experience, making them invaluable for tasks ranging from image recognition to natural language processing.</p>
-                <p>The significance of ANNs extends far beyond academic research, driving the Industry 4.0 revolution by enabling autonomous decision-making systems in manufacturing, healthcare, finance, and transportation.</p>
-                <p>Their ability to learn from vast datasets and improve performance iteratively makes them essential for handling the complexity of modern data challenges.</p>
-                
-                <blockquote>
-                    <p>"Understanding ANNs provides the foundational knowledge necessary for advanced deep learning techniques, including convolutional neural networks and recurrent neural networks.</p>
-                    <p>As businesses increasingly rely on intelligent automation and predictive analytics, proficiency in neural network concepts becomes crucial for developing AI solutions that can adapt, learn, and operate with minimal human intervention in our rapidly evolving technological landscape."</p>
-                </blockquote>
-            </div>
-            
-            <div class="navigation-buttons">
-                <a href="pgdipAI.html" class="nav-button">Back to Course Overview</a>
-                <a href="pgdipAI-unit8.html" class="nav-button">Unit 8: Training an Artificial Neural Network</a>
-            </div>
-        </div>
+  <div class="content-wrap">
+    <div class="content-main">
+
+      <!-- Introduction -->
+      <div class="content-block">
+        <div class="block-title"><span>🧠</span> Introduction</div>
+        <p class="intro-text">Artificial Neural Network (ANN) is a biology-inspired algorithm that, like the animal brain, can learn from the environment and adapt itself to make more correct decisions.</p>
+        <p class="intro-text">At present, ANN and its variant algorithms are used widely in different areas of our lives — from marketing to automation. ANN is a key driver for the Industry 4.0 revolution, where machines are making decisions with minimal or no human interaction.</p>
+      </div>
+
+      <!-- Learning Outcomes -->
+      <div class="content-block">
+        <div class="block-title"><span>🎯</span> This Week We Shall Learn About</div>
+        <ul class="outcomes-list">
+          <li>The analogy between biological neuron and artificial neural network</li>
+          <li>A detailed understanding of the algorithm underpinning artificial neural networks (ANN)</li>
+          <li>Different functions used in ANN</li>
+        </ul>
+        <div class="block-subtitle" style="margin-top: 28px; margin-bottom: 14px;">On Completion of This Week, You Will Be Able To</div>
+        <ul class="outcomes-list">
+          <li>Gain a critical and detailed understanding of ANN</li>
+          <li>Design and develop simple ANN artefacts</li>
+          <li>Critique and contextualise emerging research in ANN</li>
+        </ul>
+      </div>
+
+      <!-- References -->
+      <div class="content-block">
+        <div class="block-title"><span>📚</span> Key Readings & References</div>
+        <ul class="ref-list">
+          <li><span>Bishop, C. and Bishop, H. (2024). <em>Deep Learning: Foundations and Concepts.</em> Cambridge University Press. Chapter 15: Training Deep Networks.</span></li>
+          <li><span>Chernozhukov, V., Hansen, C. and Spindler, M. (2024). <em>Applied Causal Inference Powered by ML and AI.</em> Oxford University Press. Chapter 7: Applications in Economics and Social Sciences.</span></li>
+          <li><span>Goodfellow, I., Bengio, Y. and Courville, A. (2016). <em>Deep Learning.</em> MIT Press. Chapter 8: Optimization for Training Deep Models.</span></li>
+          <li><span>Vaio, A.D. et al. (2020). Artificial intelligence and business models in the sustainable development goals perspective: A systematic literature review. <em>Journal of Business Research,</em> 121, pp. 283–314.</span></li>
+          <li><span>Sharma, A. (2017). <em>Deep Learning: Understanding Activation Functions in Neural Networks.</em></span></li>
+          <li><span>University of Essex Online (2025). <em>Unit 7: Introduction to Artificial Neural Networks.</em> Available from: https://www.my-course.co.uk [Accessed June 2025].</span></li>
+        </ul>
+      </div>
+
+      <!-- Personal Reflection -->
+      <div class="reflection-block">
+        <div class="reflection-label">// Personal Reflection</div>
+        <p class="reflection-text">Artificial Neural Networks represent a transformative leap in machine learning, mimicking the human brain's interconnected neuron structure to solve complex problems that traditional algorithms struggle with.</p>
+        <p class="reflection-text">ANNs excel at recognizing patterns, processing non-linear relationships, and adapting through experience — making them invaluable for tasks ranging from image recognition to natural language processing.</p>
+        <p class="reflection-text">The significance of ANNs extends far beyond academic research, driving the Industry 4.0 revolution by enabling autonomous decision-making systems in manufacturing, healthcare, finance, and transportation. Their ability to learn from vast datasets and improve performance iteratively makes them essential for handling the complexity of modern data challenges.</p>
+        <div class="reflection-quote">"Understanding ANNs provides the foundational knowledge necessary for advanced deep learning techniques, including convolutional neural networks and recurrent neural networks. As businesses increasingly rely on intelligent automation and predictive analytics, proficiency in neural network concepts becomes crucial for developing AI solutions that can adapt, learn, and operate with minimal human intervention in our rapidly evolving technological landscape."</div>
+      </div>
+
     </div>
 
-    <footer>
-        <p>&copy; 2026 Andrea Trevisi. All rights reserved.</p>
-        <div class="contact-info">
-            <a href="mailto:andrea.trevisi@gmail.com">Email</a>
-            <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+    <!-- Sidebar -->
+    <div class="content-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-title">// Unit Navigation</div>
+        <div class="unit-nav">
+          <a href="pgdipAI-unit6.html" class="unit-nav-link">← Unit 6 · Clustering Python</a>
+          <a href="pgdipAI.html" class="unit-nav-link">↑ Course Overview</a>
+          <a href="pgdipAI-unit8.html" class="unit-nav-link next">Unit 8 → <span style="font-size:10px;">Training ANN</span></a>
         </div>
-    </footer>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">// This Unit Covers</div>
+        <ul class="sidebar-list">
+          <li>Biological vs artificial neuron</li>
+          <li>ANN algorithm fundamentals</li>
+          <li>Activation functions</li>
+          <li>ANN design & development</li>
+          <li>Industry 4.0 applications</li>
+          <li>Emerging ANN research</li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">// Module Info</div>
+        <ul class="sidebar-list">
+          <li>Machine Learning · April 2025</li>
+          <li>University of Essex, UK</li>
+          <li>PgDip Artificial Intelligence</li>
+          <li>Unit 7 of 12</li>
+          <li>Status: Completed ✓</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="pgdipAI-unit6.html" class="bottom-nav-btn">← Unit 6: Clustering with Python</a>
+    <a href="pgdipAI-unit8.html" class="bottom-nav-btn next">Next: Unit 8 — Training an Artificial Neural Network →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">© 2026 Andrea Trevisi — All rights reserved</div>
+  <div class="footer-links">
+    <a href="mailto:andrea.trevisi@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 4 + 'px'; cursor.style.top = my - 4 + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx - 16 + 'px'; ring.style.top = ry - 16 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+const canvas = document.getElementById('canvas-bg');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', () => { resize(); initNodes(); });
+function initNodes() {
+  nodes = [];
+  const count = Math.floor((W * H) / 18000);
+  for (let i = 0; i < count; i++) nodes.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, r: Math.random()*2+1 });
+}
+initNodes();
+function drawCanvas() {
+  ctx.clearRect(0,0,W,H);
+  nodes.forEach(n => { n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>W) n.vx*=-1; if(n.y<0||n.y>H) n.vy*=-1; });
+  for (let i=0; i<nodes.length; i++) {
+    for (let j=i+1; j<nodes.length; j++) {
+      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<130) { ctx.beginPath(); ctx.strokeStyle=`rgba(0,212,255,${(1-dist/130)*.18})`; ctx.lineWidth=.5; ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke(); }
+    }
+  }
+  nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fillStyle='rgba(0,212,255,0.5)'; ctx.fill(); });
+  requestAnimationFrame(drawCanvas);
+}
+drawCanvas();
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.content-block, .reflection-block').forEach(el => observer.observe(el));
+document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
+  let timer;
+  const menu = dropdown.querySelector(".nav-dropdown-menu");
+  dropdown.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+});
+</script>
 </body>
 </html>
