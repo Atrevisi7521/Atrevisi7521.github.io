@@ -1,426 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrea Trevisi - AI Diploma: Unit 10</title>
-    <style>
-        /* Simple, clean styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        header {
-            text-align: center;
-            padding: 30px 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 40px;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-        h2 {
-            color: #3498db;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 40px;
-        }
-        h3 {
-            color: #2c3e50;
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
-        h4 {
-            color: #3498db;
-            margin-top: 25px;
-        }
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            border-top: 1px solid #eee;
-            color: #7f8c8d;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        /* Navigation Menu Styling */
-        .navbar {
-            background-color: #2c3e50;
-            overflow: hidden;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        .navbar a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-        
-        /* Dropdown container */
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-        
-        /* Dropdown button */
-        .dropdown .dropbtn {
-            font-size: 17px;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-            cursor: pointer;
-        }
-        
-        /* Add a background color to navbar links on hover */
-        .navbar a:hover, .dropdown:hover .dropbtn {
-            background-color: #3498db;
-        }
-        
-        /* Dropdown content (hidden by default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 0 0 5px 5px;
-        }
-        
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            float: none;
-            color: #333;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        
-        /* Add a background color to dropdown links on hover */
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-        
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        /* Responsive navigation */
-        @media screen and (max-width: 600px) {
-            .navbar a, .dropdown .dropbtn {
-                display: block;
-                width: 100%;
-                text-align: left;
-            }
-            
-            .dropdown-content {
-                position: relative;
-                width: 100%;
-            }
-        }
-
-        /* Current page indicator */
-        .active {
-            background-color: #3498db;
-        }
-        
-        /* Unit Content Styling */
-        .unit-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        
-        .unit-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        
-        .unit-number {
-            background-color: #3498db;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-        
-        .unit-title {
-            font-size: 1.8em;
-            color: #2c3e50;
-            margin: 0;
-        }
-        
-        .completed-badge {
-            background-color: #27ae60;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            margin-left: 15px;
-        }
-        
-        .section-title {
-            color: #3498db;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-        }
-        
-        .key-concept {
-            background-color: #f1f9ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .learning-outcomes {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .learning-outcomes li {
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .learning-outcomes li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-            font-weight: bold;
-        }
-        
-        .resources-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .resources-list li {
-            margin-bottom: 12px;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .resources-list li:before {
-            content: "📚";
-            position: absolute;
-            left: 0;
-        }
-        
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-        
-        .nav-button {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        
-        .nav-button:hover {
-            background-color: #2980b9;
-            text-decoration: none;
-        }
-        
-        .reflection {
-            background-color: #fdf9e8;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 25px;
-            border-left: 4px solid #f1c40f;
-        }
-        
-        .reflection-title {
-            color: #f39c12;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        
-        blockquote {
-            font-style: italic;
-            border-left: 3px solid #3498db;
-            padding-left: 15px;
-            margin-left: 0;
-            color: #555;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Trevisi — Intelligent Agents Unit 10: Deep Learning in Action</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #040a0f; --surface: #0d1825; --border: #1a2f45;
+  --accent: #7b4fff; --accent2: #00d4ff; --accent3: #00ff9d; --accent4: #ffd700;
+  --text: #e8f4f8; --muted: #6a8a9e;
+  --mono: 'Space Mono', monospace; --sans: 'Syne', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; cursor: none; }
+.cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+.cursor-ring { width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease; opacity: 0.5; mix-blend-mode: screen; }
+#canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(123,79,255,0.12); background: rgba(4,10,15,0.85); backdrop-filter: blur(20px); }
+.nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-dropdown { position: relative; }
+.nav-dropdown-btn { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; background: none; border: none; cursor: none; padding: 0; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+.nav-dropdown-btn:hover { color: var(--accent); }
+.nav-dropdown-menu { display: none; position: absolute; top: 20px; left: 0; background: var(--surface); border: 1px solid var(--border); min-width: 240px; z-index: 200; padding-top: 8px; }
+.nav-dropdown-menu a { display: block; padding: 10px 16px; font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; border-bottom: 1px solid var(--border); }
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover, .nav-dropdown-menu a.active { color: var(--accent); background: rgba(123,79,255,0.06); padding-left: 20px; }
+main { position: relative; z-index: 2; }
+.page-header { padding: 140px 48px 60px; max-width: 1200px; margin: 0 auto; }
+.breadcrumb { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb span { color: var(--accent); }
+.page-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.page-label::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+.page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 70px); font-weight: 300; letter-spacing: 0.02em; line-height: 1.15; margin-bottom: 20px; padding-bottom: 8px; }
+.page-title span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+.meta-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(123,79,255,0.25); background: rgba(123,79,255,0.06); font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.08em; }
+.meta-badge-green { border-color: rgba(0,255,157,0.2); background: rgba(0,255,157,0.04); color: var(--accent3); }
+.content-wrap { padding: 0 48px 100px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 280px; gap: 40px; align-items: start; }
+.content-main { display: flex; flex-direction: column; gap: 32px; }
+.content-block { background: var(--surface); border: 1px solid var(--border); padding: 36px; position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+.content-block.visible { opacity: 1; transform: translateY(0); }
+.content-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
+.block-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.block-subtitle { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; }
+.intro-text { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.90); }
+.intro-text + .intro-text { margin-top: 12px; }
+.outcomes-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.outcomes-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; line-height: 1.6; color: rgba(232,244,248,0.90); }
+.outcomes-list li::before { content: '✓'; font-family: var(--mono); font-size: 12px; color: var(--accent3); flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+.discussion-block { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 36px; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+.discussion-block.visible { opacity: 1; transform: translateY(0); }
+.discussion-label { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+.discussion-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+.discussion-text { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.90); margin-bottom: 14px; }
+.ref-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.ref-list li { font-size: 13px; line-height: 1.7; color: rgba(232,244,248,0.85); display: flex; gap: 12px; align-items: flex-start; }
+.ref-list li::before { content: '📚'; flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+.ref-list li span { flex: 1; word-break: break-word; }
+.reflection-block { background: var(--surface); border: 1px solid rgba(255,215,0,0.2); border-left: 3px solid var(--accent4); padding: 36px; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+.reflection-block.visible { opacity: 1; transform: translateY(0); }
+.reflection-label { font-family: var(--mono); font-size: 10px; color: var(--accent4); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+.reflection-text { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.90); font-style: italic; }
+.content-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; }
+.sidebar-card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
+.sidebar-title { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
+.sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.sidebar-list li { font-size: 12px; color: rgba(232,244,248,0.75); display: flex; gap: 8px; line-height: 1.4; }
+.sidebar-list li::before { content: '·'; color: var(--accent); flex-shrink: 0; }
+.unit-nav { display: flex; flex-direction: column; gap: 8px; }
+.unit-nav-link { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; transition: all 0.2s; letter-spacing: 0.05em; }
+.unit-nav-link:hover { border-color: var(--accent); color: var(--accent); padding-left: 18px; }
+.unit-nav-link.next { background: rgba(123,79,255,0.06); border-color: rgba(123,79,255,0.25); color: var(--accent); justify-content: space-between; }
+.unit-nav-link.next:hover { background: rgba(123,79,255,0.12); }
+.bottom-nav { padding: 0 48px 80px; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.bottom-nav-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border: 1px solid var(--border); font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; }
+.bottom-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+.bottom-nav-btn.next { background: rgba(123,79,255,0.06); border-color: rgba(123,79,255,0.25); color: var(--accent); }
+.bottom-nav-btn.next:hover { background: rgba(123,79,255,0.12); }
+footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .page-header { padding: 100px 24px 48px; }
+  .content-wrap { grid-template-columns: 1fr; padding: 0 24px 80px; }
+  .content-sidebar { position: static; }
+  .bottom-nav { padding: 0 24px 60px; }
+  footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
 </head>
 <body>
-    <!-- Navigation Bar with Dropdown -->
-    <div class="navbar">
-        <a href="index.html" class="active">Home</a>
-        <div class="dropdown">
-    <button class="dropbtn">Experience 
-        <i>▼</i>
-    </button>
-    <div class="dropdown-content">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<canvas id="canvas-bg"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">AT // 2026</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Experience ▾</button>
+      <div class="nav-dropdown-menu">
         <a href="workhistory.html">Work History</a>
         <a href="pgdipAI.html">Machine Learning</a>
-        <a href="intelligent-agents.html">Intelligent Agents</a>
-        <a href="knowledge-representation.html">Knowledge Representation and Reasoning</a>
+        <a href="intelligent-agents.html" class="active">Intelligent Agents</a>
+        <a href="knowledge-representation.html">Knowledge Representation</a>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Skills ▾</button>
+      <div class="nav-dropdown-menu">
+        <a href="technical-skills.html">Technical Skills</a>
+        <a href="languages.html">Languages</a>
+      </div>
+    </li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="afterwork.html">After Work</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> ›
+      <a href="intelligent-agents.html">Intelligent Agents</a> ›
+      <span>Unit 10</span>
     </div>
+    <div class="page-label">Intelligent Agents · University of Essex · October 2025</div>
+    <h1 class="page-title">Unit 10: <span>Deep Learning in Action</span></h1>
+    <div class="page-meta">
+      <div class="meta-badge">📅 Week 10</div>
+      <div class="meta-badge">🎓 PgDip AI · Essex</div>
+      <div class="meta-badge meta-badge-green">✓ Completed</div>
     </div>
-        <div class="dropdown">
-            <button class="dropbtn">Skills 
-                <i>▼</i>
-            </button>
-            <div class="dropdown-content">
-                <a href="technical-skills.html">Technical Skills</a>
-                <a href="languages.html">Languages</a>
-            </div>
+  </div>
+
+  <div class="content-wrap">
+    <div class="content-main">
+
+      <!-- Introduction -->
+      <div class="content-block">
+        <div class="block-title"><span>⚡</span> Introduction</div>
+        <p class="intro-text">This week's seminar builds on the previous lecturecast and discusses the applications of Deep Learning in greater depth — focusing on technologies being developed at the cutting edge of research and those already at market.</p>
+      </div>
+
+      <!-- Learning Outcomes -->
+      <div class="content-block">
+        <div class="block-title"><span>🎯</span> This Week We Shall Learn About</div>
+        <ul class="outcomes-list">
+          <li>Emerging applications of deep learning</li>
+          <li>The potential social and ethical issues associated with these technologies</li>
+          <li>The future directions of deep learning technologies</li>
+        </ul>
+        <div class="block-subtitle" style="margin-top: 28px; margin-bottom: 14px;">On Completion of This Week, You Will Be Able To</div>
+        <ul class="outcomes-list">
+          <li>Understand the development of technology and its current limitations</li>
+          <li>Appraise existing products and services based on their socio-economic and ethical impacts</li>
+          <li>Explain the importance of data in delivering these technologies and services</li>
+        </ul>
+      </div>
+
+      <!-- Discussion Reply: Jaco Espag -->
+      <div class="discussion-block">
+        <div class="discussion-label">// Collaborative Discussion 3 · Units 9–11 · Reply</div>
+        <div class="discussion-title">Reply to Jaco Espag</div>
+        <p class="discussion-text">Dear Jaco, thank you for taking the time to read my post and for your engagement with my contribution — your insights have enriched our academic debate considerably.</p>
+        <p class="discussion-text">Your observation about individuals working behind platforms such as Amazon Mechanical Turk brings a valuable perspective to our discussion on labour displacement in digital economies. Santoni de Sio's (2024) critique of the "autonomous" label often attributed to AI systems is pivotal here — these technologies are entirely dependent on human expertise and labour, yet this indispensable contribution remains unseen and insufficiently compensated.</p>
+        <p class="discussion-text">Supporting this view, Gray and Suri (2019) detail the phenomenon of "ghost work," illustrating how the AI economy is maintained by workers who frequently endure unstable conditions, inadequate pay, and psychological hardships — especially in roles like content moderation. This concealed exploitation intensifies the urgency of labour-related concerns in AI development, even more so than I initially proposed.</p>
+        <p class="discussion-text">While issues of bias and misinformation are undoubtedly significant, the immediate repercussions for the "invisible workforce" call for swift regulatory attention. Introducing transparency requirements — for instance, mandating explicit disclosure of human labour involved in AI training and operation — may serve as a constructive starting point for policy discussions.</p>
+        <p class="discussion-text">Do you believe that enhancing transparency and visibility regarding this hidden labour will lead to substantive improvements, or are more robust worker protections necessary regardless?</p>
+        <p class="discussion-text" style="color: var(--accent); font-family: var(--mono); font-size: 12px;">— Andrea</p>
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+          <div class="discussion-label">// References</div>
+          <ul class="ref-list" style="margin-top: 10px;">
+            <li><span>Gray, M.L. & Suri, S. (2019). <em>Ghost Work: How to Stop Silicon Valley from Building a New Global Underclass.</em> 1st edition. Boston: Houghton Mifflin Harcourt. [Accessed 19th October 2025].</span></li>
+            <li><span>Santoni de Sio, F. (2024). Artificial Intelligence and the Future of Work: Mapping the Ethical Issues. <em>The Journal of Ethics,</em> 28(3), 407. [Accessed 19th October 2025].</span></li>
+          </ul>
         </div>
-        <a href="education.html">Education</a>
-        <a href="afterwork.html">After Work</a>
-    </div>
-    
-    <header>
-        <img src="Profile Picture.jpg" alt="Andrea Trevisi" class="profile-image">
-        <h1>Andrea Trevisi</h1>
-        <p>PG Diploma in Artificial Intelligence</p>
-    </header>
+      </div>
 
-    <div class="section">
-        <div class="unit-content">
-            <div class="unit-header">
-                <div class="unit-number">10</div>
-                <h2 class="unit-title">Unit 10: Deep Learning in Action.</h2>
-                <span class="completed-badge">Completed</span>
-            </div>
-            
-            <p>Welcome to Week 10.
-
-            </p>This week’s seminar will build on the previous lecturecast and discusses the applications of Deep Learning in more depth. We will focus on the technologies that are being developed at the cutting edge of research and those that are already at market.</p>
-        
-            <h3 class="section-title">This week we shall learn about:</h3>
-            <ul class="learning-outcomes">
-                <li>Engage with emerging applications of deep learning.</li>
-                <li>Discuss the potential social and ethical issues associated with these technologies.</li>
-                <li>Explore the future directions of these technologies.</li>
-             </ul>
-            <h3 class="section-title">On completion of this week, you will be able to:</h3>
-             <ul class="learning-outcomes">
-                <li>Understand the development of technology and its current limitations.</li>
-                <li>Appraise existing products and services based on their socio-economic and ethical impacts.</li>
-                <li>Explain the importance of data in delivering these technologies and services.</li>
-            </ul>
-
-            <p>University of Essex Online (2025)</p>
-                        
-            <h3 class="section-title">Collaborative Discussion 3: Deep Learning</h3>
-            <p>This discussion will last for 3 weeks, starting in Unit 9 and ending in Unit 11. Ensure you include appropriate citations and references in all your posts.c</p>
-            <h3 class="selection-title">Discussion Topic</h3>
-            <p>The advent of new technologies supported by Deep Learning models mean that it is now possible to generate ‘new’ content, for example, Dall-E AI to generate images or ChatGPT to create prose. Do you think that these new technologies offer any ethical issues that should be considered, and if not, why not?</p>
-                            
-            <h3 class="selection-title"><u>Reply to Jaco Espag</u></h3>    
-            <p>Dear Jaco,</p> 
-            <p>To begin, I want to thank you for your taking the time to read my post and for your engagement with my contribution and for offering insights that have the potential to enrich our ongoing academic debate.</p>
-            <p>Your observation concerning the individuals working behind platforms such as Amazon Mechanical Turk is especially important, as it brings a valuable perspective to our discussion on labour displacement within digital economies.</p>
-            <p>In particular, Santoni de Sio’s (2024) critique of the “autonomous” label often attributed to AI systems is pivotal to our debate. These technologies are entirely dependent on human expertise and labour, yet this indispensable contribution remains unseen and insufficiently compensated. Supporting this view, Gray and Suri (2019) detail the phenomenon of “ghost work,” illustrating how the AI economy is maintained by workers who frequently endure unstable conditions, inadequate pay, and psychological hardships, especially in roles like content moderation.</p>
-            <p>This concealed exploitation intensifies the urgency of labour-related concerns in AI development, even more so than I initially proposed. While issues of bias and misinformation are undoubtedly significant, the immediate repercussions for the “invisible workforce” call for swift regulatory attention. Introducing transparency requirements—for instance, mandating explicit disclosure of human labour involved in AI training and operation—may serve as a constructive point of departure for policy discussions.</p>
-            <p>Given these considerations, I am interested in your perspective: do you believe that enhancing transparency and visibility regarding this hidden labour will lead to substantive improvements, or are more robust protections for workers necessary regardless? I look forward to your thoughts as we continue this debate.</p>            <p>Thanks,</p>
-            <p>Andrea</p>
-            <p><b>References:</b></p>
-            <p><b>Gray, M. L. & Suri, S. </b> (2019)<i> Ghost work : how to stop Silicon Valley from building a new global underclass.</i> 1st edition. Boston: Houghton Mifflin Harcourt. Available from: https://learning.oreilly.com/videos/ghost-work/9781684419869/ [Accessed 19th October 2025].</p>
-            <p><b>Santoni de Sio, F. </b>(2024) ‘Artificial Intelligence and the Future of Work: Mapping the Ethical Issues’ <i> The journal of ethics</i> [Online] 28(3), 407. Available from: https://link-springer-com.uniessexlib.idm.oclc.org/article/10.1007/s10892-024-09493-6 [Accessed 19th October 2025].</p>             
-
-            <h3 class="selection-title"><u>Reply to Fabian Narel</u></h3>    
-            <p>Dear Fabian,</p> 
-            <p>Thank you for your post, which provides a thoughtful overview of the ethical challenges surrounding generative AI.</p>
-            <p>I appreciated your focus on transparency and accountability, two issues that are increasingly important in discussions about AI governance.</p>
-            <p>Your reference to the EU AI Act is timely, the move towards greater transparency in general-purpose AI models represents a substantial regulatory development. Of course, implementation will be complex, as Veale and Zuiderveen Borgesius (2021) point out. The idea of mandatory documentation for training data is aligned with best practices, although it raises significant questions, especially regarding how to document billions of data points while keeping the process both transparent and computationally feasible.</p>
-            <p>The “Stochastic Parrots” paper that you referenced is foundational to this field. I would also add that bias can arise not only from training data, but also from design choices and deployment contexts (Abebe et al., 2020). Human oversight is crucial, but there is a risk of automation bias, where humans may over-rely on AI suggestions without sufficient scrutiny.</p>
-            <p>One point I would like to discuss further is the challenge of deepfakes and misinformation. How do we verify the authenticity of content online while safeguarding privacy rights and freedom of expression? This tension is significant, particularly within the context of the transparency requirements you highlighted.</p>
-            <p>Do you think the EU’s regulatory approach could set a global standard, or will regional differences in AI governance lead to fragmentation?</p>
-            <p>Thanks,</p>
-            <p>Andrea.</p>            
-            <p><b>References:</b></p>
-            <p><b>Abete, R., Barocas, S., Kleinberg, J., Levy, K., Raghavan, M. & Robinson, D.G. </b> (2020) ‘Roles for Computing in Social Change’<i> arXiv.org.</i> Available from: https://dl.acm.org/doi/10.1145/3351095.3372871 [Accessed 19th October 2025].</p>
-            <p><b>Veale, M. & Zuiderveen Borgesius, F. </b> (2021) ) ‘Demystifying the Draft EU Artificial Intelligence Act — Analysing the good, the bad, and the unclear elements of the proposed approach’<i> Computer law review international.</i> 22(4), p.97-112. Available from: https://www-degruyterbrill-com.uniessexlib.idm.oclc.org/document/doi/10.9785/cri-2021-220402/html [Accessed 19th October 2025].</p>          
-            
-            <h3 class="section-title">Key Readings, Resources and References.</h3>
-            <ul class="resources-list">
-                <li>World Economic Forum (2022)<i> How Deep Learning can improve productivity and boost business.</i></li>
-                <li>University Of Essex Online (2025)<i> Unit 10: Deep Learning in Action.</i> Available from: https://www.my-course.co.uk/course/view.php?id=13791&section=17 [Accessed October 2025].</li>
-            </ul>
-            
-            <div class="reflection">
-                <h4 class="reflection-title">Personal Reflection</h4>
-                <p>To be added.</p>
-                <blockquote>To be added</blockquote>
-            </div>
-            
-            <div class="navigation-buttons">
-                <a href="intelligent-agents.html" class="nav-button">Back to Course Overview</a>
-                <a href="intelligent-agents-Unit11.html" class="nav-button">Next: Unit 11: Intelligent Agents in Action</a>
-            </div>
+      <!-- Discussion Reply: Fabian Narel -->
+      <div class="discussion-block">
+        <div class="discussion-label">// Collaborative Discussion 3 · Units 9–11 · Reply</div>
+        <div class="discussion-title">Reply to Fabian Narel</div>
+        <p class="discussion-text">Dear Fabian, thank you for your post — a thoughtful overview of the ethical challenges surrounding generative AI. I particularly appreciated your focus on transparency and accountability, two issues increasingly central to AI governance discussions.</p>
+        <p class="discussion-text">Your reference to the EU AI Act is timely. The move towards greater transparency in general-purpose AI models represents a substantial regulatory development — though as Veale and Zuiderveen Borgesius (2021) point out, implementation will be complex. Mandatory documentation for training data aligns with best practices, yet raises significant questions about how to document billions of data points while keeping the process both transparent and computationally feasible.</p>
+        <p class="discussion-text">The "Stochastic Parrots" paper you referenced is foundational to this field. I would add that bias can arise not only from training data, but also from design choices and deployment contexts (Abebe et al., 2020). Human oversight is crucial — but there is a real risk of automation bias, where humans over-rely on AI suggestions without sufficient scrutiny.</p>
+        <p class="discussion-text">One point I would like to explore further: how do we verify the authenticity of content online while safeguarding privacy rights and freedom of expression? This tension is significant, particularly within the transparency requirements you highlighted. Do you think the EU's regulatory approach could set a global standard, or will regional differences in AI governance lead to fragmentation?</p>
+        <p class="discussion-text" style="color: var(--accent); font-family: var(--mono); font-size: 12px;">— Andrea</p>
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+          <div class="discussion-label">// References</div>
+          <ul class="ref-list" style="margin-top: 10px;">
+            <li><span>Abebe, R., Barocas, S., Kleinberg, J., Levy, K., Raghavan, M. & Robinson, D.G. (2020). Roles for Computing in Social Change. <em>arXiv.org.</em> Available from: https://dl.acm.org [Accessed 19th October 2025].</span></li>
+            <li><span>Veale, M. & Zuiderveen Borgesius, F. (2021). Demystifying the Draft EU Artificial Intelligence Act. <em>Computer Law Review International,</em> 22(4), pp. 97–112. [Accessed 19th October 2025].</span></li>
+          </ul>
         </div>
+      </div>
+
+      <!-- References -->
+      <div class="content-block">
+        <div class="block-title"><span>📚</span> Key Readings & References</div>
+        <ul class="ref-list">
+          <li><span>World Economic Forum (2022). <em>How Deep Learning Can Improve Productivity and Boost Business.</em></span></li>
+          <li><span>University of Essex Online (2025). <em>Unit 10: Deep Learning in Action.</em> Available from: https://www.my-course.co.uk [Accessed October 2025].</span></li>
+        </ul>
+      </div>
+
+      <!-- Personal Reflection -->
+      <div class="reflection-block">
+        <div class="reflection-label">// Personal Reflection</div>
+        <p class="reflection-text">To be added.</p>
+      </div>
+
     </div>
 
-    <footer>
-        <p>&copy; 2026 Andrea Trevisi. All rights reserved.</p>
-        <div class="contact-info">
-            <a href="mailto:andrea.trevisi@gmail.com">Email</a>
-            <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+    <!-- Sidebar -->
+    <div class="content-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-title">// Unit Navigation</div>
+        <div class="unit-nav">
+          <a href="intelligent-agents-Unit9.html" class="unit-nav-link">← Unit 9 · Adaptive Algorithms</a>
+          <a href="intelligent-agents.html" class="unit-nav-link">↑ Course Overview</a>
+          <a href="intelligent-agents-Unit11.html" class="unit-nav-link next">Unit 11 → <span style="font-size:10px;">Agents in Action</span></a>
         </div>
-    </footer>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">// This Unit Covers</div>
+        <ul class="sidebar-list">
+          <li>Deep learning applications</li>
+          <li>Socio-economic impacts</li>
+          <li>Ghost work & invisible labour</li>
+          <li>EU AI Act & transparency</li>
+          <li>Automation bias risks</li>
+          <li>Deepfakes & misinformation</li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">// Module Info</div>
+        <ul class="sidebar-list">
+          <li>Intelligent Agents · 2025</li>
+          <li>University of Essex, UK</li>
+          <li>PgDip Artificial Intelligence</li>
+          <li>Unit 10 of 12</li>
+          <li>Status: Completed ✓</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="intelligent-agents-Unit9.html" class="bottom-nav-btn">← Unit 9: Introduction to Adaptive Algorithms</a>
+    <a href="intelligent-agents-Unit11.html" class="bottom-nav-btn next">Next: Unit 11 — Intelligent Agents in Action →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">© 2026 Andrea Trevisi — All rights reserved</div>
+  <div class="footer-links">
+    <a href="mailto:andrea.trevisi@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 4 + 'px'; cursor.style.top = my - 4 + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx - 16 + 'px'; ring.style.top = ry - 16 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+const canvas = document.getElementById('canvas-bg');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', () => { resize(); initNodes(); });
+function initNodes() {
+  nodes = [];
+  const count = Math.floor((W * H) / 18000);
+  for (let i = 0; i < count; i++) nodes.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, r: Math.random()*2+1 });
+}
+initNodes();
+function drawCanvas() {
+  ctx.clearRect(0,0,W,H);
+  nodes.forEach(n => { n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>W) n.vx*=-1; if(n.y<0||n.y>H) n.vy*=-1; });
+  for (let i=0; i<nodes.length; i++) {
+    for (let j=i+1; j<nodes.length; j++) {
+      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<130) { ctx.beginPath(); ctx.strokeStyle=`rgba(123,79,255,${(1-dist/130)*.2})`; ctx.lineWidth=.5; ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke(); }
+    }
+  }
+  nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fillStyle='rgba(123,79,255,0.5)'; ctx.fill(); });
+  requestAnimationFrame(drawCanvas);
+}
+drawCanvas();
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.content-block, .discussion-block, .reflection-block').forEach(el => observer.observe(el));
+document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
+  let timer;
+  const menu = dropdown.querySelector(".nav-dropdown-menu");
+  dropdown.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+});
+</script>
 </body>
 </html>
