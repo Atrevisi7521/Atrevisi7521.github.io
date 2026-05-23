@@ -19,15 +19,12 @@
   --mono: 'Space Mono', monospace;
   --sans: 'Syne', sans-serif;
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; cursor: none; }
-
 .cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
 .cursor-ring { width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease; opacity: 0.5; mix-blend-mode: screen; }
 #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; }
-
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,212,255,0.08); background: rgba(4,10,15,0.85); backdrop-filter: blur(20px); }
 .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; }
 .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
@@ -42,80 +39,48 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 48
 .nav-dropdown-menu a { display: block; padding: 10px 16px; font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; border-bottom: 1px solid var(--border); }
 .nav-dropdown-menu a:last-child { border-bottom: none; }
 .nav-dropdown-menu a:hover, .nav-dropdown-menu a.active { color: var(--accent); background: rgba(0,212,255,0.04); padding-left: 20px; }
-
 main { position: relative; z-index: 2; }
-
-/* Page header */
 .page-header { padding: 140px 48px 80px; max-width: 1200px; margin: 0 auto; }
 .page-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
 .page-label::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
 .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 6vw, 80px); font-weight: 300; letter-spacing: 0.02em; line-height: 1.0; margin-bottom: 16px; }
 .page-title span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .page-subtitle { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.05em; }
-
-/* Education cards */
 .edu-wrap { padding: 0 48px 100px; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
-
-.edu-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 40px;
-  position: relative;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: all 0.6s ease;
-}
+.edu-card { background: var(--surface); border: 1px solid var(--border); padding: 40px; position: relative; overflow: hidden; opacity: 0; transform: translateY(24px); transition: all 0.6s ease; }
 .edu-card.visible { opacity: 1; transform: translateY(0); }
 .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; transition: opacity 0.3s; }
 .edu-card:hover { border-color: rgba(0,212,255,0.25); }
-
-/* Each card has its own accent colour */
 .edu-card.ai::before { background: linear-gradient(90deg, var(--accent2), var(--accent)); opacity: 1; }
 .edu-card.ai { border-left: 3px solid var(--accent2); }
 .edu-card.ba::before { background: linear-gradient(90deg, var(--accent), transparent); opacity: 1; }
 .edu-card.ba { border-left: 3px solid var(--accent); }
 .edu-card.hs::before { background: linear-gradient(90deg, var(--accent4), transparent); opacity: 1; }
 .edu-card.hs { border-left: 3px solid var(--accent4); }
-
 .edu-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
 .edu-degree { font-size: 22px; font-weight: 700; line-height: 1.2; flex: 1; }
 .edu-badge { font-family: var(--mono); font-size: 10px; padding: 5px 12px; border-radius: 0; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
 .badge-completed { border: 1px solid rgba(0,212,255,0.3); color: var(--accent); background: rgba(0,212,255,0.06); }
 .badge-ai { border: 1px solid rgba(123,79,255,0.3); color: var(--accent2); background: rgba(123,79,255,0.06); }
 .badge-classic { border: 1px solid rgba(255,215,0,0.3); color: var(--accent4); background: rgba(255,215,0,0.06); }
-
 .edu-institution { font-family: var(--mono); font-size: 12px; margin-bottom: 4px; letter-spacing: 0.05em; }
 .edu-institution a { text-decoration: none; transition: color 0.2s; }
 .edu-institution a:hover { color: var(--accent); }
 .edu-period { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 24px; letter-spacing: 0.05em; }
-
 .edu-desc { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.88); }
 .edu-desc + .edu-desc { margin-top: 12px; }
-
-/* Thesis highlight */
-.thesis-box { margin-top: 20px; padding: 20px 24px; background: rgba(0,212,255,0.04); border: 1px solid rgba(0,212,255,0.15); border-left: 3px solid var(--accent); }
-.thesis-label { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
-.thesis-title { font-size: 13px; line-height: 1.7; color: rgba(232,244,248,0.75); font-style: italic; }
-
-/* Highlights list */
 .edu-highlights { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
 .edu-highlights li { font-size: 13px; color: rgba(232,244,248,0.88); display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
 .edu-highlights li::before { content: '→'; font-family: var(--mono); font-size: 11px; color: var(--accent4); flex-shrink: 0; margin-top: 1px; }
-
-/* Watermark */
 .edu-card::after { position: absolute; right: 24px; bottom: -10px; font-size: 100px; font-weight: 800; pointer-events: none; opacity: 0.025; line-height: 1; }
 .edu-card.ai::after { content: 'AI'; color: var(--accent2); }
 .edu-card.ba::after { content: 'BA'; color: var(--accent); }
 .edu-card.hs::after { content: 'LC'; color: var(--accent4); }
-
-/* Footer */
 footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
 .footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); }
 .footer-links { display: flex; gap: 24px; }
 .footer-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
-
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
   .page-header { padding: 100px 24px 60px; }
@@ -126,11 +91,9 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
 </style>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
 <canvas id="canvas-bg"></canvas>
-
 <nav>
   <a href="index.html" class="nav-logo">AT // 2026</a>
   <ul class="nav-links">
@@ -155,16 +118,13 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
     <li><a href="afterwork.html">After Work</a></li>
   </ul>
 </nav>
-
 <main>
   <div class="page-header">
     <div class="page-label">Academic journey</div>
     <h1 class="page-title">Edu<span>cation</span></h1>
     <p class="page-subtitle">// Humanities · Business · Artificial Intelligence · Continuous learning</p>
   </div>
-
   <div class="edu-wrap">
-
     <!-- PgDip AI -->
     <div class="edu-card ai">
       <div class="edu-header">
@@ -184,8 +144,7 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
         <li>Research Project — multi-agent systems applied to enterprise contexts</li>
       </ul>
     </div>
-
-    <!-- BA Hons -->
+    <!-- BA Hons — thesis box removed -->
     <div class="edu-card ba">
       <div class="edu-header">
         <div class="edu-degree">Bachelor's Degree with Honours (B Hons) — International Business & Marketing</div>
@@ -197,12 +156,7 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
       </div>
       <div class="edu-period">Colchester, United Kingdom · Completed with Honours</div>
       <p class="edu-desc">Earned my Bachelor's degree with honours, specialising in International Business and Marketing. The programme provided a strong foundation in global business strategy, cross-cultural management, and marketing theory — directly applicable to my subsequent career across APAC and EMEA markets.</p>
-      <div class="thesis-box">
-        <div class="thesis-label">// Honours Thesis</div>
-        <div class="thesis-title">"How the drastic decrease of business trips during the Covid-19 Era impacted global businesses and their employees. Threat or opportunity for worldwide firms?"</div>
-      </div>
     </div>
-
     <!-- Liceo Classico -->
     <div class="edu-card hs">
       <div class="edu-header">
@@ -222,10 +176,8 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
         <li>Philosophy, History, and Classical Culture</li>
       </ul>
     </div>
-
   </div>
 </main>
-
 <footer>
   <div class="footer-copy">© 2026 Andrea Trevisi — All rights reserved</div>
   <div class="footer-links">
@@ -233,9 +185,7 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
     <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
   </div>
 </footer>
-
 <script>
-// Cursor
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -249,8 +199,6 @@ function animRing() {
   requestAnimationFrame(animRing);
 }
 animRing();
-
-// Neural network canvas
 const canvas = document.getElementById('canvas-bg');
 const ctx = canvas.getContext('2d');
 let W, H, nodes = [];
@@ -276,14 +224,10 @@ function drawCanvas() {
   requestAnimationFrame(drawCanvas);
 }
 drawCanvas();
-
-// Scroll animations
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.edu-card').forEach(el => observer.observe(el));
-
-// Robust dropdown fix
 document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
   let timer;
   const menu = dropdown.querySelector(".nav-dropdown-menu");
