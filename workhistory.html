@@ -114,7 +114,7 @@ main { position: relative; z-index: 2; }
 .exp-company span { color: var(--accent2); }
 
 .exp-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.exp-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.6; color: rgba(232,244,248,0.7); }
+.exp-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.6; color: rgba(232,244,248,0.90); }
 .exp-list li::before { content: '→'; font-family: var(--mono); font-size: 12px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
 
 .exp-tag { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 8px 14px; background: rgba(123,79,255,0.06); border: 1px solid rgba(123,79,255,0.2); font-family: var(--mono); font-size: 11px; color: var(--accent2); }
@@ -139,7 +139,7 @@ main { position: relative; z-index: 2; }
 }
 .cv-card::after { content: 'CV'; position: absolute; right: 40px; top: -20px; font-size: 120px; font-weight: 800; color: rgba(0,212,255,0.03); pointer-events: none; }
 .cv-title { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
-.cv-desc { font-size: 14px; color: rgba(232,244,248,0.6); line-height: 1.6; max-width: 500px; }
+.cv-desc { font-size: 14px; color: rgba(232,244,248,0.85); line-height: 1.6; max-width: 500px; }
 .cv-btn {
   display: inline-flex;
   align-items: center;
@@ -179,6 +179,14 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
   footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
 }
 </style>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T4DGTNMMCL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T4DGTNMMCL');
+    </script>
 </head>
 <body>
 
