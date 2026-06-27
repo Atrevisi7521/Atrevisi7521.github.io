@@ -51,8 +51,8 @@ main { position: relative; z-index: 2; }
 .edu-card.visible { opacity: 1; transform: translateY(0); }
 .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; transition: opacity 0.3s; }
 .edu-card:hover { border-color: rgba(0,212,255,0.25); }
-.edu-card.ai::before { background: linear-gradient(90deg, var(--accent2), var(--accent)); opacity: 1; }
-.edu-card.ai { border-left: 3px solid var(--accent2); }
+.edu-card.ai::before { background: linear-gradient(90deg, var(--accent4), var(--accent)); opacity: 1; }
+.edu-card.ai { border-left: 3px solid var(--accent4); }
 .edu-card.ba::before { background: linear-gradient(90deg, var(--accent), transparent); opacity: 1; }
 .edu-card.ba { border-left: 3px solid var(--accent); }
 .edu-card.hs::before { background: linear-gradient(90deg, var(--accent4), transparent); opacity: 1; }
@@ -61,7 +61,7 @@ main { position: relative; z-index: 2; }
 .edu-degree { font-size: 22px; font-weight: 700; line-height: 1.2; flex: 1; }
 .edu-badge { font-family: var(--mono); font-size: 10px; padding: 5px 12px; border-radius: 0; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
 .badge-completed { border: 1px solid rgba(0,212,255,0.3); color: var(--accent); background: rgba(0,212,255,0.06); }
-.badge-ai { border: 1px solid rgba(123,79,255,0.3); color: var(--accent2); background: rgba(123,79,255,0.06); }
+.badge-ai { border: 1px solid rgba(255,215,0,0.3); color: var(--accent4); background: rgba(255,215,0,0.06); }
 .badge-classic { border: 1px solid rgba(255,215,0,0.3); color: var(--accent4); background: rgba(255,215,0,0.06); }
 .edu-institution { font-family: var(--mono); font-size: 12px; margin-bottom: 4px; letter-spacing: 0.05em; }
 .edu-institution a { text-decoration: none; transition: color 0.2s; }
@@ -73,7 +73,7 @@ main { position: relative; z-index: 2; }
 .edu-highlights li { font-size: 13px; color: rgba(232,244,248,0.88); display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
 .edu-highlights li::before { content: '→'; font-family: var(--mono); font-size: 11px; color: var(--accent4); flex-shrink: 0; margin-top: 1px; }
 .edu-card::after { position: absolute; right: 24px; bottom: -10px; font-size: 100px; font-weight: 800; pointer-events: none; opacity: 0.025; line-height: 1; }
-.edu-card.ai::after { content: 'AI'; color: var(--accent2); }
+.edu-card.ai::after { content: 'AI'; color: var(--accent4); }
 .edu-card.ba::after { content: 'BA'; color: var(--accent); }
 .edu-card.hs::after { content: 'LC'; color: var(--accent4); }
 footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
@@ -139,9 +139,9 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
         <div class="edu-degree">Postgraduate Diploma in Artificial Intelligence</div>
         <div class="edu-badge badge-ai">✓ Completed May 2026</div>
       </div>
-      <div class="edu-institution" style="color: var(--accent2);">
+      <div class="edu-institution" style="color: var(--accent4);">
         University of Essex
-        <a href="https://www.essex.ac.uk/" target="_blank" style="color: var(--accent2);">↗</a>
+        <a href="https://www.essex.ac.uk/" target="_blank" style="color: var(--accent4);">↗</a>
       </div>
       <div class="edu-period">2024 — May 2026</div>
       <p class="edu-desc">Advanced studies in Artificial Intelligence with a focus on Machine Learning applications, Intelligent Agent systems, and Knowledge Representation & Reasoning. This programme builds upon my business expertise by adding cutting-edge technological knowledge relevant to today's data-driven business environment.</p>
