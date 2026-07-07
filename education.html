@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrea Trevisi — After Work</title>
+<title>Andrea Trevisi — Education</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -38,35 +38,44 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 48
 .nav-dropdown-menu { display: none; position: absolute; top: 20px; left: 0; background: var(--surface); border: 1px solid var(--border); min-width: 240px; z-index: 200; padding-top: 8px; }
 .nav-dropdown-menu a { display: block; padding: 10px 16px; font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; border-bottom: 1px solid var(--border); }
 .nav-dropdown-menu a:last-child { border-bottom: none; }
-.nav-dropdown-menu a:hover { color: var(--accent); background: rgba(0,212,255,0.04); padding-left: 20px; }
+.nav-dropdown-menu a:hover, .nav-dropdown-menu a.active { color: var(--accent); background: rgba(0,212,255,0.04); padding-left: 20px; }
 main { position: relative; z-index: 2; }
 .page-header { padding: 140px 48px 80px; max-width: 1200px; margin: 0 auto; }
 .page-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
 .page-label::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
 .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 6vw, 80px); font-weight: 300; letter-spacing: 0.02em; line-height: 1.0; margin-bottom: 16px; }
 .page-title span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.page-subtitle { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 0; }
-.activities-wrap { padding: 0 48px 100px; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
-.activity-card { background: var(--surface); border: 1px solid var(--border); overflow: hidden; position: relative; opacity: 0; transform: translateY(28px); transition: all 0.7s ease; display: grid; grid-template-columns: 380px 1fr; min-height: 320px; }
-.activity-card.visible { opacity: 1; transform: translateY(0); }
-.activity-card:hover { border-color: rgba(0,212,255,0.2); }
-.activity-card:nth-child(even) { grid-template-columns: 1fr 380px; }
-.activity-card:nth-child(even) .activity-img-wrap { order: 2; }
-.activity-card:nth-child(even) .activity-content { order: 1; }
-.activity-img-wrap { position: relative; overflow: hidden; min-height: 320px; }
-.activity-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; filter: brightness(0.85) saturate(0.9); }
-.activity-card:hover .activity-img-wrap img { transform: scale(1.04); filter: brightness(0.95) saturate(1); }
-.activity-img-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--surface) 100%); pointer-events: none; }
-.activity-card:nth-child(even) .activity-img-wrap::after { background: linear-gradient(270deg, transparent 60%, var(--surface) 100%); }
-.activity-content { padding: 40px; display: flex; flex-direction: column; justify-content: center; position: relative; }
-.activity-content::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent2), transparent); opacity: 0; transition: opacity 0.3s; }
-.activity-card:hover .activity-content::before { opacity: 1; }
-.activity-card:nth-child(even) .activity-content::before { left: auto; right: 0; }
-.activity-number { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.2em; margin-bottom: 12px; }
-.activity-title { font-size: 26px; font-weight: 700; margin-bottom: 16px; line-height: 1.2; }
-.activity-desc { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.88); margin-bottom: 12px; }
-.skills-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-.skill-tag { font-family: var(--mono); font-size: 10px; color: var(--accent3); padding: 4px 10px; border: 1px solid rgba(0,255,157,0.2); background: rgba(0,255,157,0.04); letter-spacing: 0.08em; text-transform: uppercase; }
+.page-subtitle { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.05em; }
+.edu-wrap { padding: 0 48px 100px; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+.edu-card { background: var(--surface); border: 1px solid var(--border); padding: 40px; position: relative; overflow: hidden; opacity: 0; transform: translateY(24px); transition: all 0.6s ease; }
+.edu-card.visible { opacity: 1; transform: translateY(0); }
+.edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; transition: opacity 0.3s; }
+.edu-card:hover { border-color: rgba(0,212,255,0.25); }
+.edu-card.ai::before { background: linear-gradient(90deg, var(--accent4), var(--accent)); opacity: 1; }
+.edu-card.ai { border-left: 3px solid var(--accent4); }
+.edu-card.ba::before { background: linear-gradient(90deg, var(--accent), transparent); opacity: 1; }
+.edu-card.ba { border-left: 3px solid var(--accent); }
+.edu-card.hs::before { background: linear-gradient(90deg, var(--accent4), transparent); opacity: 1; }
+.edu-card.hs { border-left: 3px solid var(--accent4); }
+.edu-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+.edu-degree { font-size: 22px; font-weight: 700; line-height: 1.2; flex: 1; }
+.edu-badge { font-family: var(--mono); font-size: 10px; padding: 5px 12px; border-radius: 0; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
+.badge-completed { border: 1px solid rgba(0,212,255,0.3); color: var(--accent); background: rgba(0,212,255,0.06); }
+.badge-ai { border: 1px solid rgba(255,215,0,0.3); color: var(--accent4); background: rgba(255,215,0,0.06); }
+.badge-classic { border: 1px solid rgba(255,215,0,0.3); color: var(--accent4); background: rgba(255,215,0,0.06); }
+.edu-institution { font-family: var(--mono); font-size: 12px; margin-bottom: 4px; letter-spacing: 0.05em; }
+.edu-institution a { text-decoration: none; transition: color 0.2s; }
+.edu-institution a:hover { color: var(--accent); }
+.edu-period { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 24px; letter-spacing: 0.05em; }
+.edu-desc { font-size: 15px; line-height: 1.8; color: rgba(232,244,248,0.88); }
+.edu-desc + .edu-desc { margin-top: 12px; }
+.edu-highlights { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.edu-highlights li { font-size: 13px; color: rgba(232,244,248,0.88); display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+.edu-highlights li::before { content: '→'; font-family: var(--mono); font-size: 11px; color: var(--accent4); flex-shrink: 0; margin-top: 1px; }
+.edu-card::after { position: absolute; right: 24px; bottom: -10px; font-size: 100px; font-weight: 800; pointer-events: none; opacity: 0.025; line-height: 1; }
+.edu-card.ai::after { content: 'AI'; color: var(--accent4); }
+.edu-card.ba::after { content: 'BA'; color: var(--accent); }
+.edu-card.hs::after { content: 'LC'; color: var(--accent4); }
 footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
 .footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); }
 .footer-links { display: flex; gap: 24px; }
@@ -75,13 +84,8 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
   .page-header { padding: 100px 24px 60px; }
-  .activities-wrap { padding: 0 24px 80px; }
-  .activity-card, .activity-card:nth-child(even) { grid-template-columns: 1fr; }
-  .activity-card:nth-child(even) .activity-img-wrap { order: 1; }
-  .activity-card:nth-child(even) .activity-content { order: 2; }
-  .activity-img-wrap { min-height: 240px; }
-  .activity-img-wrap::after, .activity-card:nth-child(even) .activity-img-wrap::after { background: linear-gradient(180deg, transparent 60%, var(--surface) 100%); }
-  .activity-content { padding: 28px 24px; }
+  .edu-wrap { padding: 0 24px 80px; }
+  .edu-card { padding: 28px 24px; }
   footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
 }
 </style>
@@ -95,11 +99,9 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
     </script>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
 <canvas id="canvas-bg"></canvas>
-
 <nav>
   <a href="index.html" class="nav-logo">AT // 2026</a>
   <ul class="nav-links">
@@ -120,162 +122,70 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
         <a href="languages.html">Languages</a>
       </div>
     </li>
-    <li><a href="education.html">Education</a></li>
-    <li><a href="afterwork.html" class="active">After Work</a></li>
+    <li><a href="education.html" class="active">Education</a></li>
+    <li><a href="afterwork.html">After Work</a></li>
   </ul>
 </nav>
-
 <main>
   <div class="page-header">
-    <div class="page-label">Life beyond work</div>
-    <h1 class="page-title">After <span>Work</span></h1>
-    <p class="page-subtitle">// Dragon Boat · Brazilian Jiu Jitsu · Boxing · Volunteering · Travel · Music & Books</p>
+    <div class="page-label">Academic journey</div>
+    <h1 class="page-title">Edu<span>cation</span></h1>
+    <p class="page-subtitle">// Humanities · Business · Artificial Intelligence · Continuous learning</p>
   </div>
-
-  <div class="activities-wrap">
-
-    <!-- Dragon Boat -->
-    <div class="activity-card">
-      <div class="activity-img-wrap">
-        <img src="Latin_Dragons.jpg" alt="Dragon Boat Racing with Latin Dragons">
+  <div class="edu-wrap">
+    <!-- PgDip AI -->
+    <div class="edu-card ai">
+      <div class="edu-header">
+        <div class="edu-degree">Postgraduate Diploma in Artificial Intelligence</div>
+        <div class="edu-badge badge-ai">✓ Completed May 2026</div>
       </div>
-      <div class="activity-content">
-        <div class="activity-number">// 01</div>
-        <div class="activity-title">Dragon Boat Racing</div>
-        <p class="activity-desc">Proud member of the Dragon Boat team "Latin Dragons" in Singapore. We compete both nationally and internationally, representing Singapore in various competitions across Asia.</p>
-        <p class="activity-desc">Dragon boat racing demands perfect synchronization among all team members. Every stroke must be in unison for maximum efficiency — a powerful metaphor for high-performing teams.</p>
-        <div class="skills-wrap">
-          <span class="skill-tag">Teamwork</span>
-          <span class="skill-tag">Coordination</span>
-          <span class="skill-tag">Mental strength</span>
-          <span class="skill-tag">Timing</span>
-          <span class="skill-tag">Compromise</span>
-        </div>
+      <div class="edu-institution" style="color: var(--accent4);">
+        University of Essex
+        <a href="https://www.essex.ac.uk/" target="_blank" style="color: var(--accent4);">↗</a>
       </div>
+      <div class="edu-period">2024 — May 2026</div>
+      <p class="edu-desc">Advanced studies in Artificial Intelligence with a focus on Machine Learning applications, Intelligent Agent systems, and Knowledge Representation & Reasoning. This programme builds upon my business expertise by adding cutting-edge technological knowledge relevant to today's data-driven business environment.</p>
+      <ul class="edu-highlights" style="margin-top: 16px;">
+        <li style="--bullet: var(--accent2);">Machine Learning — algorithms, neural networks, Scikit-Learn, Python</li>
+        <li>Intelligent Agents — architectures, KQML/KIF, NLP, deep learning</li>
+        <li>Knowledge Representation & Reasoning — ontologies, Protégé, logic programming</li>
+        <li>Research Project — multi-agent systems applied to enterprise contexts</li>
+      </ul>
     </div>
-
-    <!-- BJJ -->
-    <div class="activity-card">
-      <div class="activity-img-wrap">
-        <img src="Jiu_Jitsu.jpg" alt="Brazilian Jiu Jitsu Certificate">
+    <!-- BA Hons — thesis box removed -->
+    <div class="edu-card ba">
+      <div class="edu-header">
+        <div class="edu-degree">Bachelor's Degree with Honours (B Hons) — International Business & Marketing</div>
+        <div class="edu-badge badge-completed">Completed</div>
       </div>
-      <div class="activity-content">
-        <div class="activity-number">// 02</div>
-        <div class="activity-title">Brazilian Jiu Jitsu</div>
-        <p class="activity-desc">Combatives Belt holder under the prestigious Gracie Academy. BJJ is often called "human chess" — it requires constant strategic thinking and anticipation of your opponent's next move.</p>
-        <p class="activity-desc">Training regularly has taught me to remain calm under pressure and find solutions even when in disadvantageous positions — directly applicable to high-stakes negotiations.</p>
-        <div class="skills-wrap">
-          <span class="skill-tag">Emotional control</span>
-          <span class="skill-tag">Calm under pressure</span>
-          <span class="skill-tag">Strategic thinking</span>
-          <span class="skill-tag">Resilience</span>
-        </div>
+      <div class="edu-institution" style="color: var(--accent);">
+        University of Essex
+        <a href="https://www.essex.ac.uk/" target="_blank" style="color: var(--accent);">↗</a>
       </div>
+      <div class="edu-period">Colchester, United Kingdom · Completed with Honours</div>
+      <p class="edu-desc">Earned my Bachelor's degree with honours, specialising in International Business and Marketing. The programme provided a strong foundation in global business strategy, cross-cultural management, and marketing theory — directly applicable to my subsequent career across APAC and EMEA markets.</p>
     </div>
-
-    <!-- Boxing -->
-    <div class="activity-card">
-      <div class="activity-img-wrap">
-        <img src="Boxing.jpeg" alt="Boxing Training">
+    <!-- Liceo Classico -->
+    <div class="edu-card hs">
+      <div class="edu-header">
+        <div class="edu-degree">High School Diploma — Liceo Classico</div>
+        <div class="edu-badge badge-classic">Classical Studies</div>
       </div>
-      <div class="activity-content">
-        <div class="activity-number">// 03</div>
-        <div class="activity-title">Boxing</div>
-        <p class="activity-desc">Training as a boxer at "FX Boxing Club" in Singapore. Boxing is one of the most demanding sports physically and mentally — requiring discipline, focus, and perseverance in equal measure.</p>
-        <p class="activity-desc">The training pushes me beyond perceived limits and teaches me to maintain precision and technique even when completely fatigued.</p>
-        <div class="skills-wrap">
-          <span class="skill-tag">Resilience</span>
-          <span class="skill-tag">Precision</span>
-          <span class="skill-tag">Discipline</span>
-          <span class="skill-tag">Perseverance</span>
-        </div>
+      <div class="edu-institution" style="color: var(--accent4);">
+        Collegio Arcivescovile Ballerini
+        <a href="https://www.collegioballerini.it/" target="_blank" style="color: var(--accent4);">↗</a>
       </div>
+      <div class="edu-period">Seregno, Milan · Italy</div>
+      <p class="edu-desc">Graduated from the prestigious Liceo Classico programme — a rigorous classical education renowned for developing critical thinking, textual analysis, and communication skills. This foundation in humanities has been invaluable throughout my international career in building nuanced cross-cultural relationships and communication.</p>
+      <ul class="edu-highlights">
+        <li>Latin Language & Literature — in-depth study of classical texts</li>
+        <li>Ancient Greek Language & Literature</li>
+        <li>Italian Language — grammar, literature, and phonetics</li>
+        <li>Philosophy, History, and Classical Culture</li>
+      </ul>
     </div>
-
-    <!-- Volunteering -->
-    <div class="activity-card">
-      <div class="activity-img-wrap">
-        <img src="NCSF_Uplift.jpg" alt="Volunteer Work with NCSF Uplift">
-      </div>
-      <div class="activity-content">
-        <div class="activity-number">// 04</div>
-        <div class="activity-title">Volunteer Work</div>
-        <p class="activity-desc">Serving as a personal trainer for NCSF Uplift in Singapore — a non-profit working with children with special needs. This volunteer work allows me to give back to the community while sharing my passion for fitness.</p>
-        <p class="activity-desc">Working with these incredible children has been one of the most rewarding experiences of my life — teaching patience, empathy, and the value of celebrating small victories.</p>
-        <div class="skills-wrap">
-          <span class="skill-tag">Empathy</span>
-          <span class="skill-tag">Patience</span>
-          <span class="skill-tag">Adaptability</span>
-          <span class="skill-tag">Communication</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Travel — updated with Osaka -->
-    <div class="activity-card">
-      <div class="activity-img-wrap">
-        <img src="Osaka.jpg" alt="Osaka, Japan — Dotonbori at night">
-      </div>
-      <div class="activity-content">
-        <div class="activity-number">// 05</div>
-        <div class="activity-title">Travel & Cultural Exploration</div>
-        <p class="activity-desc">A deep passion for travel and cultural exploration — from the frozen streets of Harbin at -23°C to the electric nights of Osaka in May 2026. Every destination leaves a different mark.</p>
-        <p class="activity-desc">Osaka was a revelation. Beyond the iconic sights, it was the <strong>extraordinary food culture</strong> that stood out — from the legendary takoyaki and okonomiyaki stalls of Dotonbori to the intimate izakayas tucked down narrow backstreets. Osaka's people live to eat, and it shows in every bite.</p>
-        <p class="activity-desc">The majestic <strong>Osaka Castle</strong>, surrounded by cherry blossom trees and centuries of history, offered a striking contrast to the city's modern energy. But the true hidden gem was <strong>Nakazakicho</strong> — a quietly charming neighbourhood of retro kissaten coffee shops, vintage boutiques, street art and independent bookstores, where time seems to move at a different pace. A neighbourhood that feels like it belongs to another era, yet is completely alive.</p>
-        <div class="skills-wrap">
-          <span class="skill-tag">Cultural awareness</span>
-          <span class="skill-tag">Global perspective</span>
-          <span class="skill-tag">Adaptability</span>
-          <span class="skill-tag">Resilience</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Music & Books — updated with Deftones + Ash -->
-    <div class="activity-card">
-      <div class="activity-img-wrap">
-        <img src="DeftonesOsaka.jpg" alt="Deftones live at Zepp Osaka Bayside — 19 May 2026">
-      </div>
-      <div class="activity-content">
-        <div class="activity-number">// 06</div>
-        <div class="activity-title">Music & Books</div>
-        <p class="activity-desc">A lifelong passion for rock and metal music — from the energy of live concerts to the deeper connection that comes from music that pushes boundaries. Few things match the experience of a great live show with a crowd that lives and breathes the same sound.</p>
-        <p class="activity-desc">The <strong>Deftones</strong> at Zepp Osaka Bayside on 19th May 2026 was one of those concerts that reminds you why live music exists. Over 30 years into their career, Chino Moreno and the band are still playing with a raw intensity and emotional power that most bands never reach in their prime. Opening with "Be Quiet and Drive (Far Away)", they commanded the room from the first note — atmospheric, heavy, and completely uncompromising. Still kicking, still electrifying. 🤘</p>
-        <p class="activity-desc">On the reading side, the focus is firmly on the intersection of AI, business and strategy — understanding how artificial intelligence is reshaping the way companies grow, compete and connect with customers.</p>
-
-        <!-- Last concert -->
-        <div style="margin-top: 20px; padding: 14px 18px; background: rgba(0,255,157,0.06); border: 1px solid rgba(0,255,157,0.25); border-left: 3px solid var(--accent3);">
-          <div style="font-family: var(--mono); font-size: 10px; color: var(--accent3); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px;">🎸 Last Concert</div>
-          <div style="font-size: 15px; font-weight: 700; margin-bottom: 3px;">Deftones</div>
-          <div style="font-family: var(--mono); font-size: 11px; color: rgba(232,244,248,0.75);">19 May 2026 · Zepp Osaka Bayside, Japan</div>
-        </div>
-
-        <!-- Next concert -->
-        <div style="margin-top: 10px; padding: 14px 18px; background: rgba(123,79,255,0.06); border: 1px solid rgba(123,79,255,0.25); border-left: 3px solid var(--accent2);">
-          <div style="font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px;">🎸 Next Concert</div>
-          <div style="font-size: 15px; font-weight: 700; margin-bottom: 3px;">Ash — 30th Anniversary Tour</div>
-          <div style="font-family: var(--mono); font-size: 11px; color: rgba(232,244,248,0.75);">21 September 2026 · Hard Rock Cafe, Singapore</div>
-        </div>
-
-        <!-- Currently reading -->
-        <div style="margin-top: 10px; padding: 14px 18px; background: rgba(0,212,255,0.04); border: 1px solid rgba(0,212,255,0.2); border-left: 3px solid var(--accent);">
-          <div style="font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px;">📖 Currently Reading</div>
-          <div style="font-size: 14px; font-weight: 700; margin-bottom: 3px; line-height: 1.4;">AI First: How to Unlock AI to Transform Your Business</div>
-          <div style="font-family: var(--mono); font-size: 11px; color: rgba(232,244,248,0.75);">by Adam Brotman & Andy Sack</div>
-        </div>
-
-        <div class="skills-wrap">
-          <span class="skill-tag">Rock & Metal</span>
-          <span class="skill-tag">Live Concerts</span>
-          <span class="skill-tag">AI & Business</span>
-          <span class="skill-tag">Continuous Learning</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 </main>
-
 <footer>
   <div class="footer-copy">© 2026 Andrea Trevisi — All rights reserved</div>
   <div class="footer-links">
@@ -283,7 +193,6 @@ footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex;
     <a href="https://www.linkedin.com/in/andrea-trevisi-/">LinkedIn</a>
   </div>
 </footer>
-
 <script>
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
@@ -326,7 +235,7 @@ drawCanvas();
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1 });
-document.querySelectorAll('.activity-card').forEach(el => observer.observe(el));
+document.querySelectorAll('.edu-card').forEach(el => observer.observe(el));
 document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
   let timer;
   const menu = dropdown.querySelector(".nav-dropdown-menu");
