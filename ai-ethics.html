@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Trevisi — AI Ethics</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1e3a52;
+  --bg2: #1a3347;
+  --surface: #243f57;
+  --border: #1a2f45;
+  --accent: #00d4ff;
+  --accent2: #7b4fff;
+  --accent3: #00ff9d;
+  --text: #e8f4f8;
+  --muted: #6a8a9e;
+  --mono: 'Space Mono', monospace;
+  --sans: 'Syne', sans-serif;
+  --serif: 'Cormorant Garamond', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; cursor: none; }
+
+.cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+.cursor-ring { width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease; opacity: 0.5; mix-blend-mode: screen; }
+
+#canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(0,212,255,0.08);
+  background: rgba(4,10,15,0.85);
+  backdrop-filter: blur(20px);
+}
+.nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--accent3); }
+.nav-links a.active::after { width: 100%; background: var(--accent3); }
+
+.nav-dropdown { position: relative; }
+.nav-dropdown-btn { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; background: none; border: none; cursor: none; padding: 0; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+.nav-dropdown-btn:hover { color: var(--accent); }
+.nav-dropdown-menu { display: none; position: absolute; top: 20px; left: 0; background: var(--surface); border: 1px solid var(--border); min-width: 240px; z-index: 200; padding-top: 8px; }
+.nav-dropdown-menu::before { content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+.nav-dropdown-menu a { display: block; padding: 10px 16px; font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; border-bottom: 1px solid var(--border); }
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover { color: var(--accent); background: rgba(0,212,255,0.04); padding-left: 20px; }
+
+main { position: relative; z-index: 2; }
+
+/* HERO / THESIS */
+.hero { min-height: auto; display: flex; align-items: center; padding: 150px 48px 60px; position: relative; overflow: hidden; }
+.hero-single { max-width: 860px; margin: 0 auto; width: 100%; }
+.hero-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+.hero-label::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+.hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 5vw, 68px); font-weight: 600; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 12px; padding-bottom: 8px; }
+.hero h1 span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-family: var(--mono); font-size: 14px; color: rgba(232,244,248,0.75); letter-spacing: 0.05em; margin-bottom: 40px; }
+
+.thesis { font-family: var(--serif); font-size: 23px; line-height: 1.65; color: rgba(232,244,248,0.94); }
+.thesis p { margin-bottom: 22px; }
+.thesis p:last-child { margin-bottom: 0; }
+.thesis em { font-style: italic; color: var(--accent); }
+
+/* BAND LABELS */
+.band { display: flex; align-items: center; gap: 16px; max-width: 1200px; margin: 0 auto; padding: 40px 48px 0; }
+.band-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding: 7px 16px; white-space: nowrap; }
+.band-tag.foundation { color: var(--accent); border: 1px solid rgba(0,212,255,0.3); background: rgba(0,212,255,0.05); }
+.band-tag.pulse { color: var(--accent3); border: 1px solid rgba(0,255,157,0.3); background: rgba(0,255,157,0.05); display: flex; align-items: center; gap: 10px; }
+.band-tag .live-dot { width: 8px; height: 8px; background: var(--accent3); border-radius: 50%; animation: pulse 2s infinite; }
+.band-line { flex: 1; height: 1px; background: var(--border); }
+.band-line.green { background: rgba(0,255,157,0.2); }
+
+section { padding: 44px 48px 60px; max-width: 1200px; margin: 0 auto; }
+.section-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+.section-label.green { color: var(--accent3); }
+.section-label.green::before { background: var(--accent3); }
+.section-title { font-size: clamp(30px, 3.4vw, 42px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; line-height: 1.2; }
+.section-intro { font-size: 16px; line-height: 1.7; color: rgba(232,244,248,0.80); max-width: 720px; margin-bottom: 40px; }
+
+/* DECKS */
+.deck-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.deck { padding: 24px; border: 1px solid var(--border); background: var(--surface); transition: all 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.deck::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0; transition: opacity 0.3s; }
+.deck:hover { border-color: var(--accent); transform: translateY(-4px); }
+.deck:hover::before { opacity: 1; }
+.deck-icon { font-size: 24px; margin-bottom: 14px; }
+.deck-name { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.25; }
+.deck-framing { font-size: 13px; line-height: 1.6; color: rgba(232,244,248,0.72); margin-bottom: 20px; flex: 1; }
+.deck-foot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.deck-status { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border: 1px solid var(--border); color: var(--muted); }
+.deck-status.ready { color: var(--accent3); border-color: rgba(0,255,157,0.3); background: rgba(0,255,157,0.05); }
+.deck-dl { font-family: var(--mono); font-size: 11px; color: var(--accent); text-decoration: none; letter-spacing: 0.05em; }
+.deck-dl:hover { color: var(--accent3); }
+.deck.featured { border-color: rgba(0,255,157,0.35); }
+
+/* CERTS */
+.cert { margin-bottom: 20px; background: #162d3f; border: 1px solid rgba(0,255,157,0.25); border-left: 4px solid var(--accent3); padding: 40px; position: relative; overflow: hidden; }
+.cert::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent3), var(--accent), transparent); }
+.cert-watermark { position: absolute; right: 24px; top: 10px; font-size: 80px; font-weight: 800; color: rgba(0,255,157,0.04); pointer-events: none; font-family: var(--sans); }
+.cert-grid { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; }
+.cert-img { width: 200px; border: 1px solid rgba(0,255,157,0.2); display: block; transition: transform 0.3s; }
+.cert-img:hover { transform: scale(1.03); }
+.cert-verify { display: block; margin-top: 10px; text-align: center; font-family: var(--mono); font-size: 10px; color: var(--accent3); letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; }
+.cert-eyebrow { font-family: var(--mono); font-size: 10px; color: var(--accent3); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+.cert-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent3); }
+.cert-title { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+.cert-meta { font-family: var(--mono); font-size: 12px; color: #a8c4d4; margin-bottom: 4px; letter-spacing: 0.05em; }
+.cert-date { font-family: var(--mono); font-size: 11px; color: rgba(232,244,248,0.65); margin-bottom: 24px; letter-spacing: 0.04em; }
+.cert-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.cert-tag { font-family: var(--mono); font-size: 10px; color: var(--accent3); padding: 5px 12px; border: 1px solid rgba(0,255,157,0.25); background: rgba(0,255,157,0.06); letter-spacing: 0.08em; text-transform: uppercase; }
+.cert-placeholder-img { width: 200px; height: 150px; border: 1px dashed rgba(0,255,157,0.3); display: flex; align-items: center; justify-content: center; text-align: center; }
+.cert-placeholder-img span { font-family: var(--mono); font-size: 10px; color: var(--muted); padding: 0 16px; line-height: 1.6; }
+
+/* CAPABILITIES */
+.cap-block { margin-top: 40px; }
+.cap-lead { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.cap-lead::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+.cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+.cap { display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; border: 1px solid var(--border); background: rgba(0,0,0,0.15); transition: border-color 0.3s; }
+.cap:hover { border-color: var(--accent); }
+.cap-arrow { color: var(--accent3); font-family: var(--mono); flex-shrink: 0; }
+.cap-text { font-size: 14px; line-height: 1.5; color: rgba(232,244,248,0.90); }
+
+/* PULSE ROW */
+.pulse-row { display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; align-items: start; }
+.pulse-card { background: var(--surface); border: 1px solid rgba(0,255,157,0.25); padding: 32px; position: relative; overflow: hidden; height: 100%; }
+.pulse-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent3), transparent); }
+.pulse-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.pulse-kicker { font-family: var(--mono); font-size: 11px; color: var(--accent3); letter-spacing: 0.15em; text-transform: uppercase; }
+.pulse-date { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.pulse-title { font-size: 22px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+.article-body { font-family: var(--serif); font-size: 19px; line-height: 1.6; color: rgba(232,244,248,0.90); }
+.article-body em { color: var(--accent); font-style: italic; }
+.article-topic { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 16px; }
+.article-body p { margin-bottom: 14px; }
+.article-body p:last-child { margin-bottom: 0; }
+.pulse-source { display: inline-block; margin-top: 18px; font-family: var(--mono); font-size: 11px; color: var(--accent3); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+.pulse-source:hover { color: var(--accent); }
+.pulse-q { margin-top: 16px; font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.03em; line-height: 1.6; }
+.ebook { display: flex; flex-direction: column; gap: 20px; }
+.ebook-head { display: flex; gap: 20px; align-items: center; }
+.ebook-spine { width: 72px; height: 100px; background: linear-gradient(135deg, var(--accent3), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; box-shadow: 8px 8px 0 rgba(0,255,157,0.1); }
+.ebook-title { font-size: 19px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+.ebook-author { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.ebook-desc { font-family: var(--serif); font-size: 19px; line-height: 1.6; color: rgba(232,244,248,0.90); }
+.ebook-mytake { font-family: var(--serif); font-size: 19px; line-height: 1.6; color: rgba(232,244,248,0.90); border-left: 2px solid var(--accent3); padding-left: 16px; }
+.ebook-mytake-label { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent3); margin-bottom: 6px; }
+
+/* ARTICLE ARCHIVE */
+.archive { margin-top: 24px; border: 1px solid var(--border); background: rgba(0,0,0,0.15); padding: 24px 28px; }
+.archive-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+.archive-title { font-family: var(--mono); font-size: 11px; color: var(--accent3); letter-spacing: 0.2em; text-transform: uppercase; }
+.archive-sub { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.archive-list { display: flex; flex-direction: column; }
+.archive-item { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text); transition: all 0.2s; }
+.archive-item:last-child { border-bottom: none; }
+.archive-item:hover { padding-left: 8px; }
+.archive-item:hover .archive-name { color: var(--accent3); }
+.archive-month { font-family: var(--mono); font-size: 11px; color: var(--accent3); letter-spacing: 0.05em; width: 84px; flex-shrink: 0; }
+.archive-name { font-size: 15px; flex: 1; transition: color 0.2s; }
+.archive-arrow { font-family: var(--mono); color: var(--muted); }
+.archive-note { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 14px; font-style: italic; }
+
+/* ASK ME ANYTHING CTA */
+.cta-ethics { max-width: 1200px; margin: 0 auto; padding: 20px 48px 40px; }
+.cta-inner { background: var(--surface); border: 1px solid rgba(0,212,255,0.2); border-top: 3px solid var(--accent); padding: 48px; text-align: center; position: relative; overflow: hidden; }
+.cta-inner::after { content: '?'; position: absolute; right: 8px; top: -30px; font-size: 160px; font-weight: 800; color: rgba(0,212,255,0.04); pointer-events: none; font-family: var(--sans); }
+.cta-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 14px; }
+.cta-title { font-size: clamp(26px, 3vw, 36px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
+.cta-desc { font-size: 16px; line-height: 1.7; color: rgba(232,244,248,0.82); max-width: 580px; margin: 0 auto 32px; position: relative; z-index: 1; }
+.btn-ama { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; background: var(--accent); color: var(--bg); font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; transition: all 0.2s; position: relative; z-index: 1; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+.btn-ama:hover { background: var(--accent2); transform: translateY(-2px); }
+
+.divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 24px auto 0; max-width: calc(1200px - 96px); }
+
+.fade-up { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; margin-top: 40px; }
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+.footer-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; color: var(--accent3); }
+.status-dot { width: 6px; height: 6px; background: var(--accent3); border-radius: 50%; animation: pulse 2s infinite; }
+
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { gap: 18px; }
+  .hero { padding: 120px 24px 40px; }
+  section { padding: 40px 24px; }
+  .band { padding: 32px 24px 0; }
+  .cert { padding: 28px 24px; }
+  .cert-grid { grid-template-columns: 1fr; gap: 24px; }
+  .cert-img, .cert-placeholder-img { width: 100%; max-width: 240px; }
+  .pulse-row { grid-template-columns: 1fr; }
+  .cta-ethics { padding: 20px 24px 40px; }
+  .cta-inner { padding: 36px 24px; }
+  footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+  .thesis { font-size: 20px; }
+}
+</style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T4DGTNMMCL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T4DGTNMMCL');
+</script>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<canvas id="canvas-bg"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">Home</a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Experience ▾</button>
+      <div class="nav-dropdown-menu">
+        <a href="workhistory.html">Work History</a>
+        <a href="pgdipAI.html">Machine Learning</a>
+        <a href="intelligent-agents.html">Intelligent Agents</a>
+        <a href="knowledge-representation.html">Knowledge Representation</a>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Skills ▾</button>
+      <div class="nav-dropdown-menu">
+        <a href="technical-skills.html">Technical Skills</a>
+        <a href="languages.html">Languages</a>
+      </div>
+    </li>
+    <li><a href="ai-ethics.html" class="active">AI Ethics</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="afterwork.html">After Work</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- 01 · THE THESIS -->
+  <div class="hero">
+    <div class="hero-single">
+      <div class="hero-label">// 01 · Why AI Ethics</div>
+      <h1>AI <span>Ethics</span></h1>
+      <div class="hero-sub">Thinking in the open about the ethics of intelligent systems</div>
+      <div class="thesis">
+        <p>For twenty years my work has been reading decisions, not the ones written in the minutes, but the ones underneath: who a call really serves, what it rests on, and where the accountability quietly goes missing. In sales across Southeast Asia I watched capable people make confident decisions on poor foundations: a relationship that mattered a decade ago, a reputation that outlived the facts, a company's financial health as it <em>used</em> to be. The data was human, and so was the bias.</p>
+        <p>Then I met artificial intelligence, and recognised the same problem wearing a new face, only faster, larger, and harder to see. A model trained on biased or stale data does not hesitate the way a person might; it decides, at scale, and calls the result objective. That is what pulled me in. The instinct I had spent two decades sharpening, to look <em>behind</em> the decision, is exactly the instinct this technology now demands, at stakes far higher than any deal I ever closed.</p>
+        <p>I am not here to be dazzled by AI, nor afraid of it. I would never hand it the final call. I want it to give me the clear picture, the data seen honestly, quickly, without sentiment, so that the judgment, and the responsibility for it, stays where it belongs: with a person who can be asked <em>why</em>. Because the hard part of AI ethics was never agreeing on good principles. Everyone agrees on fairness, transparency, accountability. The hard part is the moment those principles collide, when protecting privacy costs you safety, when "the greater good" quietly decides who pays for it, and someone still has to choose, and own the choice.</p>
+        <p>This page is where I work on that in the open. First for myself, to make my own reasoning visible, and to keep it honest. Then for anyone who shares the question: a place to trade the books, papers and arguments that sharpen it. And yes, a stage, where an employer or a university can see how I actually think, not only what I have studied.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============ THE FOUNDATION ============ -->
+  <div class="band">
+    <span class="band-tag foundation">The Foundation · updates rarely</span>
+    <div class="band-line"></div>
+  </div>
+
+  <!-- 02 · DECKS -->
+  <section id="decks">
+    <div class="section-label">// 02 · Vademecums</div>
+    <h2 class="section-title">Decks</h2>
+    <p class="section-intro">Short, downloadable field guides, each one built around a single tension in AI ethics and the choice it forces. Take what's useful.</p>
+    <div class="deck-grid">
+
+      <div class="deck featured fade-up">
+        <div class="deck-icon">📚</div>
+        <div class="deck-name">AI Ethics — A Reading List</div>
+        <div class="deck-framing">A curated map of the field, grouped by purpose rather than hype: foundations, fairness and bias, governance and law, and the big-picture reads, each with an honest note on what it's actually good for.</div>
+        <div class="deck-foot">
+          <span class="deck-status ready">Ready</span>
+          <a href="AI_Ethics_Reading_List.pdf" class="deck-dl" target="_blank">↓ Download</a>
+        </div>
+      </div>
+
+      <div class="deck fade-up">
+        <div class="deck-icon">🔍</div>
+        <div class="deck-name">The Black Box &amp; Transparency</div>
+        <div class="deck-framing">When a system can't explain itself, who is accountable for what it decides? The tension between performance and the right to an explanation.</div>
+        <div class="deck-foot">
+          <span class="deck-status">Coming soon</span>
+        </div>
+      </div>
+
+      <div class="deck fade-up">
+        <div class="deck-icon">⚖️</div>
+        <div class="deck-name">Fairness &amp; the Impossibility Theorem</div>
+        <div class="deck-framing">Several definitions of "fair" that cannot all hold at once. Choosing one is a value decision someone has to make and defend.</div>
+        <div class="deck-foot">
+          <span class="deck-status">Coming soon</span>
+        </div>
+      </div>
+
+      <div class="deck fade-up">
+        <div class="deck-icon">🧭</div>
+        <div class="deck-name">Equity vs Equality</div>
+        <div class="deck-framing">Treating everyone the same and giving everyone what they need are not the same thing. When a model has to pick, which one has it picked?</div>
+        <div class="deck-foot">
+          <span class="deck-status">Coming soon</span>
+        </div>
+      </div>
+
+      <div class="deck fade-up">
+        <div class="deck-icon">🎭</div>
+        <div class="deck-name">Ethics-Washing</div>
+        <div class="deck-framing">A principle without a mechanism is a promise. How to tell real governance from a page of comforting words with nothing behind it.</div>
+        <div class="deck-foot">
+          <span class="deck-status">Coming soon</span>
+        </div>
+      </div>
+
+      <div class="deck fade-up">
+        <div class="deck-icon">🌍</div>
+        <div class="deck-name">The "Greater Good" Trap</div>
+        <div class="deck-framing">The cleanest-sounding justification often hides who pays for it. Why data infrastructure, once built, outlives the emergency that justified it.</div>
+        <div class="deck-foot">
+          <span class="deck-status">Coming soon</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 · CERTIFICATIONS + CAPABILITIES -->
+  <section id="certs">
+    <div class="section-label">// 03 · Credentials</div>
+    <h2 class="section-title">Certifications &amp; Capabilities</h2>
+    <p class="section-intro">Not badges for their own sake, what each one lets me actually do.</p>
+
+    <!-- Helsinki (migrated) -->
+    <div class="cert fade-up">
+      <div class="cert-watermark">AI</div>
+      <div class="cert-grid">
+        <div>
+          <a href="https://certificates.mooc.fi/validate/uayj8kn6g2d" target="_blank">
+            <img src="ethicsai_cert.png" alt="Ethics of AI Certificate — University of Helsinki" class="cert-img">
+          </a>
+          <a href="https://certificates.mooc.fi/validate/uayj8kn6g2d" target="_blank" class="cert-verify">✓ Verify Certificate ↗</a>
+        </div>
+        <div>
+          <div class="cert-eyebrow">Certification · July 2026</div>
+          <div class="cert-title">Ethics of AI</div>
+          <div class="cert-meta">University of Helsinki · 2 ECTS · Prof. Jukka K. Nurminen</div>
+          <div class="cert-date">Completed: 26th July 2026</div>
+          <div class="cert-tags">
+            <span class="cert-tag">Ethical AI</span>
+            <span class="cert-tag">Accountability in AI</span>
+            <span class="cert-tag">Ethical use of Facial Recognition</span>
+            <span class="cert-tag">Central Ethical Concepts</span>
+            <span class="cert-tag">Right Ways to Use Technology</span>
+            <span class="cert-tag">Data Use and Privacy</span>
+            <span class="cert-tag">Societal &amp; Psychological Aspects of AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Google · Use AI Responsibly -->
+    <div class="cert fade-up">
+      <div class="cert-watermark">AI</div>
+      <div class="cert-grid">
+        <div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/UFNTO78TCQ7G" target="_blank">
+            <img src="google_use_ai_responsibly_cert.png" alt="Use AI Responsibly — Google / Coursera Certificate" class="cert-img">
+          </a>
+          <a href="https://www.coursera.org/account/accomplishments/verify/UFNTO78TCQ7G" target="_blank" class="cert-verify">✓ Verify Certificate ↗</a>
+        </div>
+        <div>
+          <div class="cert-eyebrow">Certification · August 2026</div>
+          <div class="cert-title">Use AI Responsibly</div>
+          <div class="cert-meta">Google · via Coursera · part of Google AI Essentials</div>
+          <div class="cert-date">Completed: 15th August 2026</div>
+          <div class="cert-tags">
+            <span class="cert-tag">Identifying AI Harms</span>
+            <span class="cert-tag">Mitigating Bias</span>
+            <span class="cert-tag">Allocative &amp; Representational Harm</span>
+            <span class="cert-tag">AI Hallucinations</span>
+            <span class="cert-tag">Security &amp; Privacy Risks</span>
+            <span class="cert-tag">Protecting Sensitive Data</span>
+            <span class="cert-tag">Human Oversight</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cambridge · Ethical AI: AI essentials for everyone -->
+    <div class="cert fade-up">
+      <div class="cert-watermark">AI</div>
+      <div class="cert-grid">
+        <div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/J9ZSNHAFSFF7" target="_blank">
+            <img src="cambridge_ethical_ai_cert.png" alt="Ethical AI: AI essentials for everyone — University of Cambridge / Coursera Certificate" class="cert-img">
+          </a>
+          <a href="https://www.coursera.org/account/accomplishments/verify/J9ZSNHAFSFF7" target="_blank" class="cert-verify">✓ Verify Certificate ↗</a>
+        </div>
+        <div>
+          <div class="cert-eyebrow">Certification · August 2026</div>
+          <div class="cert-title">Ethical AI: AI Essentials for Everyone</div>
+          <div class="cert-meta">University of Cambridge · via Coursera · Prof. Matteo Zallio</div>
+          <div class="cert-date">Completed: 28th August 2026</div>
+          <div class="cert-tags">
+            <span class="cert-tag">AI Ethics Essentials</span>
+            <span class="cert-tag">Fairness &amp; Bias</span>
+            <span class="cert-tag">Transparency</span>
+            <span class="cert-tag">Accountability</span>
+            <span class="cert-tag">Privacy &amp; Data</span>
+            <span class="cert-tag">Human-Centred Design</span>
+            <span class="cert-tag">Inclusive &amp; Trustworthy AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Capabilities -->
+    <div class="cap-block fade-up">
+      <div class="cap-lead">What I can now do</div>
+      <div class="cap-grid">
+        <div class="cap"><span class="cap-arrow">→</span><span class="cap-text">Audit a dataset and a model for proxy bias, and tell formal fairness apart from substantive discrimination.</span></div>
+        <div class="cap"><span class="cap-arrow">→</span><span class="cap-text">Trace an automated decision back to an accountable owner who can be asked <em>why</em>.</span></div>
+        <div class="cap"><span class="cap-arrow">→</span><span class="cap-text">Read a set of AI "principles" and spot where a mechanism is missing, the tell of ethics-washing.</span></div>
+        <div class="cap"><span class="cap-arrow">→</span><span class="cap-text">Assess where a system is likely to fall under the EU AI Act, and what that classification demands.</span></div>
+        <div class="cap"><span class="cap-arrow">→</span><span class="cap-text">Frame a "greater good" claim as the value trade-off it really is, and name who bears the cost.</span></div>
+        <div class="cap"><span class="cap-arrow">→</span><span class="cap-text">Design a human-in-the-loop workflow that uses AI for clarity while keeping the judgment with a person.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ THE PULSE ============ -->
+  <div class="band">
+    <span class="band-tag pulse"><span class="live-dot"></span>The Pulse · updated monthly</span>
+    <div class="band-line green"></div>
+  </div>
+
+  <section id="pulse">
+    <div class="pulse-row">
+
+      <!-- 04 · MONTHLY ARTICLE -->
+      <div class="pulse-card fade-up">
+        <div class="pulse-head">
+          <span class="pulse-kicker">// 04 · Article of the month</span>
+          <span class="pulse-date">November 2026</span>
+        </div>
+        <div class="pulse-title">Empathy Without Accountability</div>
+        <div class="article-topic">On the psychological impact of AI</div>
+        <div class="article-body">
+          <p>A team at Brown University, working alongside licensed clinical psychologists, put the popular chatbots to the test as stand-in therapists. Even when explicitly prompted to follow evidence-based methods like cognitive behavioural therapy, the models broke established mental-health ethics standards in fifteen distinct ways: manufacturing a false sense of empathy, reinforcing the very negative beliefs a person arrived with, and mishandling the moments that matter most, a user in crisis.</p>
+          <p>None of this means AI has no place in mental health; the cost and scarcity of care are real problems it might help ease. But look at where the gap actually sits. When a human therapist causes harm, a licensing board can act, there is a name, a mechanism, a consequence. When a chatbot does the same, there is no board, no liability, no one who can be asked <em>why</em>. The harm can be identical; the accountability simply is not there. And a principle without a mechanism is only a promise.</p>
+        </div>
+        <div class="pulse-q">↳ the deeper question: if an AI counsellor deepens someone's crisis, who is accountable, and by what mechanism? Until that has an answer, on-screen empathy is a performance no one has to stand behind.</div>
+        <a class="pulse-source" href="https://www.brown.edu/news/2025-10-21/ai-mental-health-ethics" target="_blank">Source: Brown University · Oct 2025 ↗</a>
+      </div>
+
+      <!-- 05 · ETHICS BOOK OF THE MONTH -->
+      <div class="pulse-card fade-up">
+        <div class="pulse-head">
+          <span class="pulse-kicker">// 05 · Ethics book of the month</span>
+          <span class="pulse-date">November 2026</span>
+        </div>
+        <div class="ebook">
+          <div class="ebook-head">
+            <div class="ebook-spine">📖</div>
+            <div>
+              <div class="ebook-title">AI Ethics</div>
+              <div class="ebook-author">by Mark Coeckelbergh · MIT Press, 2020</div>
+            </div>
+          </div>
+          <div class="ebook-desc">A short, accessible entry in the MIT Press Essential Knowledge series, written by philosopher of technology Mark Coeckelbergh. It moves past both the hype and the science-fiction nightmares to focus on concrete questions: what AI actually is, and the real ethical problems it raises, responsibility, transparency, bias, privacy, and the challenge of turning principles into policy. It closes with a call for wisdom alongside intelligence.</div>
+          <div class="ebook-mytake">
+            <span class="ebook-mytake-label">My take</span>
+            [ the one idea that sharpened my thinking, or the one I argued with ]
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ARTICLE ARCHIVE · rolling last 6 months -->
+    <div class="archive fade-up">
+      <div class="archive-head">
+        <span class="archive-title">// Article archive</span>
+        <span class="archive-sub">the last 6 months</span>
+      </div>
+      <div class="archive-list">
+        <a class="archive-item" href="#">
+          <span class="archive-month">Oct 2026</span>
+          <span class="archive-name">Principles Without a Mechanism</span>
+          <span class="archive-arrow">↗</span>
+        </a>
+        <a class="archive-item" href="#">
+          <span class="archive-month">Sep 2026</span>
+          <span class="archive-name">Accuracy Without Understanding</span>
+          <span class="archive-arrow">↗</span>
+        </a>
+      </div>
+      <div class="archive-note">Rolls forward each month: the current piece sits above, the previous six live here.</div>
+    </div>
+  </section>
+
+  <!-- ASK ME ANYTHING -->
+  <section class="cta-ethics">
+    <div class="cta-inner fade-up">
+      <div class="cta-eyebrow">// Open question</div>
+      <h2 class="cta-title">Ask me anything about AI Ethics</h2>
+      <p class="cta-desc">Disagree with a take? Have a case worth pulling apart, a paper worth reading, a question with no clean answer? This page is a space to think in the open. Start the conversation.</p>
+      <a href="mailto:andrea.trevisi@gmail.com?subject=AI%20Ethics%20%E2%80%94%20Ask%20me%20anything" class="btn-ama">✉ Ask me anything ↗</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-copy">© 2026 Andrea Trevisi — All rights reserved</div>
+  <div class="footer-status"><div class="status-dot"></div>AI Ethics · updated monthly</div>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 4 + 'px';
+  cursor.style.top = my - 4 + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx - 16 + 'px'; ring.style.top = ry - 16 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+// Neural network canvas
+const canvas = document.getElementById('canvas-bg');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', () => { resize(); initNodes(); });
+function initNodes() {
+  nodes = [];
+  const count = Math.floor((W * H) / 18000);
+  for (let i = 0; i < count; i++) nodes.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, r: Math.random()*2+1 });
+}
+initNodes();
+function drawCanvas() {
+  ctx.clearRect(0,0,W,H);
+  nodes.forEach(n => { n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>W) n.vx*=-1; if(n.y<0||n.y>H) n.vy*=-1; });
+  for (let i=0; i<nodes.length; i++) {
+    for (let j=i+1; j<nodes.length; j++) {
+      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<130) { ctx.beginPath(); ctx.strokeStyle=`rgba(0,212,255,${(1-dist/130)*.18})`; ctx.lineWidth=.5; ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke(); }
+    }
+  }
+  nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fillStyle='rgba(0,212,255,0.5)'; ctx.fill(); });
+  requestAnimationFrame(drawCanvas);
+}
+drawCanvas();
+
+// Scroll animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Dropdown
+document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
+  let timer;
+  const menu = dropdown.querySelector(".nav-dropdown-menu");
+  dropdown.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+});
+</script>
+</body>
+</html>
