@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Trevisi — Insights</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1e3a52;
+  --bg2: #1a3347;
+  --surface: #243f57;
+  --border: #1a2f45;
+  --accent: #ff7a59;      /* Insights ember */
+  --accent2: #ffb867;     /* warm amber */
+  --accent3: #00ff9d;
+  --text: #e8f4f8;
+  --muted: #a8c4d4;
+  --mono: 'Space Mono', monospace;
+  --sans: 'Syne', sans-serif;
+  --serif: 'Cormorant Garamond', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; cursor: none; min-height: 100vh; display: flex; flex-direction: column; }
+
+.cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+.cursor-ring { width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease; opacity: 0.5; mix-blend-mode: screen; }
+
+#canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(255,122,89,0.12);
+  background: rgba(4,10,15,0.85);
+  backdrop-filter: blur(20px);
+}
+.nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.active::after { width: 100%; background: var(--accent); }
+
+.nav-dropdown { position: relative; }
+.nav-dropdown-btn { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; background: none; border: none; cursor: none; padding: 0; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+.nav-dropdown-btn:hover { color: var(--accent); }
+.nav-dropdown-menu { display: none; position: absolute; top: 20px; left: 0; background: var(--surface); border: 1px solid var(--border); min-width: 240px; z-index: 200; padding-top: 8px; }
+.nav-dropdown-menu::before { content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+.nav-dropdown-menu a { display: block; padding: 10px 16px; font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; border-bottom: 1px solid var(--border); }
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover { color: var(--accent); background: rgba(255,122,89,0.05); padding-left: 20px; }
+
+main { position: relative; z-index: 2; flex: 1; padding: 140px 24px 80px; }
+.wrap { max-width: 760px; margin: 0 auto; }
+
+/* Section header */
+.ins-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 12px; }
+.ins-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+.ins-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+.ins-h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 6vw, 68px); font-weight: 600; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 20px; }
+.ins-h1 span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.ins-lead { font-family: var(--serif); font-size: 23px; line-height: 1.6; color: rgba(232,244,248,0.92); max-width: 620px; }
+
+.ins-divider { height: 1px; background: linear-gradient(90deg, var(--accent), transparent); margin: 56px 0; opacity: 0.5; }
+
+/* Article */
+.art-kicker { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 18px; }
+.art-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(30px, 4.4vw, 46px); font-weight: 600; line-height: 1.12; letter-spacing: -0.015em; margin-bottom: 12px; }
+.art-subtitle { font-family: var(--serif); font-size: 24px; font-weight: 500; color: rgba(232,244,248,0.82); line-height: 1.4; margin-bottom: 24px; }
+.art-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; padding-bottom: 36px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+.art-meta .sep { color: var(--accent); }
+
+.art-body p { font-size: 17px; line-height: 1.85; color: rgba(232,244,248,0.9); margin-bottom: 26px; }
+.art-body p.lead-para::first-letter { font-family: 'Space Grotesk', sans-serif; font-size: 58px; font-weight: 600; float: left; line-height: 0.82; padding: 6px 14px 0 0; color: var(--accent); }
+.art-body cite { font-style: normal; color: rgba(232,244,248,0.7); }
+
+.section-heading { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin: 44px 0 28px; display: flex; align-items: center; gap: 14px; }
+.section-heading::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* Principle blocks */
+.principles { display: flex; flex-direction: column; gap: 18px; margin: 10px 0 36px; }
+.principle { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 24px 28px; display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: start; transition: transform 0.25s, border-color 0.25s; }
+.principle:hover { transform: translateX(4px); border-left-color: var(--accent2); }
+.principle-num { font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 600; color: var(--accent); opacity: 0.55; line-height: 1; }
+.principle-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px; }
+.principle p { font-size: 16px; line-height: 1.78; color: rgba(232,244,248,0.88); margin: 0; }
+
+/* Pull quote */
+.pullquote { font-family: var(--serif); font-size: clamp(24px, 3.4vw, 32px); line-height: 1.45; font-weight: 500; color: var(--text); border-left: 3px solid var(--accent); padding: 8px 0 8px 28px; margin: 44px 0; }
+.pullquote span { color: var(--accent); }
+
+/* Credibility anchor */
+.anchor { margin-top: 56px; background: linear-gradient(135deg, rgba(255,122,89,0.07), rgba(255,184,103,0.04)); border: 1px solid rgba(255,122,89,0.25); padding: 32px 34px; position: relative; overflow: hidden; }
+.anchor::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2), transparent); }
+.anchor-tag { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 14px; }
+.anchor-text { font-family: var(--serif); font-size: 19px; line-height: 1.5; color: rgba(232,244,248,0.92); margin-bottom: 22px; }
+.anchor-text strong { color: var(--text); font-weight: 600; }
+.btn-dl { display: inline-flex; align-items: center; gap: 10px; padding: 13px 24px; background: var(--accent); color: #1a2130; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+.btn-dl:hover { background: var(--accent2); transform: translateY(-2px); }
+
+/* References */
+.refs { margin-top: 52px; }
+.refs ol { list-style: none; counter-reset: ref; }
+.refs li { counter-increment: ref; position: relative; padding-left: 34px; margin-bottom: 18px; font-family: var(--mono); font-size: 12px; line-height: 1.7; color: var(--muted); }
+.refs li::before { content: '[' counter(ref) ']'; position: absolute; left: 0; color: var(--accent); }
+.refs li i { font-style: italic; color: rgba(232,244,248,0.78); }
+.refs a { color: var(--accent); text-decoration: none; word-break: break-word; }
+.refs a:hover { text-decoration: underline; }
+
+/* Back / CTA row */
+.end-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 56px; }
+.btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border: 1px solid var(--border); color: var(--text); font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; transition: all 0.2s; }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+.fade-up { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+.footer-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; color: var(--accent); }
+.status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { gap: 16px; }
+  main { padding: 120px 20px 60px; }
+  .principle { grid-template-columns: 1fr; gap: 10px; }
+  footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T4DGTNMMCL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T4DGTNMMCL');
+</script>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<canvas id="canvas-bg"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">Home</a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Experience &#9662;</button>
+      <div class="nav-dropdown-menu">
+        <a href="workhistory.html">Work History</a>
+        <a href="pgdipAI.html">Machine Learning</a>
+        <a href="intelligent-agents.html">Intelligent Agents</a>
+        <a href="knowledge-representation.html">Knowledge Representation</a>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Skills &#9662;</button>
+      <div class="nav-dropdown-menu">
+        <a href="technical-skills.html">Technical Skills</a>
+        <a href="languages.html">Languages</a>
+      </div>
+    </li>
+    <li><a href="ai-ethics.html">AI Ethics</a></li>
+    <li><a href="insights.html" class="active">Insights</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="afterwork.html">After Work</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <!-- Section header -->
+    <div class="ins-eyebrow"><span class="ins-dot"></span> Insights &middot; Writing</div>
+    <h1 class="ins-h1">Insights</h1>
+    <p class="ins-lead">Thinking in the open about applied, responsible AI. Where two decades in industry meet the questions a new technology forces us to ask.</p>
+
+    <div class="ins-divider"></div>
+
+    <!-- Flagship article -->
+    <article>
+      <div class="art-kicker fade-up">Responsible AI Adoption &middot; October 2026</div>
+      <h2 class="art-title fade-up">Responsible AI in a Traditional Industry</h2>
+      <p class="art-subtitle fade-up">What B2B Printing Taught Me About Adopting AI Well</p>
+      <div class="art-meta fade-up">
+        <span>Andrea Trevisi</span> <span class="sep">/</span> <span>5 min read</span> <span class="sep">/</span> <span>Applied AI &middot; Ethics</span>
+      </div>
+
+      <div class="art-body">
+        <p class="lead-para fade-up">Walk into almost any B2B printing company, from a family run shop to a division of a multinational, and ask how they decide which customers matter most. More often than not, the answer is a Microsoft Excel spreadsheet. Someone, usually experienced and overworked, sorts customers by how recently they bought, how often, and how much they spent. It is the RFM method (Recency, Frequency, Monetary), and it has quietly run commercial decision making in this industry for decades.</p>
+
+        <p class="fade-up">It works. But it is slow, it is manual, it is prone to error, and it leaves a great deal of insight buried in the data.</p>
+
+        <p class="fade-up">Printing is one of the most conservative sectors in manufacturing, and its caution about artificial intelligence is well documented. Industry research suggests AI's transformative potential in printing remains largely under recognised, with many professionals still unfamiliar with its practical uses <cite>(PRINTING United Alliance and NAPCO Research, 2024)</cite>. Where other sectors, fintech, e-commerce, retail, have embraced machine learning for customer profiling, printing has barely begun. Adoption in customer analytics is forecast to roughly double in the coming years, from around 13% to 27% <cite>(PRINTING United Alliance and NAPCO Research, 2024)</cite>, which tells you both how early we are and how much room there is to move.</p>
+
+        <p class="fade-up">That gap was the subject of the research proposal I completed this year as part of my Postgraduate Diploma in Artificial Intelligence. The technical question was simple to state: can a machine learning approach, K-means clustering layered onto the familiar RFM framework, segment B2B printing customers more accurately and far more quickly than the spreadsheet can? The early answer, consistent with studies in adjacent sectors, is yes.</p>
+
+        <p class="fade-up">But the technical answer is the easy part. The harder and more interesting question is how to bring a tool like this into a traditional industry responsibly, and that is where I want to spend the rest of this piece, because it is the part most "AI will transform your business" conversations quietly skip.</p>
+
+        <div class="section-heading fade-up">Three things kept me honest</div>
+
+        <p class="fade-up">Three things kept me honest while designing this research, and they should keep any business honest before it automates customer decisions.</p>
+
+        <div class="principles">
+          <div class="principle fade-up">
+            <div class="principle-num">01</div>
+            <div>
+              <div class="principle-label">The Law</div>
+              <p>The first is the law. Under the European Union's General Data Protection Regulation, Article 22 gives individuals the right not to be subject to decisions based solely on automated processing, including profiling, where those decisions significantly affect them <cite>(European Parliament and Council of the European Union, 2016)</cite>. An algorithm that quietly sorts customers into "champions" and "lost causes" with no human involved is not only commercially risky, it may be unlawful. The answer is not to abandon the tool. It is to keep a person in the decision, using the algorithm to inform judgement rather than replace it.</p>
+            </div>
+          </div>
+          <div class="principle fade-up">
+            <div class="principle-num">02</div>
+            <div>
+              <div class="principle-label">Bias</div>
+              <p>The second is bias. A clustering model trained on historical data will happily learn our historical habits, including the habit of favouring large, established firms over smaller or newer ones that may be just as sound. Left unexamined, AI does not remove bias from commercial decisions, it industrialises it. Naming that risk at the outset, and testing for it, is part of doing this properly.</p>
+            </div>
+          </div>
+          <div class="principle fade-up">
+            <div class="principle-num">03</div>
+            <div>
+              <div class="principle-label">Sensitivity</div>
+              <p>The third is sensitivity. B2B customer data is not just names and order dates. It includes pricing structures, margins, and financial information that could cause real harm if mishandled or exposed to competitors. Responsible adoption means treating that data with the seriousness it deserves, long before anyone writes a line of Python.</p>
+            </div>
+          </div>
+          <div class="principle fade-up">
+            <div class="principle-num">04</div>
+            <div>
+              <div class="principle-label">The Human Question</div>
+              <p>And there is a fourth consideration that is not legal or technical at all, but human. In a traditional industry, the first question people ask about AI is rarely "is it accurate?" It is "is it here to replace me?" Any honest adoption effort has to answer that directly. The purpose of a tool like this is not to remove the experienced person who knows the customers, it is to give them back the hours they lose to spreadsheets, and to sharpen the judgement they already have.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="fade-up">This, to me, is the real lesson, and it reaches well beyond printing. The industries slowest to adopt AI will not be won over by promises of efficiency. They will be won over by adoption that is visibly careful: lawful, unbiased, respectful of sensitive data, and honest with the people whose work it touches.</p>
+
+        <blockquote class="pullquote fade-up">In conservative sectors, responsibility is not the brake on AI adoption. <span>It is the thing that makes adoption possible at all.</span></blockquote>
+
+        <p class="fade-up">I spent two decades in this industry before I began studying AI. What I have come to believe is that the most valuable person in the room during an AI transition is not the one who understands the algorithm best, nor the one who knows the business best, but the one who can hold both at once, and who insists on asking, at every step, not only "can we?" but "should we, and how do we do it right?"</p>
+
+        <p class="fade-up">That is the work I want to do more of.</p>
+      </div>
+
+      <!-- Credibility anchor -->
+      <div class="anchor fade-up">
+        <div class="anchor-tag">The research behind this piece</div>
+        <div class="anchor-text">Adapted from my Postgraduate Diploma research proposal, <strong>University of Essex, awarded Distinction</strong>. The full proposal sets out the RFM and K-means methodology, the literature, and the ethical framework in depth.</div>
+        <a href="research-proposal-essex.pdf" class="btn-dl" target="_blank" rel="noopener">&#8595; Read the full research proposal (PDF)</a>
+      </div>
+
+      <!-- References -->
+      <div class="refs fade-up">
+        <div class="section-heading">References</div>
+        <ol>
+          <li>European Parliament and Council of the European Union (2016) <i>Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation)</i>. Official Journal of the European Union, L119, 1&ndash;88. Available at: <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32016R0679" target="_blank" rel="noopener">eur-lex.europa.eu</a> [Accessed 21 March 2026].</li>
+          <li>PRINTING United Alliance and NAPCO Research (2024) <i>Artificial Intelligence in the Printing Industry: The Journey Begins</i>. (pdf). Available at: <a href="https://www.printing.org/publication/artificial-intelligence-in-the-printing-industry--the-journey-begins" target="_blank" rel="noopener">printing.org</a> [Accessed 11 March 2026].</li>
+        </ol>
+      </div>
+
+      <div class="end-cta fade-up">
+        <a href="index.html" class="btn-secondary">&#8592; Back to portfolio</a>
+        <a href="mailto:andrea.trevisi@gmail.com?subject=Responsible%20AI%20in%20a%20Traditional%20Industry" class="btn-secondary">&#9993; Let's talk about this</a>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 Andrea Trevisi &mdash; All rights reserved</div>
+  <div class="footer-status"><div class="status-dot"></div>Insights &middot; live</div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 4 + 'px';
+  cursor.style.top = my - 4 + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx - 16 + 'px'; ring.style.top = ry - 16 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+const canvas = document.getElementById('canvas-bg');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', () => { resize(); initNodes(); });
+function initNodes() {
+  nodes = [];
+  const count = Math.floor((W * H) / 18000);
+  for (let i = 0; i < count; i++) nodes.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, r: Math.random()*2+1 });
+}
+initNodes();
+function drawCanvas() {
+  ctx.clearRect(0,0,W,H);
+  nodes.forEach(n => { n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>W) n.vx*=-1; if(n.y<0||n.y>H) n.vy*=-1; });
+  for (let i=0; i<nodes.length; i++) {
+    for (let j=i+1; j<nodes.length; j++) {
+      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<130) { ctx.beginPath(); ctx.strokeStyle='rgba(255,122,89,'+((1-dist/130)*.18)+')'; ctx.lineWidth=.5; ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke(); }
+    }
+  }
+  nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fillStyle='rgba(255,122,89,0.5)'; ctx.fill(); });
+  requestAnimationFrame(drawCanvas);
+}
+drawCanvas();
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
+  let timer;
+  const menu = dropdown.querySelector(".nav-dropdown-menu");
+  dropdown.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+});
+</script>
+</body>
+</html>
