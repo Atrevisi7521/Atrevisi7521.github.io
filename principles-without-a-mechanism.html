@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Principles Without a Mechanism — Andrea Trevisi</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1e3a52;
+  --surface: #243f57;
+  --border: #1a2f45;
+  --accent: #00d4ff;
+  --accent2: #7b4fff;
+  --accent3: #00ff9d;
+  --text: #e8f4f8;
+  --muted: #6a8a9e;
+  --mono: 'Space Mono', monospace;
+  --sans: 'Syne', sans-serif;
+  --serif: 'Cormorant Garamond', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; cursor: none; }
+
+.cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+.cursor-ring { width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease; opacity: 0.5; mix-blend-mode: screen; }
+
+#canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.4; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(0,212,255,0.08);
+  background: rgba(4,10,15,0.85);
+  backdrop-filter: blur(20px);
+}
+.nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--accent3); }
+.nav-links a.active::after { width: 100%; background: var(--accent3); }
+
+.nav-dropdown { position: relative; }
+.nav-dropdown-btn { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; background: none; border: none; cursor: none; padding: 0; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+.nav-dropdown-btn:hover { color: var(--accent); }
+.nav-dropdown-menu { display: none; position: absolute; top: 20px; left: 0; background: var(--surface); border: 1px solid var(--border); min-width: 240px; z-index: 200; padding-top: 8px; }
+.nav-dropdown-menu::before { content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+.nav-dropdown-menu a { display: block; padding: 10px 16px; font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: all 0.2s; border-bottom: 1px solid var(--border); }
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover { color: var(--accent); background: rgba(0,212,255,0.04); padding-left: 20px; }
+
+main { position: relative; z-index: 2; }
+.post { max-width: 760px; margin: 0 auto; padding: 140px 24px 90px; }
+
+.post-back { display: inline-block; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; margin-bottom: 40px; transition: color 0.2s; }
+.post-back:hover { color: var(--accent3); }
+
+.post-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--accent3); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.post-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent3); }
+
+.post-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(36px, 5vw, 60px); font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 16px; padding-bottom: 6px; }
+.post-title span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.post-meta { font-family: var(--mono); font-size: 12px; color: rgba(232,244,248,0.72); letter-spacing: 0.04em; margin-bottom: 44px; }
+
+.post-body { font-family: var(--serif); font-size: 21px; line-height: 1.72; color: rgba(232,244,248,0.94); }
+.post-body p { margin-bottom: 22px; }
+.post-body p:last-child { margin-bottom: 0; }
+.post-body em { font-style: italic; color: var(--accent); }
+.post-lead::first-letter { }
+
+.post-ref { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--border); }
+.post-ref-label { display: block; font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; }
+.post-ref p { font-family: var(--mono); font-size: 12px; line-height: 1.7; color: rgba(232,244,248,0.72); margin-bottom: 12px; }
+.post-ref p:last-child { margin-bottom: 0; }
+.post-ref em { font-style: italic; }
+.post-ref a { color: var(--accent3); text-decoration: none; }
+.post-ref a:hover { color: var(--accent); }
+.post-orig { display: inline-block; margin-top: 14px; font-family: var(--mono); font-size: 11px; color: var(--accent3); letter-spacing: 0.05em; text-decoration: none; }
+.post-orig:hover { color: var(--accent); }
+
+.post-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+
+footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+.footer-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; color: var(--accent3); }
+.status-dot { width: 6px; height: 6px; background: var(--accent3); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { gap: 16px; }
+  .post { padding: 120px 20px 70px; }
+  .post-body { font-size: 19px; }
+  footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T4DGTNMMCL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T4DGTNMMCL');
+</script>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<canvas id="canvas-bg"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">Home</a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Experience &#9662;</button>
+      <div class="nav-dropdown-menu">
+        <a href="workhistory.html">Work History</a>
+        <a href="pgdipAI.html">Machine Learning</a>
+        <a href="intelligent-agents.html">Intelligent Agents</a>
+        <a href="knowledge-representation.html">Knowledge Representation</a>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn">Skills &#9662;</button>
+      <div class="nav-dropdown-menu">
+        <a href="technical-skills.html">Technical Skills</a>
+        <a href="languages.html">Languages</a>
+      </div>
+    </li>
+    <li><a href="ai-ethics.html" class="active">AI Ethics</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="afterwork.html">After Work</a></li>
+  </ul>
+</nav>
+
+<main>
+  <article class="post">
+    <a class="post-back" href="ai-ethics.html">&#8592; AI Ethics</a>
+    <div class="post-eyebrow">Article &middot; October 2026</div>
+    <h1 class="post-title">Principles Without a <span>Mechanism</span></h1>
+    <div class="post-meta">Andrea Trevisi &middot; on global AI ethics, and what actually binds</div>
+
+    <div class="post-body">
+      <p>Type "greatest leaders of all time" into a search engine and count the women. Ask the same tool for "school girl" and watch it serve back something closer to a costume than a child. These are not glitches. They are the ordinary output of systems trained on us, and they are the plainest proof of something worth saying at the start: technology is never neutral. It reflects the values, biases and decisions of the people who build it.</p>
+
+      <p>The world noticed. In November 2021, all one hundred and ninety-three member states of UNESCO adopted the first global standard on the ethics of AI, the Recommendation on the Ethics of Artificial Intelligence (UNESCO, 2021), a shared statement on fairness, transparency, human oversight and human rights. That is a real achievement, and it should be said plainly before anything else: getting nearly two hundred governments to agree on anything is rare, and getting them to agree on how a fast-moving technology should be governed is rarer still.</p>
+
+      <p>But here is where my optimism meets my old instinct for how power actually works. A recommendation is not a regulation. It sets norms, not consequences. It tells governments what good looks like; it does not make anything happen when they look away. A principle that cannot be enforced is a promise, not a rule. So the honest question is not whether the world can agree on principles, it just did. The question is whether that agreement ever becomes a mechanism that binds someone who would rather ignore it.</p>
+
+      <p>Some places are trying to give it teeth. In 2026 China put into force measures that require universities, research bodies and companies to pass an ethics review before an AI project even begins, at the research stage, earlier than the pre-market checks most Western frameworks rely on, and accompanied by nearly two hundred technical standards, most of them still advisory (MIIT, 2026). The review itself is binding, which is enforcement in a way a recommendation never is, and it deserves to be taken seriously rather than waved away. It also carries its own uncomfortable trade-off: a mechanism that binds is also a mechanism that concentrates power over who writes the standard and what "ethical" is permitted to mean. Enforcement and control arrive together. Others work the softer path: under the same UNESCO Recommendation, Vietnam completed a national readiness assessment of its own AI ecosystem (UNESCO, 2025), the quiet, unglamorous work of measuring how prepared a country actually is to govern AI ethically. Soft law, it turns out, is not nothing. It becomes the scaffolding that national laws are later built on.</p>
+
+      <p>So I end where I began, but with the reason attached. Ethics is what gives AI its teeth; without it, systems drift toward the biased, the opaque and the harmful. But teeth are not principles. Teeth are mechanisms: a review someone must pass, a consequence someone must face, a name that can be asked why. The world has agreed on the principles. What is still missing, and what the next stretch of this work is really about, is the machinery that makes anyone answer for them.</p>
+    </div>
+
+    <div class="post-ref">
+      <span class="post-ref-label">References</span>
+      <p>UNESCO (2021) <em>Recommendation on the Ethics of Artificial Intelligence</em>. Paris: UNESCO. Available at: <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank" rel="noopener">unesco.org</a> (Accessed: 26 September 2026).</p>
+      <p>Ministry of Industry and Information Technology (MIIT) (2026) <em>Administrative Measures for the Ethical Review and Services of Artificial Intelligence Science and Technology</em> (in force 3 April 2026). Reported by TechTimes, 27 August 2026. Available at: <a href="https://www.techtimes.com/articles/325712/20260827/china-mandates-pre-development-ai-ethics-review-200-standards-take-effect.htm" target="_blank" rel="noopener">techtimes.com</a> (Accessed: 26 September 2026).</p>
+      <p>UNESCO (2025) <em>Viet Nam launches first comprehensive national report on AI ethics under UNESCO framework</em>. Available at: <a href="https://www.unesco.org/en/articles/viet-nam-launches-first-comprehensive-national-report-ai-ethics-under-unesco-framework" target="_blank" rel="noopener">unesco.org</a> (Accessed: 26 September 2026).</p>
+    </div>
+
+    <div class="post-foot">
+      <a class="post-back" href="ai-ethics.html">&#8592; Back to AI Ethics</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 Andrea Trevisi &mdash; All rights reserved</div>
+  <div class="footer-status"><div class="status-dot"></div>AI Ethics &middot; article archive</div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 4 + 'px';
+  cursor.style.top = my - 4 + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx - 16 + 'px'; ring.style.top = ry - 16 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+const canvas = document.getElementById('canvas-bg');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', () => { resize(); initNodes(); });
+function initNodes() {
+  nodes = [];
+  const count = Math.floor((W * H) / 18000);
+  for (let i = 0; i < count; i++) nodes.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, r: Math.random()*2+1 });
+}
+initNodes();
+function drawCanvas() {
+  ctx.clearRect(0,0,W,H);
+  nodes.forEach(n => { n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>W) n.vx*=-1; if(n.y<0||n.y>H) n.vy*=-1; });
+  for (let i=0; i<nodes.length; i++) {
+    for (let j=i+1; j<nodes.length; j++) {
+      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<130) { ctx.beginPath(); ctx.strokeStyle='rgba(0,212,255,'+((1-dist/130)*.18)+')'; ctx.lineWidth=.5; ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke(); }
+    }
+  }
+  nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fillStyle='rgba(0,212,255,0.5)'; ctx.fill(); });
+  requestAnimationFrame(drawCanvas);
+}
+drawCanvas();
+
+document.querySelectorAll(".nav-dropdown").forEach(dropdown => {
+  let timer;
+  const menu = dropdown.querySelector(".nav-dropdown-menu");
+  dropdown.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  dropdown.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+  menu.addEventListener("mouseenter", () => { clearTimeout(timer); menu.style.display = "block"; });
+  menu.addEventListener("mouseleave", () => { timer = setTimeout(() => { menu.style.display = "none"; }, 200); });
+});
+</script>
+</body>
+</html>
